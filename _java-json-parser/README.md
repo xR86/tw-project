@@ -1,6 +1,6 @@
 # JSON Parser
 
-Initial fails and motivation for using GSON library.
+### Initial fails and motivation for using GSON library.
 
 My first try was copying the JSON information into a table in PL/SQL
 then parsing the information with a regular expresion, selecting the essential information.
@@ -68,7 +68,7 @@ then parsing the entire file as a list with lists of tasks.
 Each object shall be parsed and inserted into the database after making a connection with Oracle 11.2g in Java.
 
 
-Other problems? ..
+### Other problems? ..
 The file is still to big to parse from one single execution.
 For that we shall need a heap size at least equal to the json file size or else we would encounter this error:
 
@@ -88,6 +88,8 @@ in order to insert the formatted information in our database and work with it ea
 Parsing 195 lines with the GSON library took 1/4 the time parsing 1 line 
 straight in PL/SQL with regular expressions (see demo.PNG) and we don't have
 to "clone" the raw information before parsing it.
+
+![demo.PNG](/_java-json-parser/demo.PNG?raw=true "demo.PNG")
 
 
 

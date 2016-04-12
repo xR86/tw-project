@@ -35,9 +35,9 @@
 
 :thought_balloon:  __Saptamana 9__ - [descriere laborator](http://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html#calendar)
 ... `deadline: 12.04.2016, ora 16 (S9)`
-+ [ ] wireframes
-+ [ ] frotend protototype
-+ [ ] presentation & architecture
++ [X] wireframes: [wireframe folder](https://goo.gl/JXXELa)
++ [X] frotend protototype
++ [X] presentation & architecture: [presentation](https://goo.gl/JXXELa) (slideshare is buggy now) & [scholarly documentation of architecture](https://xr86.github.io/tw-project/)
 + [X] initial server implementation
 
 

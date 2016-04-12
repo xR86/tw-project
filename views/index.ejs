@@ -3,9 +3,11 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include templates/styletemplate.ejs %>
+    <% include templates/scripttemplate.ejs %>
   </head>
   <body>
-  <% include templetes/header.ejs %>
+  <% include templates/header.ejs %>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
   </body>

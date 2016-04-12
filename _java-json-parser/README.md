@@ -5,7 +5,11 @@
 My first try was copying the JSON information into a table in PL/SQL
 then parsing the information with a regular expresion, selecting the essential information.
 
+<<<<<<< fc3de2560825fdbf6123035f3e1d627d6721d5ce
 The very first problem was when using the UTL_FILE library (https://docs.oracle.com/cd/B19306_01/appdev.102/b14258/u_file.htm#BABDEJDH)
+=======
+The very first problem was when using the [UTL_FILE library](https://docs.oracle.com/cd/B19306_01/appdev.102/b14258/u_file.htm#BABDEJDH)
+>>>>>>> added support for database 1.0
 
 The library has functions for opening/closing the file, parsing the file line by line and inserting the information into a variable (to be inserted on a table later on)
 
@@ -14,9 +18,16 @@ The UTL_FILE.GET_LINE function accepts only VARCHAR2 types (meaning the maximum 
 In our .json file we encounter right at the first line a line 93384 characters long.
 
 
+<<<<<<< fc3de2560825fdbf6123035f3e1d627d6721d5ce
 Then I started searching for a library that can accept CLOB types or 'Character Large Objects' (http://www.orafaq.com/wiki/CLOB)
 These are types specific to very large variables (up to 4GB).
 The library had enough functions to satisfy our needs (https://docs.oracle.com/cd/B19306_01/appdev.102/b14258/d_lob.htm)
+=======
+Then I started searching for a [library that can accept CLOB types or 'Character Large Objects'](http://www.orafaq.com/wiki/CLOB)
+These are types specific to very large variables (up to 4GB).
+The library had enough functions to satisfy our needs (https://docs.oracle.com/cd/B19306_01/appdev.102/b14258/d_lob.htm)
+
+>>>>>>> added support for database 1.0
 Although it was more than enough, this method proved not to be so efficient.
 
 ### Why? ..
@@ -27,7 +38,11 @@ Having about 10^5 lines, more or less with the same size that would mean waiting
 
 
 ## What to use next? 
+<<<<<<< fc3de2560825fdbf6123035f3e1d627d6721d5ce
 GSON library for JSON parsing(deserialization) in Java (https://github.com/google/gson)
+=======
+[GSON library for JSON parsing(deserialization) in Java](https://github.com/google/gson)
+>>>>>>> added support for database 1.0
 
 ### How does it work? 
 First, we need to look at the json schema. We can see the data is divided like this:
@@ -77,9 +92,15 @@ For that we shall need a heap size at least equal to the json file size or else 
 > Could not create the Java virtual machine."
 
 That is because the default Java VM is made to consume a low amount of memory (about 256M)
+<<<<<<< fc3de2560825fdbf6123035f3e1d627d6721d5ce
 If we have enough free memory for parsing the entire file we could set the -Xmx parameter 
 in order to accept as much memory as we want (and as long as we have it, of course).
 http://alvinalexander.com/blog/post/java/java-xmx-xms-memory-heap-size-control
+=======
+If we have enough free memory for parsing the entire file we could [set the -Xmx parameter](http://alvinalexander.com/blog/post/java/java-xmx-xms-memory-heap-size-control) 
+in order to accept as much memory as we want (and as long as we have it, of course).
+
+>>>>>>> added support for database 1.0
 
 But if we still don't have enough free memory then the big json file shall be split into multiple files
 in order to insert the formatted information in our database and work with it easily.
@@ -92,5 +113,26 @@ to "clone" the raw information before parsing it.
 ![demo.PNG](/_java-json-parser/demo.PNG?raw=true "demo.PNG")
 
 
+<<<<<<< fc3de2560825fdbf6123035f3e1d627d6721d5ce
+=======
+## INSERTING DATA IN THE DATABASE
+For this we will use the [JDBC library](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html).
+
+Screenshots:
+
+![insert.PNG](/_java-json-parser/insert.PNG?raw=true "insert.PNG")
+
+![query.PNG](/_java-json-parser/query.PNG?raw=true "query.PNG")
+
+
+### Bugs to fix:
+
+![problem1.PNG](/_java-json-parser/problem1.PNG?raw=true "problem1.PNG")
+![problem2.PNG](/_java-json-parser/problem2.PNG?raw=true "problem2.PNG")
+
+
+
+
+>>>>>>> added support for database 1.0
 
 

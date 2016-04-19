@@ -2,3 +2,17 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+
+	$(document).ready(function(){
+		var url = window.location;
+		
+		// Will also work for relative and absolute hrefs
+		$('ul.nav a').filter(function() {
+		    return this.href == url;
+		}).parent().addClass('active').append('<span class="sr-only">(current)</span>');
+		//sr-only -> important for screen readers, no visual difference
+	});
+
+</script>

@@ -5,17 +5,14 @@
 var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
+var auth=require('./auth/utils/auth'); //demonstrating the ability to make any route dependent on autentification
 
-var connAttrs = {
-    "user": "SGBD",
-    "password": "SGBD",
-    "connectString": "localhost/XE"
-};
+var connAttrs = require('./auth/utils/config');
 
-router.get('/:p_id', function (req,res) {
+router.get('/:p_id',auth(), function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');
@@ -54,10 +51,10 @@ router.get('/:p_id', function (req,res) {
     });
 });
 
-router.get('/', function (req,res) {
+router.get('/',auth(), function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');

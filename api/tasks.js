@@ -6,16 +6,12 @@ var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
 
-var connAttrs = {
-    "user": "SGBD",
-    "password": "SGBD",
-    "connectString": "localhost/XE"
-};
+var connAttrs = require('./auth/utils/config');
 
 router.get('/:task_id', function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');
@@ -57,7 +53,7 @@ router.get('/:task_id', function (req,res) {
 router.get('/', function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');

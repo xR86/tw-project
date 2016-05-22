@@ -13,11 +13,14 @@ var dash= require('./routes/Dashboard');
 var datafil= require('./routes/Datafiltering');
 var help= require('./routes/Help');
 var about= require('./routes/About');
-var apitest=require('./api/testapi');
 var persons=require('./api/persons');
 var tasks=require('./api/tasks');
 var solvedTasks=require('./api/solvedTasks');
 
+var testPublic=require('./api/testLogin/publicRoute');
+var testProtected=require('./api/testLogin/protectedRoute');
+var usersLog=require('./api/auth/routes/addUserRoute');
+var logins=require('./api/auth/routes/LoginRoute');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -30,15 +33,16 @@ app.set('view engine', 'ejs');
 app.use('/', routes);
 app.use('/users', users);
 app.use('/Dashboard',dash);
-app.use('/datafiltering',datafil)
+app.use('/datafiltering',datafil);
 app.use('/Help',help);
 app.use('/About',about);
-app.use('/user_profiles',apitest);
 app.use('/api/persons',persons);
 app.use('/api/tasks',tasks);
 app.use('/api/solvedTasks',solvedTasks);
-
-
+app.use('/api/public',testPublic);
+app.use('/api/protected',testProtected);
+app.use('/addUser',usersLog);
+app.use('/login',logins);
 
 // production error handler
 // no stacktraces leaked to user

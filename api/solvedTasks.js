@@ -5,17 +5,13 @@
 var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
+var connAttrs = require('./auth/utils/config');
 
-var connAttrs = {
-    "user": "SGBD",
-    "password": "SGBD",
-    "connectString": "localhost/XE"
-};
 
 router.get('/:st_id', function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');
@@ -57,7 +53,7 @@ router.get('/:st_id', function (req,res) {
 router.get('/:hasSolution', function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');
@@ -99,7 +95,7 @@ router.get('/:hasSolution', function (req,res) {
 router.get('/', function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs, function (err, connection) {
+    oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');

@@ -58,11 +58,17 @@ function post(req, res, next) {
                             sub: user.email,
                             role: user.role
                         };
-
+                        var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
+/*
                         res.status(200).json({
                             user: user,
-                            token: jwt.sign(payload, config.jwtSecretKey) //TODO:should expire as well
+                            token: persistentSessionToken //TODO:should expire as well
                         });
+                        */
+                       req.session.persistentSessionToken=persistentSessionToken;
+                        res.redirect('/dashboard');
+                        console.log(persistentSessionToken);
+                        console.log(req.session);
                     });
 
                     connection.release(function(err) {
@@ -74,5 +80,4 @@ function post(req, res, next) {
         }
     );
 }
-
 module.exports.post = post;

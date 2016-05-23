@@ -5,7 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
-var auth=require('./auth/utils/auth'); //demonstrating the ability to make any route dependent on autentification
+var auth=require('./auth/utils/myAuth'); //demonstrating the ability to make any route dependent on autentification
 
 var connAttrs = require('./auth/utils/config');
 

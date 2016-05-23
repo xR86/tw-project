@@ -3,8 +3,10 @@
  */
 var express = require('express');
 var router = express.Router();
-var logins=require('./../utils/logins');
+var login=require('./../utils/logins');
 
-router.post('/',logins.post);
-
+router.post('/',login.post);
+router.get('/', function(req, res, next) {
+    res.render('login', { title: 'LOGIN' });
+});
 module.exports=router;

@@ -7,11 +7,14 @@ var jwt = require('jsonwebtoken');
 
 function auth(role) {
     return function(req, res, next) {
+
         var token;
         var payload;
 
         if (!req.headers.authorization) {
             return res.status(401).send({message: 'You are not authorized'});
+            //res.redirect('/login');
+            //   return;
         }
 
         token = req.headers.authorization.split(' ')[1];
@@ -21,10 +24,13 @@ function auth(role) {
         } catch (e) {
             if (e.name === 'TokenExpiredError') {
                 res.status(401).send({message: 'Token Expired'});
+                //  res.redirect('/login');
+                // return;
             } else {
                 res.status(401).send({message: 'Authentication failed'});
+                //res.redirect('/login');
+                // return;
             }
-
             return;
         }
 
@@ -38,8 +44,10 @@ function auth(role) {
             next();
         } else {
             res.status(401).send({message: 'You are not authorized'});
+            // res.redirect('/login');
         }
     }
+
 }
 
 module.exports = auth;

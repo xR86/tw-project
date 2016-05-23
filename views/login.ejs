@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <% include templates/styletemplate.ejs %>
+    <% include templates/scripttemplate.ejs %>
+</head>
+<body>
+<% include templates/header.ejs %>
+<form method="post" action="/login">
+    <p>
+        <label>email:</label>
+        <input type="text" name="email">
+    </p>
+    <p>
+        <label>password:</label>
+        <input type="text" name="password">
+    </p>
+    <p>
+        <input type="submit" value="Login">
+    </p>
+</form>
+
+</body>
+</html>

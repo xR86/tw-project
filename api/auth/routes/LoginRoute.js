@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var login=require('./../utils/logins');
+var login=require('./../utils/login');
 
 router.post('/',login.post);
 router.get('/', function(req, res, next) {

@@ -22,14 +22,18 @@ function post(req, res, next) {
                 'from MYSITEUSERS ' +
                 'where email = :email',
                 {
-                    email: req.body.email.toLowerCase()
+                    email: req.body.email.toLowerCase() //TODO:email does not accept numbers. Also check for valid email if possible...
                 },
                 {
                     outFormat: oracledb.OBJECT
                 },
+
                 function(err, results){
                     var user;
-
+                    if(results.rows[0]==null){
+                        res.redirect('/login'); //TODO: should display message in front end saying invalid email or password
+                        return;
+                    }
                     if (err) {
                         connection.release(function(err) {
                             if (err) {
@@ -40,7 +44,7 @@ function post(req, res, next) {
                         return next(err);
                     }
 
-                    user = results.rows[0];
+                    user = results.rows[0]; 
 
                     bcrypt.compare(req.body.password, user.password, function(err, pwMatch) {
                         var payload;
@@ -50,7 +54,7 @@ function post(req, res, next) {
                         }
 
                         if (!pwMatch) {
-                            res.status(401).send({message: 'Invalid email or password.'});
+                            res.redirect('/login');
                             return;
                         }
 
@@ -59,16 +63,16 @@ function post(req, res, next) {
                             role: user.role
                         };
                         var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
-/*
+                        /*
                         res.status(200).json({
                             user: user,
-                            token: persistentSessionToken //TODO:should expire as well
+                            token: persistentSessionToken 
                         });
                         */
                        req.session.persistentSessionToken=persistentSessionToken;
                         res.redirect('/dashboard');
-                        console.log(persistentSessionToken);
-                        console.log(req.session);
+                       // console.log(persistentSessionToken);
+                      //  console.log(req.session);
                     });
 
                     connection.release(function(err) {

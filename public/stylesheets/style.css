@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+nav{
+	height: 5rem;
+    font-size: 1.8rem;
+}

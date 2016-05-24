@@ -37,10 +37,15 @@ function post(req, res, next) {
                     role: user.role
                 };
 
-                res.status(200).json({
-                    user: user,
-                    token: jwt.sign(payload, config.jwtSecretKey) //TODO: token should expire
-                });
+               // res.status(200).json({
+                  // user: user,
+                  //  token: jwt.sign(payload, config.jwtSecretKey) //TODO: token should expire
+                //});
+                var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
+                req.session.persistentSessionToken=persistentSessionToken;
+                res.redirect('/dashboard');
+                //console.log(persistentSessionToken);
+               // console.log(req.session);
             });
         });
     });

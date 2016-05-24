@@ -7,5 +7,8 @@ var router = express.Router();
 var users=require('./../utils/addUser');
 
 router.post('/',users.post);
+router.get('/', function(req, res, next) {
+    res.render('signup', { message: 'SIGNUP' });
+});
 
 module.exports=router;

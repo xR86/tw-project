@@ -1,2 +1,3 @@
 node_modules/*
 _java-json-parser/out/*
+.idea/*

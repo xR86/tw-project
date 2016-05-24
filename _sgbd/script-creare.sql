@@ -78,10 +78,10 @@ CREATE TABLE SiteUsers(
 	user_id NUMBER(5) NOT NULL,
 	user_firstname VARCHAR2(30) NOT NULL,
 	user_lastname VARCHAR2(30) NOT NULL,
+	user_role VARCHAR2(30) NOT NULL,
 
 	user_email VARCHAR2(30) NOT NULL,/*indexare aici ... 2 usecases: logare si recuperare parola*/
-	user_password VARCHAR2(40) NOT NULL, /*hashed*/
-	user_salt VARCHAR2(40) NOT NULL, /*hash for password*/
+	user_password VARCHAR2(200) NOT NULL, /*hashed*/
 
 	CONSTRAINT user_id_pk PRIMARY KEY (user_id),
 	CONSTRAINT user_email_un UNIQUE (user_email)

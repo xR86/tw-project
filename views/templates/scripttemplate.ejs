@@ -1,18 +1,48 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- <script src="javascripts/jquery.min.js"></script> -->
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<script>
 
+<!-- script to show active tab -->
+<script>
 	$(document).ready(function(){
 		var url = window.location;
-		
 		// Will also work for relative and absolute hrefs
 		$('ul.nav a').filter(function() {
 		    return this.href == url;
 		}).parent().addClass('active').append('<span class="sr-only">(current)</span>');
 		//sr-only -> important for screen readers, no visual difference
 	});
+
+</script>
+
+<!-- script that hides fixed navbar on scroll -->
+ <script> $(document).ready(function(){
+    // fade in .navbar
+    $(function () {
+        var lastScrollTop = 0;
+        $(window).scroll(function () {
+          var st = $(this).scrollTop();
+          if (st > lastScrollTop){
+            //downscroll code
+            $('.navbar').hide(500);
+
+          } else {
+            // upscroll code
+            $('.navbar').show(200);
+          }
+          lastScrollTop = st;
+          /*
+                 // set distance user needs to scroll before we start fadeIn
+            if ($(this).scrollTop() > 100) {
+                $('.navbar').fadeOut();
+            } else {
+                $('.navbar').fadeIn();
+            }*/
+        });
+    });
+});
 
 </script>

@@ -4,7 +4,7 @@
 var config=require('./config');
 var jwt = require('jsonwebtoken');
 
-function myAuth(){
+function logout(){
     return function(req,res,next) {
         if(!req.session.persistentSessionToken){
             res.redirect('/login');
@@ -16,4 +16,4 @@ function myAuth(){
     }
 }
 
-module.exports = myAuth;
+module.exports = logout;

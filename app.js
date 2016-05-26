@@ -19,8 +19,9 @@ var tasks=require('./api/tasks');
 var solvedTasks=require('./api/solvedTasks');
 
 var login=require('./api/auth/routes/LoginRoute');
-var signup=require('./api/auth/routes/addUserRoute');
+var signup=require('./api/auth/routes/signupRoute');
 var logout=require('./api/auth/routes/LogoutRoute');
+var remove=require('./api/auth/routes/deleteAccountRoute');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -30,7 +31,7 @@ app.use(session({resave: true, saveUninitialized: true, secret: 'SOMERANDOMSECRE
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
+app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/Dashboard',dash);
@@ -43,6 +44,7 @@ app.use('/api/solvedTasks',solvedTasks);
 app.use('/login',login);
 app.use('/logout',logout);
 app.use('/signup',signup);
+app.use('/remove',remove);
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {

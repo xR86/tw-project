@@ -3,10 +3,7 @@
  */
 
 
-var config=require('./config');
-var jwt = require('jsonwebtoken');
-
-function muAuth(){
+function myAuth(){
     return function(req,res,next) {
         if(!req.session.persistentSessionToken){
             res.redirect('/login');
@@ -18,4 +15,4 @@ function muAuth(){
     }
 }
 
-module.exports = muAuth;
+module.exports = myAuth;

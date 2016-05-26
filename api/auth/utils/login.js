@@ -15,14 +15,14 @@ function post(req, res, next) {
             }
 
             connection.execute(
-                'select id as "id", ' +
-                '   email as "email", ' +
-                '   password as "password", ' +
+                'select user_id as "id", ' +
+                '   user_email as "user_email", ' +
+                '   user_password as "user_password", ' +
                 '   role as "role" ' +
-                'from MYSITEUSERS ' +
-                'where email = :email',
+                'from SITEUSERS ' +
+                'where user_email = :user_email',
                 {
-                    email: req.body.email.toLowerCase() //TODO:email does not accept numbers. Also check for valid email if possible...
+                    user_email: req.body.user_email.toLowerCase() //TODO:email does not accept numbers. Also check for valid email if possible...
                 },
                 {
                     outFormat: oracledb.OBJECT
@@ -46,7 +46,7 @@ function post(req, res, next) {
 
                     user = results.rows[0]; 
 
-                    bcrypt.compare(req.body.password, user.password, function(err, pwMatch) {
+                    bcrypt.compare(req.body.user_password, user.user_password, function(err, pwMatch) {
                         var payload;
 
                         if (err) {
@@ -59,20 +59,21 @@ function post(req, res, next) {
                         }
 
                         payload = {
-                            sub: user.email,
+                            sub: user.user_email,
                             role: user.role
                         };
                         var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
-                        /*
-                        res.status(200).json({
-                            user: user,
-                            token: persistentSessionToken 
-                        });
-                        */
-                       req.session.persistentSessionToken=persistentSessionToken;
+
+                  //      res.status(200).json({
+                   //         user: user,
+                      //      token: persistentSessionToken
+                      //  });
+
+                        req.session.persistentSessionToken=persistentSessionToken;
+                        req.session.email=payload.sub;
                         res.redirect('/dashboard');
                        // console.log(persistentSessionToken);
-                      //  console.log(req.session);
+                        console.log(req.session);
                     });
 
                     connection.release(function(err) {

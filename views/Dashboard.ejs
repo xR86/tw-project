@@ -9,10 +9,10 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="stylesheets/AdminLTE/AdminLTE.min.css">
+    <link rel="stylesheet" href="/public/stylesheets/AdminLTE/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="stylesheets/AdminLTE/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/public/stylesheets/AdminLTE/skins/_all-skins.min.css">
 
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
@@ -361,7 +361,7 @@
 
 
     <!-- D3.js -->
-	<script src="/javascripts/d3.v3.min.js"></script>
+	<script src="/public/javascripts/d3.v3.min.js"></script>
 	<script>
 		var margin = {top: 20, right: 20, bottom: 30, left: 40},
 		    width = 400 - margin.left - margin.right,
@@ -388,7 +388,7 @@
 		  .append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		d3.tsv("/data.tsv", type, function(error, data) {
+		d3.tsv("/public/data.tsv", type, function(error, data) {
 		  if (error) throw error;
 
 		  x.domain(data.map(function(d) { return d.letter; }));

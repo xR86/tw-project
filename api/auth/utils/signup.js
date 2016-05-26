@@ -8,10 +8,13 @@ var jwt = require('jsonwebtoken');
 var config=require('../utils/config');
 
 function post(req, res, next) {
+
     var user = {
-        email: req.body.email
+        user_email: req.body.user_email,
+        user_firstname: req.body.user_firstname,
+        user_lastname: req.body.user_lastname
     };
-    var unhashedPassword = req.body.password;
+    var unhashedPassword = req.body.user_password;
 
     bcrypt.genSalt(10, function(err, salt) {
         if (err) {
@@ -33,19 +36,19 @@ function post(req, res, next) {
                 }
 
                 payload = {
-                    sub: user.email,
+                    sub: user.user_email,
                     role: user.role
                 };
 
-               // res.status(200).json({
-                  // user: user,
-                  //  token: jwt.sign(payload, config.jwtSecretKey) //TODO: token should expire
+                // res.status(200).json({
+                // user: user,
+                //  token: jwt.sign(payload, config.jwtSecretKey) //TODO: token should expire
                 //});
                 var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
                 req.session.persistentSessionToken=persistentSessionToken;
                 res.redirect('/dashboard');
                 //console.log(persistentSessionToken);
-               // console.log(req.session);
+                // console.log(req.session);
             });
         });
     });
@@ -62,40 +65,58 @@ function insertUser(user, cb) {
             }
 
             connection.execute(
-                'insert into MYSITEUSERS ( ' +
-                '   email, ' +
-                '   password, ' +
-                '   role ' +
+                'insert into SITEUSERS ( ' +
+                '   user_email, ' +
+                '   user_password, ' +
+                '   role, ' +
+                '   user_firstname, '+
+                '   user_lastname '+
                 ') ' +
                 'values (' +
-                '    :email, ' +
-                '    :password, ' +
-                '    \'BASE\' ' +
+                '    :user_email, ' +
+                '    :user_password, ' +
+                '    \'BASE\', ' +
+                '    :user_firstname, '+
+                '    :user_lastname '+
                 ') ' +
                 'returning ' +
-                '   id, ' +
-                '   email, ' +
-                '   role ' +
+                '   user_id, ' +
+                '   user_email, ' +
+                '   role, ' +
+                '   user_firstname, '+
+                '   user_lastname '+
                 'into ' +
-                '   :rid, ' +
-                '   :remail, ' +
-                '   :rrole',
+                '   :user_rid, ' +
+                '   :user_remail, ' +
+                '   :user_rrole, '+
+                '   :user_rfirstname, '+
+                '   :user_rlastname'
+                ,
                 {
-                    email: user.email.toLowerCase(),
-                    password: user.hashedPassword,
-                    rid: {
+                    user_email: user.user_email.toLowerCase(),
+                    user_firstname: user.user_firstname.toLowerCase(),
+                    user_password: user.hashedPassword,
+                    user_lastname:user.user_lastname,
+                    user_rid: {
                         type: oracledb.NUMBER,
                         dir: oracledb.BIND_OUT
                     },
-                    remail: {
+                    user_remail: {
                         type: oracledb.STRING,
                         dir: oracledb.BIND_OUT
                     },
-                    rrole: {
+                    user_rrole: {
+                        type: oracledb.STRING,
+                        dir: oracledb.BIND_OUT
+                    },
+                    user_rfirstname: {
+                        type: oracledb.STRING,
+                        dir: oracledb.BIND_OUT
+                    },
+                    user_rlastname: {
                         type: oracledb.STRING,
                         dir: oracledb.BIND_OUT
                     }
-
                 },
                 {
                     autoCommit: true
@@ -112,9 +133,11 @@ function insertUser(user, cb) {
                     }
 
                     cb(null, {
-                        id: results.outBinds.rid[0],
-                        email: results.outBinds.remail[0],
-                        role: results.outBinds.rrole[0]
+                        user_id: results.outBinds.user_rid[0],
+                        user_email: results.outBinds.user_remail[0],
+                        role: results.outBinds.user_rrole[0],
+                        user_firstname: results.outBinds.user_rfirstname[0],
+                        user_lastname: results.outBinds.user_rlastname[0]
                     });
 
                     connection.release(function(err) {

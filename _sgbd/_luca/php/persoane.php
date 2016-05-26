@@ -49,7 +49,7 @@ if ($nb<=10){
 } else{
 	echo '<a href=\sgbd/persoane.php?pagina=1&rpp=',$rez_per_pagina,"&filtru=$filtru&ordine=$ordine",'><b>1</b></a>', ' ';
 	
-	if ($pagina>4 && $pagina<$nb-4){
+	if ($pagina > 4 && $pagina<$nb-4){
 		echo '<b>...</b>';
 		echo '<a href=\sgbd/persoane.php?pagina=',$pagina-2,'&rpp=',$rez_per_pagina,"&filtru=$filtru&ordine=$ordine",'><b>',$pagina-2,'</b></a>', ' ';
 		echo '<a href=\sgbd/persoane.php?pagina=',$pagina-1,'&rpp=',$rez_per_pagina,"&filtru=$filtru&ordine=$ordine",'><b>',$pagina-1,'</b></a>', ' ';

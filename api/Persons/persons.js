@@ -2,13 +2,18 @@
  * Created by alber_000 on 5/21/2016.
  */
 
+//may become useless in the near future
 var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
+var auth=require('./../auth/utils/myAuth'); 
+var select=require('./personSelectType');
+var connAttrs = require('./../auth/utils/config');
 
-var connAttrs = require('./auth/utils/config');
+router.post('/tasksAttempted',auth(),select("SELECT * FROM Persons WHERE p_id= :p_id ORDER BY TASKS_ATTEMPTED_COUNTER ASC"));
+router.post('/tasksCompleted',auth(),select("SELECT * FROM Persons WHERE p_id= :p_id ORDER BY TASKS_COMPLETED_COUNTER ASC"));
 
-router.get('/:task_id', function (req,res) {
+router.get('/:p_id', function (req,res) {
     "use strict";
 
     oracledb.getConnection(connAttrs.database, function (err, connection) {
@@ -23,7 +28,7 @@ router.get('/:task_id', function (req,res) {
             return;
         }
 
-        connection.execute("SELECT * FROM Tasks WHERE task_id= :task_id", [req.params.task_id], {
+        connection.execute("SELECT * FROM Persons WHERE p_id= :p_id", [req.params.p_id], {
             outFormat: oracledb.OBJECT // Return the result as Object
         }, function (err, result) {
             if (err) {
@@ -43,7 +48,7 @@ router.get('/:task_id', function (req,res) {
                     if (err) {
                         console.error(err.message);
                     } else {
-                        console.log("GET /Tasks : Connection released");
+                        console.log("GET /Persons : Connection released");
                     }
                 });
         });
@@ -65,7 +70,7 @@ router.get('/', function (req,res) {
             return;
         }
 
-        connection.execute("SELECT * FROM Tasks",{}, {
+        connection.execute("SELECT * FROM Persons",{}, {
             outFormat: oracledb.OBJECT // Return the result as Object
         }, function (err, result) {
             if (err) {
@@ -85,7 +90,7 @@ router.get('/', function (req,res) {
                     if (err) {
                         console.error(err.message);
                     } else {
-                        console.log("GET /Tasks : Connection released");
+                        console.log("GET /Persons : Connection released");
                     }
                 });
         });

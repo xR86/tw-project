@@ -14,9 +14,10 @@ var dash= require('./routes/Dashboard');
 var datafil= require('./routes/Datafiltering');
 var help= require('./routes/Help');
 var about= require('./routes/About');
-var persons=require('./api/persons');
-var tasks=require('./api/tasks');
-var solvedTasks=require('./api/solvedTasks');
+
+var persons=require('./api/Persons/persons');
+var tasks=require('./api/SolvedTasks/tasks');
+var solvedTasks=require('./api/SolvedTasks/solvedTasks');
 
 var login=require('./api/auth/routes/LoginRoute');
 var signup=require('./api/auth/routes/signupRoute');
@@ -38,9 +39,11 @@ app.use('/Dashboard',dash);
 app.use('/datafiltering',datafil);
 app.use('/Help',help);
 app.use('/About',about);
+
 app.use('/api/persons',persons);
 app.use('/api/tasks',tasks);
 app.use('/api/solvedTasks',solvedTasks);
+
 app.use('/login',login);
 app.use('/logout',logout);
 app.use('/signup',signup);

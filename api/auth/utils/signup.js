@@ -39,13 +39,10 @@ function post(req, res, next) {
                     sub: user.user_email,
                     role: user.role
                 };
-
-                // res.status(200).json({
-                // user: user,
-                //  token: jwt.sign(payload, config.jwtSecretKey) //TODO: token should expire
-                //});
+                
                 var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
                 req.session.persistentSessionToken=persistentSessionToken;
+                req.session.email=payload.sub; //added this
                 res.redirect('/dashboard');
                 //console.log(persistentSessionToken);
                 // console.log(req.session);

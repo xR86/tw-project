@@ -5,11 +5,10 @@
 var express = require('express');
 var router = express.Router();
 var oracledb = require('oracledb');
-var auth=require('./auth/utils/myAuth'); //demonstrating the ability to make any route dependent on autentification
 
-var connAttrs = require('./auth/utils/config');
+var connAttrs = require('./../auth/utils/config');
 
-router.get('/:p_id',auth(), function (req,res) {
+router.get('/:task_id', function (req,res) {
     "use strict";
 
     oracledb.getConnection(connAttrs.database, function (err, connection) {
@@ -24,7 +23,7 @@ router.get('/:p_id',auth(), function (req,res) {
             return;
         }
 
-        connection.execute("SELECT * FROM Persons WHERE p_id= :p_id", [req.params.p_id], {
+        connection.execute("SELECT * FROM Tasks WHERE task_id= :task_id", [req.params.task_id], {
             outFormat: oracledb.OBJECT // Return the result as Object
         }, function (err, result) {
             if (err) {
@@ -44,14 +43,14 @@ router.get('/:p_id',auth(), function (req,res) {
                     if (err) {
                         console.error(err.message);
                     } else {
-                        console.log("GET /Persons : Connection released");
+                        console.log("GET /Tasks : Connection released");
                     }
                 });
         });
     });
 });
 
-router.get('/',auth(), function (req,res) {
+router.get('/', function (req,res) {
     "use strict";
 
     oracledb.getConnection(connAttrs.database, function (err, connection) {
@@ -66,7 +65,7 @@ router.get('/',auth(), function (req,res) {
             return;
         }
 
-        connection.execute("SELECT * FROM Persons",{}, {
+        connection.execute("SELECT * FROM Tasks",{}, {
             outFormat: oracledb.OBJECT // Return the result as Object
         }, function (err, result) {
             if (err) {
@@ -86,7 +85,7 @@ router.get('/',auth(), function (req,res) {
                     if (err) {
                         console.error(err.message);
                     } else {
-                        console.log("GET /Persons : Connection released");
+                        console.log("GET /Tasks : Connection released");
                     }
                 });
         });

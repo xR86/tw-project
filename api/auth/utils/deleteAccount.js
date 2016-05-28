@@ -27,6 +27,7 @@ function remove (req, res, next) {
         //console.log(persistentSessionToken);
         // console.log(req.session);
     });
+    req.session.destroy();
     res.redirect('/');
 }
 
@@ -43,7 +44,7 @@ module.exports.remove = remove;
                 connection.execute(
                     'DELETE FROM SITEUSERS WHERE user_email = :user_email ',
                     {
-                        user_email: user.user_email.toLowerCase()
+                        user_email: user.user_email
                     },
                     {
                         autoCommit: true

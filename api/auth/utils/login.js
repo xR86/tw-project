@@ -4,6 +4,7 @@
 var oracledb = require('oracledb');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+var validator=require('validator');
 var config=require('../utils/config');
 
 function post(req, res, next) {
@@ -13,7 +14,6 @@ function post(req, res, next) {
             if (err) {
                 return next(err);
             }
-
             connection.execute(
                 'select user_id as "id", ' +
                 '   user_email as "user_email", ' +
@@ -22,7 +22,7 @@ function post(req, res, next) {
                 'from SITEUSERS ' +
                 'where user_email = :user_email',
                 {
-                    user_email: req.body.user_email.toLowerCase() //TODO:email does not accept numbers. Also check for valid email if possible...
+                    user_email: validator.normalizeEmail(req.body.user_email)
                 },
                 {
                     outFormat: oracledb.OBJECT
@@ -34,6 +34,7 @@ function post(req, res, next) {
                         res.redirect('/login'); //TODO: should display message in front end saying invalid email or password
                         return;
                     }
+
                     if (err) {
                         connection.release(function(err) {
                             if (err) {
@@ -73,7 +74,7 @@ function post(req, res, next) {
                         req.session.email=payload.sub;
                         res.redirect('/dashboard');
                        // console.log(persistentSessionToken);
-                        console.log(req.session);
+                       // console.log(req.session);
                     });
 
                     connection.release(function(err) {

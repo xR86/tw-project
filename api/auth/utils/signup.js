@@ -6,14 +6,20 @@ var oracledb = require('oracledb');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var config=require('../utils/config');
+var validator=require('validator');
 
 function post(req, res, next) {
 
     var user = {
-        user_email: req.body.user_email,
+        user_email:req.body.user_email,
         user_firstname: req.body.user_firstname,
         user_lastname: req.body.user_lastname
     };
+    if(!validator.isEmail(user.user_email) || !validator.isAlphanumeric(user.user_firstname) || !validator.isAlphanumeric(user.user_lastname)){
+        res.redirect('/signup');
+        console.log("not a valid email || firstname || lastname");
+        return;
+    }
     var unhashedPassword = req.body.user_password;
 
     bcrypt.genSalt(10, function(err, salt) {
@@ -90,8 +96,8 @@ function insertUser(user, cb) {
                 '   :user_rlastname'
                 ,
                 {
-                    user_email: user.user_email.toLowerCase(),
-                    user_firstname: user.user_firstname.toLowerCase(),
+                    user_email: validator.normalizeEmail(user.user_email),
+                    user_firstname: user.user_firstname,
                     user_password: user.hashedPassword,
                     user_lastname:user.user_lastname,
                     user_rid: {

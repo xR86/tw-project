@@ -5,9 +5,9 @@ package org.java_json_parser.ObjectStructure;
  */
 
 public class Tasks {
-    String name;
-    long completedDate;
-    String solution;
+    private String name;
+    private long completedDate;
+    private String solution;
 
     public String getName() {
         return name;

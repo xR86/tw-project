@@ -18,6 +18,7 @@
     "morgan": "~1.6.1",
     "oracledb": "^1.8.0",
     "serve-favicon": "~2.3.0",
+    "simple-oracledb": "^0.1.66",
     "validator": "^5.3.0"
   },
   "devDependencies": {

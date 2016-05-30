@@ -9,92 +9,20 @@ var oracledb = require('oracledb');
 var auth=require('./../auth/utils/myAuth'); 
 var select=require('./personSelectType');
 var connAttrs = require('./../auth/utils/config');
+var generic=require('../databaseFunctions/genericSelect');
 
 router.post('/tasksAttempted',auth(),select("SELECT * FROM Persons WHERE p_id= :p_id ORDER BY TASKS_ATTEMPTED_COUNTER ASC"));
 router.post('/tasksCompleted',auth(),select("SELECT * FROM Persons WHERE p_id= :p_id ORDER BY TASKS_COMPLETED_COUNTER ASC"));
 
 router.get('/:p_id', function (req,res) {
     "use strict";
-
-    oracledb.getConnection(connAttrs.database, function (err, connection) {
-        if (err) {
-            // Error connecting to DB
-            res.set('Content-Type', 'application/json');
-            res.status(500).send(JSON.stringify({
-                status: 500,
-                message: "Error connecting to DB",
-                detailed_message: err.message
-            }));
-            return;
-        }
-
-        connection.execute("SELECT * FROM Persons WHERE p_id= :p_id", [req.params.p_id], {
-            outFormat: oracledb.OBJECT // Return the result as Object
-        }, function (err, result) {
-            if (err) {
-                res.set('Content-Type', 'application/json');
-                res.status(500).send(JSON.stringify({
-                    status: 500,
-                    message: "Error getting the user profile",
-                    detailed_message: err.message
-                }));
-            } else {
-                res.contentType('application/json').status(200);
-                res.send(JSON.stringify(result.rows));
-            }
-            // Release the connection
-            connection.release(
-                function (err) {
-                    if (err) {
-                        console.error(err.message);
-                    } else {
-                        console.log("GET /Persons : Connection released");
-                    }
-                });
-        });
-    });
+    generic(req,res,"SELECT * FROM Persons WHERE p_id= :p_id",[req.params.p_id])
 });
 
 router.get('/', function (req,res) {
     "use strict";
 
-    oracledb.getConnection(connAttrs.database, function (err, connection) {
-        if (err) {
-            // Error connecting to DB
-            res.set('Content-Type', 'application/json');
-            res.status(500).send(JSON.stringify({
-                status: 500,
-                message: "Error connecting to DB",
-                detailed_message: err.message
-            }));
-            return;
-        }
-
-        connection.execute("SELECT * FROM Persons",{}, {
-            outFormat: oracledb.OBJECT // Return the result as Object
-        }, function (err, result) {
-            if (err) {
-                res.set('Content-Type', 'application/json');
-                res.status(500).send(JSON.stringify({
-                    status: 500,
-                    message: "Error getting the user profile",
-                    detailed_message: err.message
-                }));
-            } else {
-                res.contentType('application/json').status(200);
-                res.send(JSON.stringify(result.rows));
-            }
-            // Release the connection
-            connection.release(
-                function (err) {
-                    if (err) {
-                        console.error(err.message);
-                    } else {
-                        console.log("GET /Persons : Connection released");
-                    }
-                });
-        });
-    });
+    generic(req,res,"SELECT * FROM Persons",[]);
 });
 
 module.exports = router;

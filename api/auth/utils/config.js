@@ -4,8 +4,8 @@
 
 module.exports = {
     database: {
-         user : 'SGBD',
-         password: 'SGBD' ,
+         user : 'TW',
+         password: 'parola' ,
          connectString: 'localhost/XE'
     },
     jwtSecretKey: "jmvhDdDBMvqb=M@6h&QVA7x"

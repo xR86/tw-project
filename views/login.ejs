@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>Login</title>
 
     <% include templates/styletemplate.ejs %>
@@ -10,6 +11,33 @@
         form{
             margin-top: 3rem;
         }
+        /*body{
+            background-image: url("http://bgfons.com/upload/rainbow_texture679.jpg");
+        }*/
+        div.row.translate10:after{
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: -1;
+            content: "";
+            background: url('/public/assets/background-texture-1.jpg');
+            background-size:cover;
+            opacity: 0.6;
+        }
+        label{
+            opacity: 0.6;
+        }
+        .bad-input-focus{
+            border-color: #E96666;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 102, 102, 0.6);
+        }
+        /*.form-control:focus {}
+        */
+
     </style>
 </head>
 <body>
@@ -17,24 +45,65 @@
 
 <div class="row translate10">
     <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
+        <div class="panel panel-default z-depth-1">
             <form class="panel-body" method="post" action="/login">
                 <h3>Welcome back !</h3>
                 <p>
-                    <label>email:</label>
-                    <input type = "text" class = "form-control inlined-element" name="user_email" placeholder = "Enter Name">
+                    <label>EMAIL:</label>
+                    <input type = "text" class = "form-control inlined-element" name="user_email" placeholder = "Enter your email" id="login-email" onblur="validateEmail()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a valid email" data-trigger="manual" data-html="false">
                 </p>
                 <p>
-                    <label>password:</label>
-                    <input type = "text" class = "form-control inlined-element" name="user_password" placeholder = "Enter Name">
+                    <label>PASSWORD:</label>
+                    <input type = "password" class = "form-control inlined-element" name="user_password" placeholder = "Enter your password" id="login-password" onblur="validatePassword()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a password" data-trigger="manual" data-html="false">
                 </p>
                 <p>
-                    <input type="submit" class = "btn btn-default" value="Login">
+                    <input type="submit" class = "btn btn-primary" value="Login">
                 </p>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+function validateEmail() {
+    <%#var userEmail = document.getElementById("login-email").childNodes[0].nodeValue;#%>
+    
+    var userEmail = $("#login-email").val();
+    var userEmailObject = $("#login-email[data-toggle='tooltip']");
+
+    if(userEmail.indexOf("@") === -1 && userEmail.length < 31){
+        if( !(userEmailObject.hasClass("bad-input-focus")) ){
+            userEmailObject.tooltip('show');
+            userEmailObject.addClass("bad-input-focus");
+            <%#//console.log("Tooltip !");#%>
+        }
+    } else {
+        if(userEmailObject.hasClass("bad-input-focus")){
+            userEmailObject.tooltip('hide');
+            userEmailObject.removeClass("bad-input-focus");
+        }
+    }
+}
+
+function validatePassword(){
+    var userPassword = $("#login-password").val();
+    var userPasswordObject = $("#login-password[data-toggle='tooltip']");
+    
+    if(!userPassword){
+        if( !(userPasswordObject.hasClass("bad-input-focus")) ){
+            userPasswordObject.tooltip('show');
+            userPasswordObject.addClass("bad-input-focus");
+            <%# //console.log("Tooltip !"); #%>
+    } else {
+        if(userPasswordObject.hasClass("bad-input-focus")){
+            userPasswordObject.tooltip('hide');
+            userPasswordObject.removeClass("bad-input-focus");
+        }
+       }
+   }
+
+}
+</script>
 
 </body>
 </html>

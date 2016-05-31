@@ -24,6 +24,7 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
     "vows": "^0.8.1"
   }
 }

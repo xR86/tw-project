@@ -16,8 +16,8 @@ var help= require('./routes/Help');
 var about= require('./routes/About');
 
 var persons=require('./api/Persons/persons');
-var tasks=require('./api/SolvedTasks/tasks');
-var solvedTasks=require('./api/SolvedTasks/solvedTasks');
+var tasks=require('./api/Tasks/tasks');
+var solvedTasks=require('./api/Tasks/solvedTasks');
 
 var login=require('./api/auth/routes/LoginRoute');
 var signup=require('./api/auth/routes/signupRoute');

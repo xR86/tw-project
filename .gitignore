@@ -1,3 +1,5 @@
 node_modules/*
 _java-json-parser/out/*
+_java-json-parser/.idea/*
+api/auth/utils/config.js
 .idea/*

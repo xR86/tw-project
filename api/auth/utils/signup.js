@@ -67,6 +67,7 @@ function insertUser(user, cb) {
                 return cb(err);
             }
 
+            console.log("\n[DB] Connected to database !\n");
             connection.execute(
                 'insert into SITEUSERS ( ' +
                 '   user_email, ' +
@@ -145,7 +146,9 @@ function insertUser(user, cb) {
 
                     connection.release(function(err) {
                         if (err) {
-                            console.error(err.message);
+                            console.error("[DB] " + err.message);
+                        } else {
+                            console.log("\n[DB] Disconnected from the database !\n");
                         }
                     });
                 });

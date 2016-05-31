@@ -8,101 +8,122 @@
     <% include templates/scripttemplate.ejs %>
     <style>
       .vcenter {
-  display: inline-block;
-  vertical-align: middle;
-  float: none;
-  margin-top: 0.5rem;
-}
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+        /*margin-top: 0.5rem;*/
+      }
 
-.inline-element {
-  display: inline-block;
-}
+      .inline-element {
+        display: inline-block;
+      }
 
-.container.csegment {
-  width: 85%;
-  margin-bottom: 2rem;
-}
+      .container.csegment {
+        width: 85%;
+        margin-bottom: 2rem;
+      }
 
-.breadcrumb.breadcrumb-background {
-  background: #FFF;
-}
+      .breadcrumb.breadcrumb-background {
+        background: #FFF;
+      }
 
-.panel-body .row {
-  margin-top: 1rem;
-}
+      .panel-body .row {
+        margin-top: 1rem;
+      }
 
-.panel-center {
-  width: 80%;
-  margin: 0 auto;
-}
+      .panel-center {
+        width: 80%;
+        margin: 0 auto;
+      }
 
-.panel-filtering {
-  width: 30%;
-}
+      .panel-filtering {
+        width: 30%;
+      }
 
-.btn-filter {
-  width: 30%
-}
+      .btn-filter {
+        width: 30%
+      }
     </style>
 </head>
 <body>
 <% include templates/header.ejs %>
 
 
-<div class="container csegment">
+<div class="container csegment translate10">
   <div class="row">
 
   </div>
 </div>
 <!-- end-row -->
-<div class="panel panel-default panel-center">
+<div class="panel panel-default panel-center translate10">
   <div class="panel-body">
     <ol class="breadcrumb breadcrumb-background">
       <li><a href="#">Home</a></li>
       <li class="active">Data filtering</li>
       <h3><i class="fa fa-chevron-right"></i>  Data Filtering</h3>
     </ol>
-    <div class="panel panel-default panel-filtering">
-      <div class="panel-body">
-        <h4>Task name</h4>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Waypoint: Learn how Free Code Camp works
-          </label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox">Waypoint: Link to External Pages with Anchor Elements 
-          </label>
-        </div>
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-        </select>
-        <h4>Completed Date</h4>
-        <p class="inline-element">On</p>
-        <select class="form-control inline-element">
-          <option>1</option>
-          <option>2</option>
-        </select>
-        <h4>Between</h4>
-        <select class="form-control inline-element">
+    <div class="row">
+      <div class="col-md-4">
+      <div class="panel panel-default panel-filtering" style="width: auto">
+        <div class="panel-body">
+          <h4>Task name</h4>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Waypoint: Learn how Free Code Camp works
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">Waypoint: Link to External Pages with Anchor Elements 
+            </label>
+          </div>
+          <select class="form-control">
             <option>1</option>
             <option>2</option>
           </select>
-        <select class="form-control inline-element">
+          <h4>Completed Date</h4>
+          <p class="inline-element">On</p>
+          <select class="form-control inline-element">
             <option>1</option>
             <option>2</option>
           </select>
-        <h4>Day</h4>
-        <h4>Month</h4>
-        <h4>Year</h4>
+          <h4>Between</h4>
+          <select class="form-control inline-element">
+              <option>1</option>
+              <option>2</option>
+            </select>
+          <select class="form-control inline-element">
+              <option>1</option>
+              <option>2</option>
+            </select>
+          <h4>Day</h4>
+          <h4>Month</h4>
+          <h4>Year</h4>
+        </div>
+        <!-- end-panel-body -->
       </div>
-      <!-- end-panel-body -->
+      <!-- end-panel -->
+      <input class="btn btn-lg btn-default btn-filter col-md-12" type="submit" value="Submit">
     </div>
-    <!-- end-panel -->
-    <input class="btn btn-lg btn-default btn-filter" type="submit" value="Submit">
-    
+    <div class="col-md-8">
+      <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <textarea class="form-control" rows="3" placeholder="json here" required></textarea>
+            </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <textarea class="form-control" rows="3" placeholder="json here" required></textarea>
+            </div>
+        </div>
+      </div>
+      <input type="submit" class = "btn btn-default" value="Load More">
+    </div>
+    </div>
 
   </div>
   <!-- end-panel-body -->

@@ -3,7 +3,8 @@
  */
 
 function denyAccess(){
-    return function(req,res,next) {
+    return function(req,res,next)
+    {
         if(req.session.persistentSessionToken){
             res.status(401).redirect('/');
             //res.status(401).send({message: 'Naughty '});

@@ -1,13 +1,11 @@
 /**
- * Created by alber_000 on 5/29/2016.
+ * Created by alber_000 on 5/27/2016.
  */
+
 var oracledb = require('oracledb');
 var connAttrs = require('./../auth/utils/config');
-var SimpleOracleDB = require('simple-oracledb');
-SimpleOracleDB.extend(oracledb);
 
-
-function genericDatabaseOperation(req,res,select,params)
+function filterBy(req,res,select,params)
 {
     oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
@@ -30,7 +28,8 @@ function genericDatabaseOperation(req,res,select,params)
                         detailed_message: err.message
                     }));
                 } else {
-                    res.send(results); //default 100 rows
+                   //res.render('apiExperiments', { title: 'Express' }); //default 100 rows
+                    res.send(results);
                 }
                 // Release the connection
 
@@ -47,4 +46,4 @@ function genericDatabaseOperation(req,res,select,params)
     });
 }
 
-module.exports=genericDatabaseOperation;
+module.exports.filterBy=filterBy;

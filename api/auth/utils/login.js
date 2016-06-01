@@ -14,6 +14,11 @@ function post(req, res, next) {
             if (err) {
                 return next(err);
             }
+            if(!validator.isEmail(req.body.user_email))
+            {
+                res.redirect('/login');
+                return;
+            }
             connection.execute(
                 'select user_id as "id", ' +
                 '   user_email as "user_email", ' +
@@ -35,7 +40,8 @@ function post(req, res, next) {
                         return;
                     }
 
-                    if (err) {
+                    if (err)
+                    {
                         connection.release(function(err) {
                             if (err) {
                                 console.error(err.message);

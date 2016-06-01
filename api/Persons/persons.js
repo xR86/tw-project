@@ -6,7 +6,7 @@ var express = require('express');
 var router = express.Router();
 var auth=require('./../auth/utils/myAuth');
 var generic=require('../databaseFunctions/genericSelect');
-var filter=require('../databaseFunctions/filter');
+var filter=require('../databaseFunctions/genericFilter');
 
 
 

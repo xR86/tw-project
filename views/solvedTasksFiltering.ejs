@@ -18,15 +18,14 @@
 <div class="row translate10">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
-            <form class="panel-body" method="post" action="/api/solvedTasks/hasSolution">
-                <h3>Welcome back !</h3>
-                <p>
-                    <label>ID:</label>
-                    <input type = "text" class = "form-control inlined-element" name="st_id" placeholder = "Enter ID">
-                </p>
+            <form class="panel-body" method="post" action="/datafiltering/solvedTasksFilter">
                 <p>
                     <label>hasSolution:</label>
                     <input type = "text" class = "form-control inlined-element" name="hasSolution" placeholder = "Enter SolEx">
+                </p>
+                <p>
+                    <label>name:</label>
+                    <input type = "text" class = "form-control inlined-element" name="task_name" placeholder = "Enter name">
                 </p>
                 <p>
                     <label>date:</label>

@@ -15,7 +15,7 @@ SimpleOracleDB.extend(oracledb);
 
 router.get('/', function (req,res) {
     "use strict";
-    generic(req,res,"Select * from solvedtasks",[]);
+    generic(req,res,"select * from solvedtasks",[]);
 });
 
 router.get('/:st_id', function (req,res) {

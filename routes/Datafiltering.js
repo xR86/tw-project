@@ -16,6 +16,6 @@ router.post('/solvedTasksFilter',solvedTasksFilter);
 router.get('/personFilter',function(req,res) {
     res.render('personFilter');
 });
-//router.post('/personFilter',personFilter);
+router.post('/personFilter',personFilter);
 
 module.exports = router;

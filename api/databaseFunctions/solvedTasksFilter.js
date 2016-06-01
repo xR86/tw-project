@@ -78,7 +78,7 @@ function filterSolvedTasks(req,res)
         filter.filterBy(req,res,select[0],{});
     }
     else{ //nu cred ca se poate ajunge in else-ul asta 
-        res.redirect('/api/solvedTasks/testId');
+        res.redirect('/datafiltering/solvedTasksFilter');
         console.log("try inputting again");
     }
 }

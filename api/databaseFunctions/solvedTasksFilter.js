@@ -39,7 +39,7 @@ function filterSolvedTasks(req,res)
     if(req.body.hasSolution!='' &&  req.body.completeddate!='' && req.body.task_name!='')
     {
         select.push("SELECT * FROM SOLVEDTASKSVIEW  where task_name= :task_name and hasSolution= :hasSolution and"+
-            " completeddate= :completeddate");
+            " TO_DATE(TRUNC(completeddate),'DD/MM/YY')=TO_DATE(:completeddate,'DD/MM/YY')");
         filter.filterBy(req,res,select[0],bindvariables.case1);
     }
     else if(req.body.hasSolution!='' &&  req.body.completeddate=='' && req.body.task_name!='')
@@ -50,7 +50,7 @@ function filterSolvedTasks(req,res)
     else if(req.body.hasSolution!='' && req.body.completeddate!='' && req.body.task_name=='')
     {
         select.push("SELECT * FROM SOLVEDTASKSVIEW  where hasSolution= :hasSolution and"+
-            " completeddate= :completeddate");
+            " TO_DATE(TRUNC(completeddate),'DD/MM/YY')=TO_DATE(:completeddate,'DD/MM/YY')");
         filter.filterBy(req,res,select[0],bindvariables.case3);
     }
     else if(req.body.hasSolution!='' && req.body.completeddate=='' && req.body.task_name=='')
@@ -60,7 +60,7 @@ function filterSolvedTasks(req,res)
     }
     else if(req.body.hasSolution=='' && req.body.completeddate!='' && req.body.task_name!='')
     {
-        select.push("SELECT * FROM SOLVEDTASKSVIEW  where completeddate= :completeddate and task_name= :task_name ");
+        select.push("SELECT * FROM SOLVEDTASKSVIEW  where TO_DATE(TRUNC(completeddate),'DD/MM/YY')=TO_DATE(:completeddate,'DD/MM/YY') and task_name= :task_name ");
         filter.filterBy(req,res,select[0],bindvariables.case5);
     }
     else if(req.body.hasSolution=='' && req.body.completeddate=='' && req.body.task_name!='')
@@ -70,7 +70,7 @@ function filterSolvedTasks(req,res)
     }
     else if(req.body.hasSolution=='' && req.body.completeddate!='' && req.body.task_name=='')
     {
-        select.push("SELECT * FROM SOLVEDTASKSVIEW  where completeddate= :completeddate ");
+        select.push("SELECT * FROM SOLVEDTASKSVIEW  where TO_DATE(TRUNC(completeddate),'DD/MM/YY')=TO_DATE(:completeddate,'DD/MM/YY')");
         filter.filterBy(req,res,select[0],bindvariables.case7);
     }
     else if(req.body.hasSolution=='' && req.body.completeddate=='' && req.body.task_name=='') {

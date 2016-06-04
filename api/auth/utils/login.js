@@ -20,7 +20,7 @@ function post(req, res, next) {
                 return;
             }
             connection.execute(
-                'select user_id as "id", ' +
+                'select user_firstname as "user_firstname", ' +
                 '   user_email as "user_email", ' +
                 '   user_password as "user_password", ' +
                 '   role as "role" ' +
@@ -67,7 +67,8 @@ function post(req, res, next) {
 
                         payload = {
                             sub: user.user_email,
-                            role: user.role
+                            role: user.role,
+                            user_firstname: user.user_firstname
                         };
                         var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
 
@@ -78,9 +79,11 @@ function post(req, res, next) {
 
                         req.session.persistentSessionToken=persistentSessionToken;
                         req.session.email=payload.sub;
+                        req.session.user_firstname=payload.user_firstname;
                         res.redirect('/dashboard');
                        // console.log(persistentSessionToken);
-                       // console.log(req.session);
+                        console.log(req.session);
+                        
                     });
 
                     connection.release(function(err) {

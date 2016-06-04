@@ -12,8 +12,8 @@ DROP TABLE Tasks CASCADE CONSTRAINTS
 /
 DROP TABLE SolvedTasks CASCADE CONSTRAINTS
 /
-DROP TABLE SiteUsers CASCADE CONSTRAINTS
-/
+--DROP TABLE SiteUsers CASCADE CONSTRAINTS
+--/
 
 
 ACCEPT  dmy  PROMPT "create tables/Press [Enter] to continue ...";
@@ -26,9 +26,8 @@ ACCEPT  dmy  PROMPT "create tables/Press [Enter] to continue ...";
 CREATE TABLE Persons(
   p_id NUMBER(6) NOT NULL,
   tasks_attempted_counter NUMBER(4) NOT NULL,
-  tasks_completed_counter NUMBER(4) NOT NULL,
-
-  CONSTRAINT p_id_pk PRIMARY KEY (p_id)
+  tasks_completed_counter NUMBER(4) NOT NULL,/*
+  CONSTRAINT p_id_pk PRIMARY KEY (p_id)*/
 )
 /
 
@@ -37,10 +36,10 @@ CREATE TABLE Persons(
 * used for task list -> so as to reduce memory needed for each task id
 */
 CREATE TABLE Tasks(
-	task_id NUMBER(3) NOT NULL,
-	task_name VARCHAR2(30) NOT NULL,
-
-	CONSTRAINT task_id_pk PRIMARY KEY (task_id)
+  task_id NUMBER(3) NOT NULL,
+  task_name VARCHAR2(100) NOT NULL/*,
+ 
+  CONSTRAINT task_id_pk PRIMARY KEY (task_id)*/
 )
 /
 
@@ -50,22 +49,24 @@ CREATE TABLE Tasks(
 * a user should have more than 1 task
 */
 CREATE TABLE SolvedTasks(
-	st_id NUMBER(20) NOT NULL,/*numar mare de taskuri rezolvate,
-	 poate ar trebui un cod alfanumeric ?*/
-	p_id NUMBER(6) NOT NULL, /**/
-	task_id NUMBER(3) NOT NULL,
-	
-	completedDate DATE,
-	hasSolution CHAR(1) NOT NULL,
-	solution CLOB,
-
- 	CONSTRAINT p_id_FK
-    	FOREIGN KEY (p_id)
+  st_id NUMBER(20) NOT NULL,/*numar mare de taskuri rezolvate,
+   poate ar trebui un cod alfanumeric ?*/
+  p_id NUMBER(6) NOT NULL, /**/
+  task_id NUMBER(3) NOT NULL,
+ 
+  completedDate TIMESTAMP,
+  hasSolution CHAR(1),
+  solution CLOB/*,
+ 
+  CONSTRAINT st_id_pk PRIMARY KEY (st_id)
+ 
+  CONSTRAINT p_id_FK
+      FOREIGN KEY (p_id)
     REFERENCES Persons(p_id),
-
- 	CONSTRAINT task_id_FK
-    	FOREIGN KEY (task_id)
-    REFERENCES Tasks(task_id)
+ 
+  CONSTRAINT task_id_FK
+      FOREIGN KEY (task_id)
+    REFERENCES Tasks(task_id)*/
 )
 /
 
@@ -78,7 +79,7 @@ CREATE TABLE SiteUsers(
 	user_id NUMBER(5) NOT NULL,
 	user_firstname VARCHAR2(30) NOT NULL,
 	user_lastname VARCHAR2(30) NOT NULL,
-	user_role VARCHAR2(30) NOT NULL,
+	user_role VARCHAR2(10) NOT NULL,
 
 	user_email VARCHAR2(30) NOT NULL,/*indexare aici ... 2 usecases: logare si recuperare parola*/
 	user_password VARCHAR2(200) NOT NULL, /*hashed*/
@@ -127,22 +128,82 @@ CREATE TABLE PersonStats(
 )
 /
 
+--DROP TABLE MONTHLY_TASKS;
+
+CREATE TABLE MONTHLY_TASKS(
+	MON NUMBER(2),
+	TASK_COUNT NUMBER
+	);
+
+
+
+declare
+ v_temp NUMBER;
+
+begin
+ FOR i IN 1..12
+ LOOP
+   --select count(*) INTO v_temp from solvedtasks where extract(month from completeddate)=i;
+   select count(*) INTO v_temp from solvedtasks where extract(month from completeddate)=i AND hasSolution='Y';
+   EXECUTE IMMEDIATE 'INSERT INTO MONTHLY_TASKS VALUES (' || i || ',' || v_temp ||')';
+ END LOOP;
+end;
+--select * from monthly_tasks
+
+
 ACCEPT  dmy  PROMPT "create views/Press [Enter] to continue ...";
 
 /*
 * solvedTasksView
 * used to aggregate solved tasks (implied - that have a solution)
-* 
+*
 */
 DROP VIEW solvedTasksView;
 /
-
+ 
 CREATE VIEW solvedTasksView as
-	SELECT t.task_name, s.completedDate, s.hasSolution, s.solution
-	FROM SolvedTasks s
-		JOIN Tasks t ON s.task_id = t.task_ID
-	WHERE hasSolution IS NOT NULL 
+  SELECT s.p_id,s.st_id,s.task_id, t.task_name, s.completedDate, s.hasSolution, s.solution
+  FROM SolvedTasks s
+    JOIN Tasks t ON s.task_id = t.task_ID
+  WHERE hasSolution IS NOT NULL
 ;
+/
 
 
 
+ACCEPT  dmy  PROMPT "create sequences/Press [Enter] to continue ...";
+
+
+drop sequence task_id_seq;
+/
+CREATE SEQUENCE TASK_ID_SEQ;
+/
+drop sequence st_id_seq;
+/
+create sequence st_id_seq;
+/
+DROP SEQUENCE PERSON_ID_SEQ;
+/
+CREATE SEQUENCE PERSON_ID_SEQ;
+/
+
+
+
+
+
+--run update after parsing
+/*
+update persons p set 
+      TASKS_ATTEMPTED_COUNTER=(
+              select count(*) from solvedtasks st where p.p_id=st.p_id),
+      TASKS_COMPLETED_COUNTER=(
+              select count(*) from solvedtasks st where p.p_id=st.p_id AND HASSOLUTION='Y');
+/*/
+COMMIT;
+/
+
+/*
+select count(*) from solvedtasks;
+select * from solvedtasks s join tasks t on t.TASK_ID = s.TASK_ID WHERE task_name= 'Mutations';
+select * from solvedtasks where hasSolution='Y'
+*/

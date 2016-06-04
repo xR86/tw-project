@@ -17,7 +17,6 @@ function post(req, res, next) {
     };
     if(!validator.isEmail(user.user_email) || !validator.isAlphanumeric(user.user_firstname) || !validator.isAlphanumeric(user.user_lastname)){
         res.redirect('/signup');
-        console.log("not a valid email || firstname || lastname");
         return;
     }
     var unhashedPassword = req.body.user_password;
@@ -43,15 +42,17 @@ function post(req, res, next) {
 
                 payload = {
                     sub: user.user_email,
-                    role: user.role
+                    role: user.role,
+                    user_firstname:user.user_firstname
                 };
                 
                 var persistentSessionToken=jwt.sign(payload, config.jwtSecretKey);
                 req.session.persistentSessionToken=persistentSessionToken;
-                req.session.email=payload.sub; //added this
+                req.session.email=payload.sub;
+                req.session.user_firstname=payload.user_firstname;
                 res.redirect('/dashboard');
                 //console.log(persistentSessionToken);
-                // console.log(req.session);
+                console.log(req.session);
             });
         });
     });

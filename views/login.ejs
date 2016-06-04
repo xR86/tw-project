@@ -37,6 +37,8 @@
         }
         /*.form-control:focus {}
         */
+        .custom-tooltip + .tooltip > .tooltip-inner {background-color: #F33232;}
+        .custom-tooltip + .tooltip > .tooltip-arrow {border-top-color: #F33232;}
 
     </style>
 </head>
@@ -50,11 +52,11 @@
                 <h3>Welcome back !</h3>
                 <p>
                     <label>EMAIL:</label>
-                    <input type = "text" class = "form-control inlined-element" name="user_email" placeholder = "Enter your email" id="login-email" onblur="validateEmail()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a valid email" data-trigger="manual" data-html="false">
+                    <input type = "text" class = "form-control inlined-element custom-tooltip" name="user_email" placeholder = "Enter your email" id="login-email" onblur="validateEmail()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a valid email" data-trigger="manual" data-html="false">
                 </p>
                 <p>
                     <label>PASSWORD:</label>
-                    <input type = "password" class = "form-control inlined-element" name="user_password" placeholder = "Enter your password" id="login-password" onblur="validatePassword()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a password" data-trigger="manual" data-html="false">
+                    <input type = "password" class = "form-control inlined-element custom-tooltip" name="user_password" placeholder = "Enter your password" id="login-password" onblur="validatePassword()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a password" data-trigger="manual" data-html="false">
                 </p>
                 <p>
                     <input type="submit" class = "btn btn-primary" value="Login">

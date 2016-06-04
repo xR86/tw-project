@@ -5,8 +5,9 @@
 var oracledb = require('oracledb');
 var connAttrs = require('./../auth/utils/config');
 
-function filterBy(req,res,select,params)
+function filterBy(req,res,select,params,max_rows)
 {
+    oracledb.maxRows=max_rows;
     oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB
@@ -28,7 +29,7 @@ function filterBy(req,res,select,params)
                         detailed_message: err.message
                     }));
                 } else {
-                   //res.render('apiExperiments', { title: 'Express' }); //default 100 rows
+                   // res.contentType("application/json");
                     res.send(results);
                 }
                 // Release the connection

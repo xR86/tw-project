@@ -23,7 +23,6 @@ var login=require('./api/auth/routes/LoginRoute');
 var signup=require('./api/auth/routes/signupRoute');
 var logout=require('./api/auth/routes/LogoutRoute');
 var remove=require('./api/auth/routes/deleteAccountRoute');
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,7 +30,10 @@ app.use(cookieParser());
 app.use(session({resave: true, saveUninitialized: true, secret: 'SOMERANDOMSECRETHERE', cookie: { maxAge: 15*60*1000 }})); //session expires in 15 minutes
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(function (req, res, next) {
+  res.locals.req = req;
+ next();
+});
 app.use("/public", express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);

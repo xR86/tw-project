@@ -5,7 +5,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('About', { title: 'Express' });
+    res.render('About', { user: req.session.user_firstname });
+   // res.render('demoHeader', { title: 'About' });
 });
 
 module.exports = router;

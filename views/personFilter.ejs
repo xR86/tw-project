@@ -20,38 +20,65 @@
         <div class="panel panel-default">
             <form class="panel-body" method="post" action="/datafiltering/personFilter">
                 <h3>Welcome back !</h3>
-                <p>
+
                     <label>person_id:</label>
                     <input type = "text" class = "form-control inlined-element" name="p_id" placeholder = "Enter ID">
-                </p>
-                <p>
-                    <label>completedTasks:</label>
-                    <input type = "text" class = "form-control inlined-element" name="tasks_completed_counter" placeholder = "greater than">
-                </p>
-                <p>
-                    <label>date1:</label>
-                    <input type = "text" class = "form-control inlined-element" name="date1" placeholder = "Enter date1">
-                </p>
-                <p>
-                    <label>date2:</label>
-                    <input type = "text" class = "form-control inlined-element" name="date2" placeholder = "Enter date2">
-                </p>
-                <p>
-                    <input type="submit" class = "btn btn-default" value="getJson">
-                </p>
-            </form>
-        </div>
 
+
+                    <label>completedTasks:</label>
+                    <input type = "number" class = "form-control inlined-element" name="tasks_completed_counter" placeholder = "greater than">
+
+
+                    <label>date1:</label>
+                    <input type = "text" class = "form-control inlined-element" name="date1" placeholder = "DD/MM/YY">
+
+
+                    <label>date2:</label>
+                    <input type = "text" class = "form-control inlined-element" name="date2" placeholder = "DD/MM/YY">
+
+
+                    <label>rowsToFetch</label>
+                    <input type = "number" max="1000" class = "form-control inlined-element" name="max" placeholder = "100" required>
+
+
+                    <input type="submit" class = "btn btn-default" value="getJson">
+
+            </form>
+            <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+            <script type="text/javascript">
+                $(".panel-body").submit(function(e)
+                {
+                    var postData = $(this).serialize();
+                    var formURL = $(this).attr("action");
+                    var met=$(this).attr("method");
+                    $.ajax(
+                            {
+                                url : formURL,
+                                type: met,
+                                data : postData,
+                                datatype: "json",
+                                success:function(response)
+                                {
+                                 //   $(".col-md-6").append(JSON.stringify(response,null,3));
+                                    $(".col-md-6").wrapInner('<textarea>'+JSON.stringify(response,null,3)+'</textarea>');
+                                },
+                                error: function(jqXHR, textStatus, errorThrown)
+                                {
+                                    //handle error
+                                }
+                            });
+                    e.preventDefault();	//STOP default action
+                });
+            </script>
+        </div>
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-6">
-                    <textarea class="form-control" rows="3" placeholder="json here" required></textarea>
+
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
 </body>
 </html>

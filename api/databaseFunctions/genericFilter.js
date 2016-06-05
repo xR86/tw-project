@@ -28,12 +28,12 @@ function filterBy(req,res,select,params,max_rows)
                         message: "Error getting the user profile",
                         detailed_message: err.message
                     }));
+                    res.render('500');
                 } else {
                    // res.contentType("application/json");
                     res.send(results);
                 }
                 // Release the connection
-
                 connection.release(
                     function (err) {
                         if (err) {

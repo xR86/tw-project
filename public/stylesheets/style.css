@@ -33,6 +33,42 @@ nav{
 }
 
 
+.row.login-container:after,
+.row.signup-container:after
+{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: -1;
+    content: "";
+    background: url('/public/assets/background-texture-1.jpg');
+    background-size:cover;
+    opacity: 0.6;
+}
+
+.login-container label,
+.signup-container label
+{
+   opacity: 0.6;
+}
+
+.bad-input-focus{
+    border-color: #E96666;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 102, 102, 0.6);
+}
+
+/*
+.form-control:focus {}
+*/
+
+.bad-tooltip + .tooltip > .tooltip-inner {background-color: #F33232;}
+.bad-tooltip + .tooltip > .tooltip-arrow {border-top-color: #F33232;}
+
+
 /******Navbar styling********************************/
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {

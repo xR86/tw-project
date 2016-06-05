@@ -2,40 +2,44 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Signup</title>
 
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
-    <style>
-        form{
-            margin-top: 6rem;
-        }
-    </style>
+    
 </head>
 <body>
     <% include templates/header.ejs %>
-    <form method="post" action="/signup">
-        <p>
-            <label>First Name:</label>
-            <input type="text" name="user_firstname">
-        </p>
-        <p>
-            <label>Last Name:</label>
-            <input type="text" name="user_lastname">
-        </p>
-        <p>
-            <label>Email:</label>
-            <input type="text" name="user_email">
-        </p>
-        <p>
-            <label>Password:</label>
-            <input type="text" name="user_password">
-        </p>
-        <p>
-            <input type="submit" value="signup">
-        </p>
-    </form>
+    <div class="row translate10 signup-container">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default z-depth-1">
+            <form class="panel-body" method="post" action="/signup">
+                <h3>Nice to meet you !</h3>
+                <p>
+                    <label>First Name:</label>
+                    <input type="text" class = "form-control inlined-element bad-tooltip form-name" name="user_firstname" placeholder = "Enter your first name" id="formName1" onblur="validateName(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a name (max 30 characters)" data-trigger="manual" data-html="false">
+                </p>
+                <p>
+                    <label>Last Name:</label>
+                    <input type="text" class = "form-control inlined-element bad-tooltip form-name" name="user_lastname" placeholder = "Enter your last name" id="formName2" onblur="validateName(1)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a name (max 30 characters)" data-trigger="manual" data-html="false">
+                </p>
+                <p>
+                    <label>Email:</label>
+                    <input type="text" class = "form-control inlined-element bad-tooltip" name="user_email" placeholder = "Enter your email" id="email" onblur="validateEmail()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a valid email between 6-30 characters" data-trigger="manual" data-html="false">
+                </p>
+                <p>
+                    <label>Password:</label>
+                    <input type = "password" class = "form-control inlined-element bad-tooltip" name="user_password" placeholder = "Enter your password" id="password" onblur="validatePassword()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please enter a password between 6-30 characters" data-trigger="manual" data-html="false">
+                </p>
+                <p>
+                    <input type="submit" class = "btn btn-primary" value="signup">
+                </p>
+            </form>
+        </div>
+    </div>
+    </div>
 
+<script src="/public/javascripts/validations.js"></script>
 
 </body>
 </html>

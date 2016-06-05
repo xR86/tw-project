@@ -52,6 +52,8 @@ app.use('/login',login);
 app.use('/logout',logout);
 app.use('/signup',signup);
 app.use('/remove',remove);
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {

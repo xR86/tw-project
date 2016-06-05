@@ -7,5 +7,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('Help');
 });
+router.get('/rest', function(req, res, next) {
+    res.render('Help-REST');
+});
 
 module.exports = router;

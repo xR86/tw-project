@@ -10,7 +10,7 @@ var config=require('../utils/config');
 var auth=require('../utils/myAuth');
 
 router.get('/', function(req, res, next) {
-    res.render('deleteAccount');
+    res.render('Settings');
 });
 router.post('/',auth(),users.remove);
 

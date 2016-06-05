@@ -488,12 +488,35 @@
                 </div>
             </div>
         </div>
-
-
-
-        <!-- /END THE FEATURETTES -->
-
-
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript">
+          $("#contactForm").submit(function(e)
+          {
+            var postData = $(this).serialize();
+            var formURL = $(this).attr("action");
+            var met=$(this).attr("method");
+            $.ajax(
+                    {
+                      url : formURL,
+                      type: met,
+                      data : postData,
+                      datatype: "json",
+                      success:function(response)
+                      {
+                        //   $(".col-md-6").append(JSON.stringify(response,null,3));
+                       $(".messageLog").append('<h1>'+JSON.stringify(response)+'</h1>');
+                      },
+                      error: function(jqXHR, textStatus, errorThrown)
+                      {
+                        $(".messageLog").wrapInner('<h1>'+JSON.stringify(errorThrown)+'</h1>');
+                      }
+                    });
+            e.preventDefault();	//STOP default action
+          });
+        </script>
+        <div class="messageLog">
+        </div>
+        <!-- /END THE FEATURETTES --->
         <hr>
 
 

@@ -33,15 +33,14 @@ function myAuth(role){
         }
         if (!role || role === payload.role) {
             //pass some user details through in case they are needed
-            req.user = {
-                email: payload.sub,
-                role: payload.role
-            };
-
+            //req.user = {
+             //   email: payload.sub,
+           //     role: payload.role
+          //  };
             next();
         } else {
-            res.status(401).send({message: 'You are not authorized'});
-            // res.redirect('/login');
+            res.status(401).send({message: 'You are not authorized'}); //ToDo : redirect to a specific page, maybe to the user friendly view made for exceptions;
+            //res.redirect('/login');   
         }
     }
 }

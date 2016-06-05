@@ -28,7 +28,6 @@ var logout=require('./api/auth/routes/LogoutRoute');
 var settings=require('./api/auth/routes/Settings');
 
 /*Routes accesible only to admin role*/
-var loginAdmin=require('./routes/Loginadmin');
 var adminDashboard=require('./routes/Admindash');
 var devstats=require('./routes/Devstats');
 
@@ -55,7 +54,6 @@ app.use('/contact',contact);
 app.use('/settings',settings);
 
 /*Routes accesible only to admin role*/
-app.use('/loginadmin',loginAdmin);
 app.use('/admindash',adminDashboard);
 app.use('/devstats',devstats);
 

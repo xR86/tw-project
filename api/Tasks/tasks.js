@@ -20,10 +20,10 @@ router.get('/:task_id', function (req,res) {
     generic(req,res,"SELECT * FROM Tasks WHERE task_id= :task_id", [req.params.task_id]);
 });
 
-router.get('/:task_name', function (req,res) {
+router.get('/name/:task_name', function (req,res) {
     "use strict";
 
-    generic(req,res,"SELECT * FROM Tasks WHERE task_id= :task_name", [req.params.task_name]);
+    generic(req,res,"SELECT * FROM Tasks WHERE task_name= :task_name", [req.params.task_name]);
 });
 
 module.exports = router;

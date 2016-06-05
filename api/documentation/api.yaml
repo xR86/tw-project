@@ -1,0 +1,517 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "0.0.0"
+  title: CODR REST API
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /api/tasks:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Task` objects.
+        Query param of **task_id** determines
+        the Task object returned
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: task_id
+          in: query
+          description: The task id
+          required: false
+          type: number
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfTasks
+            type: array
+            items:
+              title: Task
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                task_name:
+                  type: string
+
+  /api/tasks/name:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Task` objects.
+        Query param of **task_name** determines
+        the Task object returned
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: task_name
+          in: query
+          description: Name of the task
+          required: true
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfTasks
+            type: array
+            items:
+              title: Task
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                task_name:
+                  type: string
+  
+  /api/persons:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Person` objects.
+        Optional query param of **p_id** determines
+        the Person object returned
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: p_id
+          in: query
+          description: Person id in the database
+          required: false
+          type: integer
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfPersons
+            type: array
+            items:
+              title: Person
+              type: object
+              properties:
+                p_id:
+                  type: integer
+                tasks_completed_counter:
+                  type: integer
+                tasks_atttempted_counter:
+                  type: integer
+  /api/solvedTasks:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects.
+        Optional query param of **st_id** determines
+        the solvedTask object returned
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: st_id
+          in: query
+          description: Name of the task
+          required: false
+          type: integer
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  /api/solvedTasks/task_name:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects.
+        You must either use neither optional parameters or both at the same time.
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: task_name
+          in: query
+          description: Name of the task
+          required: true
+          type: integer
+        -
+          name: completeddate
+          in: query
+          description: Date of completion
+          required: false
+          type: string 
+          format: date
+        -
+          name: hasSolution
+          in: query
+          description: Y or N response 
+          required: false
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  /api/solvedTasks/task_name/date:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects.Used to filter a SolvedTasks by name and date of 
+        completion
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: task_name
+          in: query
+          description: Name of the task
+          required: true
+          type: integer
+        -
+          name: completeddate
+          in: query
+          description: Date of completion
+          required: true
+          type: string 
+          format: date
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  /api/solvedTasks/task_name/hasSolution:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects.Used to filter a SolvedTasks by name and existence of 
+        the solution field.
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: task_name
+          in: query
+          description: Name of the task
+          required: true
+          type: integer
+        -
+          name: hasSolution
+          in: query
+          description: Y or N response 
+          required: true
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  /api/solvedTasks/task_name/p_id:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects. Filters tasks by the persons who 
+        completed them, optional query parameter **completeddate** also
+        filters by date of completion
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: p_id
+          in: query
+          description: Person id in the database
+          required: true
+          type: integer
+        -
+          name: completeddate
+          in: query
+          description: Date of completion
+          required: false
+          type: string 
+          format: date
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  /api/solvedTasks/task_name/p_id/hasSolution:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects. Filters by mandatory fields
+        p_id, completeddate and hasSolution. Used to inspect what tasks a user 
+        completed at a specific date
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: p_id
+          in: query
+          description: Person id in the database
+          required: true
+          type: integer
+        -
+          name: completeddate
+          in: query
+          description: Date of completion
+          required: true
+          type: string 
+          format: date
+        -
+          name: hasSolution
+          in: query
+          description: Y or N response 
+          required: true
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  /api/solvedTasks/hasSolution:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects.
+        Filters tasks by existence of solution only 
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: hasSolution
+          in: query
+          description: Y or N response 
+          required: true
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  /api/solvedTasks/completeddate:
+   # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `SolvedTasks` objects.
+        Filters tasks only by date
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: completeddate
+          in: query
+          description: Date of completion
+          required: true
+          type: string 
+          format: date
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfSolvedTasks
+            type: array
+            items:
+              title: SolvedTask
+              type: object
+              properties:
+                st_id:
+                  type: integer
+                p_id:
+                  type: integer
+                task_id:
+                  type: integer
+                completeddate:
+                  type: string
+                  format: date
+                hasSolution:
+                  type: string
+                solution:
+                  type: string
+  

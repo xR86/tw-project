@@ -30,10 +30,42 @@ router.get('/task_name/:task_name', function (req,res) {
     generic(req,res,"select * from solvedtasks s join tasks t on t.TASK_ID = s.TASK_ID WHERE task_name= :task_name",params);
 });
 
+router.get('/task_name/date/:task_name/:completeddate', function (req,res) {
+    "use strict";
+    var params=[req.params.task_name,req.params.completeddate];
+    generic(req,res,"select * from solvedtasks s join tasks t on t.TASK_ID = s.TASK_ID WHERE task_name= :task_name and " +
+        "TO_DATE(TRUNC(completeddate),'DD-MM-YY')=TO_DATE(:completeddate,'DD-MM-YY')",params);
+});
+
+router.get('/task_name/hasSolution/:task_name/:hasSolution', function (req,res) {
+    "use strict";
+    var params=[req.params.task_name,req.params.hasSolution];
+    generic(req,res,"select * from solvedtasks s join tasks t on t.TASK_ID = s.TASK_ID WHERE task_name= :task_name and hasSolution= :hasSolution",params);
+});
+
+router.get('/task_name/:task_name/:completeddate/:hasSolution', function (req,res) {
+    "use strict";
+    var params=[req.params.task_name,req.params.completeddate,req.params.hasSolution];
+    generic(req,res,"select * from solvedtasks s join tasks t on t.TASK_ID = s.TASK_ID WHERE task_name= :task_name and " +
+        "TO_DATE(TRUNC(completeddate),'DD-MM-YY')=TO_DATE(:completeddate,'DD-MM-YY') and hasSolution= :hasSolution",params);
+});
+
 router.get('/p_id/:p_id', function (req,res) {
     "use strict";
     var params=[req.params.p_id];
     generic(req,res,"select * from solvedtasks where p_id= :p_id",params);
+});
+
+router.get('/p_id/:p_id/:completeddate', function (req,res) {
+    "use strict";
+    var params=[req.params.p_id,req.params.completeddate];
+    generic(req,res,"select * from solvedtasks where p_id= :p_id and TO_DATE(TRUNC(completeddate),'DD-MM-YY')=TO_DATE(:completeddate,'DD-MM-YY')",params);
+});
+
+router.get('/p_id/hasSolution/:p_id/:completeddate/:hasSolution', function (req,res) {
+    "use strict";
+    var params=[req.params.p_id,req.params.completeddate,req.params.hasSolution];
+    generic(req,res,"select * from solvedtasks where p_id= :p_id and TO_DATE(TRUNC(completeddate),'DD-MM-YY')=TO_DATE(:completeddate,'DD-MM-YY') and hasSolution= :hasSolution",params);
 });
 
 router.get('/hasSolution/:hasSolution', function (req,res) {
@@ -45,7 +77,13 @@ router.get('/hasSolution/:hasSolution', function (req,res) {
 router.get('/completeddate/:completeddate', function (req,res) {
     "use strict";
     var params=[req.params.completeddate];
-    generic(req,res,"select * from solvedtasks where completeddate= :completeddate",params);
+    generic(req,res,"select * from solvedtasks where TO_DATE(TRUNC(completeddate),'DD-MM-YY')=TO_DATE(:completeddate,'DD-MM-YY')",params);
+});
+
+router.get('/completeddate/:completeddate/:hasSolution', function (req,res) {
+    "use strict";
+    var params=[req.params.completeddate,req.params.hasSolution];
+    generic(req,res,"select * from solvedtasks where TO_DATE(TRUNC(completeddate),'DD-MM-YY')=TO_DATE(:completeddate,'DD-MM-YY') and hasSolution= :hasSolution",params);
 });
 
 module.exports = router;

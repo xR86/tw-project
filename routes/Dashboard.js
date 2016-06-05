@@ -6,7 +6,7 @@ var router = express.Router();
 var auth=require('../api/auth/utils/myAuth');
 
 router.get('/',auth(),function(req, res, next) {
-    res.render('Dashboard', { title: 'Express' });
+    res.render('Dashboard');
 });
 
 module.exports = router;

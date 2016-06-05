@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About</title>
+    <title><%= title %> - About</title>
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
 <body>
+<% include templates/header.ejs %>
 
-<% if(req.session.user_firstname){ console.log(req.session.user_firstname); %>
-<% include templates/demoHeader.ejs %>
-<%} else { %>
-<%console.log("hai pa"); }%>
 
 </body>
 </html>

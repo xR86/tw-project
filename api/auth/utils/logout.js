@@ -11,6 +11,7 @@ function logout(){
         }
         else{
          req.session.destroy();
+          req.app.locals.user = "";
             res.redirect('/');
         }
     }

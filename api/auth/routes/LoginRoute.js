@@ -8,6 +8,6 @@ var access=require('./../utils/denyAccessToLogin');
 
 router.post('/',login.post);
 router.get('/',access(),function(req, res, next) {
-    res.render('login', { title: 'LOGIN' });
+    res.render('login');
 });
 module.exports=router;

@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session=require('express-session');
+var log = require('./config/logger');
 var app = express();
 
 
@@ -16,6 +17,7 @@ var help= require('./routes/Help');
 var about= require('./routes/About');
 var contact=require('./routes/Contact');
 
+
 var persons=require('./api/Persons/persons');
 var tasks=require('./api/Tasks/tasks');
 var solvedTasks=require('./api/Tasks/solvedTasks');
@@ -23,7 +25,14 @@ var solvedTasks=require('./api/Tasks/solvedTasks');
 var login=require('./api/auth/routes/LoginRoute');
 var signup=require('./api/auth/routes/signupRoute');
 var logout=require('./api/auth/routes/LogoutRoute');
-var remove=require('./api/auth/routes/deleteAccountRoute');
+var settings=require('./api/auth/routes/Settings');
+
+/*Routes accesible only to admin role*/
+var loginAdmin=require('./routes/Loginadmin');
+var adminDashboard=require('./routes/Admindash');
+var devstats=require('./routes/Devstats');
+
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,6 +52,13 @@ app.use('/datafiltering',datafil);
 app.use('/Help',help);
 app.use('/About',about);
 app.use('/contact',contact);
+app.use('/settings',settings);
+
+/*Routes accesible only to admin role*/
+app.use('/loginadmin',loginAdmin);
+app.use('/admindash',adminDashboard);
+app.use('/devstats',devstats);
+
 
 app.use('/api/persons',persons);
 app.use('/api/tasks',tasks);
@@ -51,7 +67,6 @@ app.use('/api/solvedTasks',solvedTasks);
 app.use('/login',login);
 app.use('/logout',logout);
 app.use('/signup',signup);
-app.use('/remove',remove);
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 // production error handler
@@ -80,5 +95,7 @@ app.locals = {
     title: 'CoDr',
     user: ''
 };
+
+log.info('\nServer ready on port 8081');
 
 module.exports = app;

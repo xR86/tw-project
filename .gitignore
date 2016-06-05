@@ -1,5 +1,16 @@
-node_modules/*
-_java-json-parser/out/*
+#IntelliJ metadata
 _java-json-parser/.idea/*
-api/auth/utils/config.js
 .idea/*
+
+#Compiled java files
+_java-json-parser/out/*
+
+#Dependency directory
+node_modules/*
+
+#database configuration
+api/auth/utils/config.js
+
+# Logs
+log/*
+*.log

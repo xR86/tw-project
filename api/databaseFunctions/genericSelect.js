@@ -29,11 +29,11 @@ function genericDatabaseOperation(req,res,select,params)
                         message: "Error getting the user profile",
                         detailed_message: err.message
                     }));
+                    res.render('500',{message: err.message});
                 } else {
                     res.send(results); //default 100 rows
                 }
                 // Release the connection
-
                 connection.release(
                     function (err) {
                         if (err) {

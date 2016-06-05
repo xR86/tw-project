@@ -36,7 +36,7 @@ function post(req, res, next) {
                 function(err, results){
                     var user;
                     if(results.rows[0]==null){
-                        res.redirect('/login'); //TODO: should display message in front end saying invalid email or password
+                        res.redirect('/login'); 
                         return;
                     }
 
@@ -82,10 +82,14 @@ function post(req, res, next) {
                         req.session.user_firstname=payload.user_firstname;
 
                         req.app.locals.user = req.session.user_firstname;
-
-                        res.redirect('/dashboard');
+                        if(payload.role=='ADMIN'){
+                            res.redirect('/Admindash');
+                        }
+                        else {
+                            res.redirect('/dashboard');
+                        }
                        // console.log(persistentSessionToken);
-                        console.log(req.session);
+                        //console.log(req.session);
                         
                     });
 

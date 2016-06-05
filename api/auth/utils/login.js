@@ -80,6 +80,9 @@ function post(req, res, next) {
                         req.session.persistentSessionToken=persistentSessionToken;
                         req.session.email=payload.sub;
                         req.session.user_firstname=payload.user_firstname;
+
+                        req.app.locals.user = req.session.user_firstname;
+
                         res.redirect('/dashboard');
                        // console.log(persistentSessionToken);
                         console.log(req.session);

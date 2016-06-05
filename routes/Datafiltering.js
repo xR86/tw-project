@@ -5,7 +5,7 @@ var solvedTasksFilter=require('../api/databaseFunctions/solvedTasksFilter');
 var personFilter=require('../api/databaseFunctions/personFilter');
 
 router.get('/', function(req, res, next) {
-    res.render('Datafiltering', { title: 'Express' });
+    res.render('Datafiltering');
 });
 
 router.get('/solvedTasksFilter',function(req,res) {

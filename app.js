@@ -74,4 +74,9 @@ if (app.get('env') === 'development') {
   });
 }
 
+app.locals = {
+    title: 'CoDr',
+    user: ''
+};
+
 module.exports = app;

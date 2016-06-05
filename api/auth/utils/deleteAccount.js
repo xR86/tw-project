@@ -28,6 +28,7 @@ function remove (req, res, next) {
         // console.log(req.session);
     });
     req.session.destroy();
+     req.app.locals.user = "";
     res.redirect('/');
 }
 

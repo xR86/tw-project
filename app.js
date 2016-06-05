@@ -14,6 +14,7 @@ var dash= require('./routes/Dashboard');
 var datafil= require('./routes/Datafiltering');
 var help= require('./routes/Help');
 var about= require('./routes/About');
+var contact=require('./routes/Contact');
 
 var persons=require('./api/Persons/persons');
 var tasks=require('./api/Tasks/tasks');
@@ -41,6 +42,7 @@ app.use('/Dashboard',dash);
 app.use('/datafiltering',datafil);
 app.use('/Help',help);
 app.use('/About',about);
+app.use('/contact',contact);
 
 app.use('/api/persons',persons);
 app.use('/api/tasks',tasks);

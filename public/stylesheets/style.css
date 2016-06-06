@@ -94,6 +94,33 @@ textarea.json-append{
   width: 100%;
   height: 10rem;
   max-width: 100%;
+
+  background-color: #222;
+  color: #FFF;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+/*textarea.json-append:hover + form .prefill-button{
+  display: inline;
+  transition: 1s ease-in-out;
+}*/
+
+.prefill-button:hover{
+  opacity: 1;
+  transform: translateX(4px);
+  transition: 0.5s ease-in-out;
+}
+
+.prefill-button{
+  /*display: none;*/
+  position: absolute;
+  z-index: 2;
+  right: 3rem;
+  opacity: 0.2;
+  top: 0;
+
+  transition: 0.1s ease-in-out;
 }
 
 

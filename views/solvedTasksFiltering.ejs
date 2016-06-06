@@ -60,10 +60,14 @@
                                 success:function(response)
                                 {
                                     //   $(".col-md-6").append(JSON.stringify(response,null,3));
+                                    //<button type="button" class="btn btn-default prefill-button">Prefill</button>
                                     $(".col-md-12.target-append").empty();
                                     if( $("#list-radio").is(":checked") ){
                                         for(var i=0; i<response.length; i++){
-                                            $(".col-md-12.target-append").append('<div class="col-md-12"><textarea class="json-append" disabled>'+JSON.stringify(response[i],null,3)+'</textarea></div>');
+                                            $(".col-md-12.target-append").append(
+                                                '<div class="col-md-12 append-container"><textarea class="json-append" disabled>'
+                                                +JSON.stringify(response[i],null,3)
+                                                +'</textarea></div>');
                                         }
                                     } else {
                                         for(var i=0; i<response.length; i++){
@@ -76,6 +80,60 @@
                                             }
                                         }
                                     }
+
+                                    $(".json-append").each(function() {
+                                        //console.log("Entered function");
+
+                                        //console.log($(this).text());
+                                        var parsedData = JSON.parse($(this).text());
+                                        //console.log(parsedData["SOLUTION"]);
+                                        var htmlcodeBoolean = parsedData["HASSOLUTION"];
+                                        if(htmlcodeBoolean === 'Y'){
+                                            var htmlcode = parsedData["SOLUTION"];
+                                        } else {
+                                            var htmlcode = "";
+                                        }
+
+                                        var el = $(this),
+                                            codeInside = htmlcode,
+                                            isCodeInside = codeInside.length,
+                                            HTML = "",
+                                            CSS = "",
+                                            JS = "";
+
+                                        if (isCodepenURL(codeInside)){
+                                            var form = 
+                                              '<a href="' + codeInside + '" target="_blank">' + 
+                                                '<input type="image" src="http://s.cdpn.io/3/cp-arrow-right.svg" width="40" height="40" class="codepen-mover-button prefill-button">'
+                                                + '</a>';
+                                            el.parent().append(form);
+                                        }
+                                        else if (isCodeInside) {
+                                            HTML = codeInside;//.html()
+                                            var data = {
+                                              title              : "",
+                                              description        : "",
+                                              html               : HTML
+                                            };
+
+                                            var JSONstring = 
+                                              JSON.stringify(data)
+                                              // Quotes will screw up the JSON
+                                              .replace(/"/g, "&quot;")
+                                              .replace(/'/g, "&apos;");
+
+                                            var form = 
+                                              '<form action="http://codepen.io/pen/define" method="POST" target="_blank">' + 
+                                                '<input type="hidden" name="data" value=\'' + 
+                                                  JSONstring + 
+                                                  '\'>' + 
+                                                '<input type="image" src="http://s.cdpn.io/3/cp-arrow-right.svg" width="40" height="40" value="Create New Pen with Prefilled Data" class="codepen-mover-button prefill-button">' +
+                                              '</form>';
+                                            el.parent().append(form);
+                                        } else {
+                                            //HTML = el.html() + "This solution has no code";
+                                        }
+                                      });
                                 },
                                 error: function(jqXHR, textStatus, errorThrown)
                                 {

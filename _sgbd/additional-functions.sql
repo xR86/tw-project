@@ -1,0 +1,6 @@
+CREATE OR REPLACE FUNCTION personsCount RETURN VARCHAR2 AS
+  result number;
+BEGIN
+  SELECT COUNT(*) INTO result FROM PERSONS;
+  RETURN result;
+END;

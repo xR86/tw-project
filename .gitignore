@@ -14,3 +14,4 @@ api/auth/utils/config.js
 # Logs
 log/*
 *.log
+bin/log/*

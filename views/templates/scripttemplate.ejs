@@ -53,7 +53,7 @@ function isCodepenURL(str){
   var substr1= "http";
   var substr2= "codepen.io";
   console.log();
-  if(str.indexOf(substr1) > -1 && str.indexOf(substr2) > -1){
+  if(str.indexOf(substr1) > -1 && str.indexOf(substr2) > -1 && str.length < 80){
     return 1;
   } else {
     return 0;

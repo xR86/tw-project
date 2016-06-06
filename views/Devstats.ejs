@@ -6,10 +6,153 @@
 
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
+    <style>
+    	iframe{
+    		height: 25rem;
+    	}
+    	i.fa{
+    		margin-left: 20%;
+    	}
+
+    </style>
 </head>
 <body>
 <% include templates/header.ejs %>
 
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="panel panel-default translate10">
+		  <div class="panel-body">
+		  	<h2>Developer statistics</h2>
+
+		  	<%# <p><a class="btn btn-default" href="/help" role="button">View details &raquo;</a></p> #%>
+
+		  	<div class="container marketing" style="width: 90%">
+
+		  		<h3>Frontend features</h3>
+		        <div class="row">
+		          <div class="col-lg-3">
+		            <i class="fa fa-tachometer featurette-big-icon" aria-hidden="true"></i>
+		            <h2>AdminLTE dashboard</h2>
+		            <p>Used to manage cleaner composition.</p>
+		          </div><!-- /.col-lg-3 -->
+		          <div class="col-lg-3">
+		            <i class="fa fa-bar-chart featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Visualization</h2>
+		            <p>We used D3.js, filtering routes, while integrated various API's.</p>
+		          </div><!-- /.col-lg-3 -->
+		          
+		           <div class="col-lg-3">
+		            <i class="fa fa-codepen featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Codepen API integration</h2>
+		            <p>Integrated and validated for FCC user solution visualization.</p>
+		          </div><!-- /.col-lg-3 -->
+
+		          <div class="col-lg-3">
+		            <i class="fa fa-compress featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Grunt integration</h2>
+		            <p>Watch with minification for css.</p>
+		          </div><!-- /.col-lg-3 -->
+		          
+		        </div><!-- /.row -->
+
+		        <h3>Backend &amp; DB features</h3>
+		        <div class="row">
+		          <div class="col-lg-3">
+		            <i class="fa fa-angle-double-right featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Java json parser</h2>
+		            <p>Program used to parse the json data to a relational database (indexes, PL/SQL).</p>
+		          </div><!-- /.col-lg-3 -->
+		          <div class="col-lg-3">
+		            <i class="fa fa-database featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Oracle db</h2>
+		            <p>Database used for FCC data and local user data. Filterable, indexed, various PL/SQL scripts to favor visualizations.</p>
+		          </div><!-- /.col-lg-3 -->
+		          <div class="col-lg-3">
+		            <i class="fa fa-code featurette-big-icon" aria-hidden="true"></i>
+		            <h2>REST API</h2>
+		            <p><a href="https://github.com/xR86/tw-project/blob/5850bc7c7bb2d6f93346e57c3103c95e3b40d192/api/documentation/api.yaml">Swagger yaml</a>, <span class="text-muted">static documentation</span>, <span class="text-muted">dynamic documentation</span></p>
+		          </div><!-- /.col-lg-3 -->
+		          <div class="col-lg-3">
+		            <i class="fa fa-key featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Authentication (RBAC)</h2>
+		            <p>Two roles - BASE and ADMIN. Persistent sessions, signup &amp; login, delete account. Various security policies in place.</p>
+		          </div><!-- /.col-lg-3 -->
+		          
+		        </div><!-- /.row -->
+		        <div class="row">
+		          <div class="col-lg-3">
+		            <i class="fa fa-commenting-o featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Integrated Gitter chat</h2>
+		            <p>On user dashboard, a user can interact with FreeCodeCamp users.</p>
+		          </div><!-- /.col-lg-3 -->
+		          <div class="col-lg-3">
+		            <i class="fa fa-envelope featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Contact form</h2>
+		            <p>Given as a communication bridge for users with the site. Can be extended to chat (future).</p>
+		          </div><!-- /.col-lg-3 -->
+		        </div>
+
+		        <h3>Devops/PM features</h3>
+		        <div class="row">
+		          <div class="col-lg-3">
+		            <i class="fa fa-book featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Logging</h2>
+		            <p>Integrated Winston with Node.js for logging.</p>
+		          </div><!-- /.col-lg-3 -->
+		         
+		          <div class="col-lg-3">
+		            <i class="fa fa-code-fork featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Intermediate level Github</h2>
+		            <p>Used issues, labels, milestones, branches, release.</p>
+		          </div><!-- /.col-lg-3 -->
+
+		          <div class="col-lg-3">
+		            <i class="fa fa-graduation-cap featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Academic documentation</h2>
+		            <p>Scholarly used for both architecture and implementation.</p>
+		          </div><!-- /.col-lg-3 -->
+		          <div class="col-lg-3">
+		            <i class="fa fa-terminal featurette-big-icon" aria-hidden="true"></i>
+		            <h2>Scripting</h2>
+		            <p>Various scripts - workspace setup, Dockerfile, Vagrantfile</p>
+		          </div><!-- /.col-lg-3 -->
+		          
+		        </div><!-- /.row -->
+	      	</div><!-- /.container -->
+
+	      	<p>&nbsp;</p>
+	      	<p>&nbsp;</p>
+	      	<p>&nbsp;</p>
+
+	      	<button id="show-image" class="btn btn-default">API down ?</button>
+	      	<img id="api-placeholder" class="img-responsive" src="/public/assets/githubApiPlaceholder.png" style="display:none" />
+
+	      	<p>&nbsp;</p>
+			<div class="row">
+				<%# type=repo #%>
+				<div class="col-md-4">
+			  		<iframe allowtransparency="true" frameborder="0" scrolling="no" seamless="seamless" src="http://colmdoyle.github.io/gh-activity/gh-activity.html?user=xR86&repo=tw-project&type=user" width="300" height="300"></iframe>
+			  	</div>
+			  	<div class="col-md-4">
+			  		<iframe allowtransparency="true" frameborder="0" scrolling="no" seamless="seamless" src="http://colmdoyle.github.io/gh-activity/gh-activity.html?user=dev-alberto&type=user" width="300" height="300"></iframe>
+			  	</div>
+		  		<div class="col-md-4">
+			  		<iframe allowtransparency="true" frameborder="0" scrolling="no" seamless="seamless" src="http://colmdoyle.github.io/gh-activity/gh-activity.html?user=shully899509&type=user" width="300" height="300"></iframe>
+			  	</div>
+			</div>
+
+
+		  </div> <!--/.panel-body -->
+		</div>
+	</div>
+</div><!--/.row -->
+
+<script>
+$( "#show-image" ).click(function() {
+  $("#api-placeholder").fadeToggle();
+});
+</script>
 
 </body>
 </html>

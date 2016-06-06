@@ -271,6 +271,24 @@
 		}
 	</script>
 
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'FreeCodeCamp/FreeCodeCamp'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script>
+  document.addEventListener('gitter-sidecar-instance-started', function(e) {
+  var chat = e.detail.chat;
+  chat.options.targetElement.forEach(function(targetElement) {
+    var actionBarElement = targetElement.querySelector('.gitter-chat-embed-action-bar');
+    actionBarElement.insertAdjacentHTML('afterbegin', '<div class="chat-embed-title">' + chat.options.room + '</div>');
+  });
+});
+</script>
+
+
 <!-- jQuery 2.1.4 -->
    <!--  <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script> -->
     <!-- Bootstrap 3.3.5 -->

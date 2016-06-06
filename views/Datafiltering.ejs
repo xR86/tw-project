@@ -60,12 +60,18 @@
     <ol class="breadcrumb breadcrumb-background">
       <li><a href="#">Home</a></li>
       <li class="active">Data filtering</li>
-      <h3><i class="fa fa-chevron-right"></i>  Data Filtering</h3>
     </ol>
+    <h3><i class="fa fa-chevron-right"></i>  Data Filtering</h3>
     <div class="row">
       <div class="col-md-4">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#solved-filter">Solved Tasks Filter</a></li>
+        <li><a data-toggle="tab" href="#person-filter">Person Filter</a></li>
+      </ul>
       <div class="panel panel-default panel-filtering" style="width: auto">
-        <div class="panel-body">
+        <div class="panel-body tab-content">
+        <!--<div class="tab-content"></div>./tab-content -->
+        <div id="solved-filter" class="tab-pane fade in active">
           <h4>Task name</h4>
           <div class="checkbox">
             <label>
@@ -99,11 +105,16 @@
           <h4>Day</h4>
           <h4>Month</h4>
           <h4>Year</h4>
+          </div><!--./tab-pane -->
+          <div id="person-filter" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
         </div>
         <!-- end-panel-body -->
       </div>
       <!-- end-panel -->
-      <input class="btn btn-lg btn-default btn-filter col-md-12" type="submit" value="Submit">
+      <input class="btn btn-lg btn-default btn-filter" type="submit" value="Submit" style="width: 100%">
     </div>
     <div class="col-md-8">
       <div class="form-horizontal">
@@ -131,8 +142,6 @@
 <!-- end-panel -->
 
 
-</div>
-<!-- end-container -->
 
 </body>
 </html>

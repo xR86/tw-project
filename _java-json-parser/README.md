@@ -82,29 +82,63 @@ That is because the default Java VM is made to consume a low amount of memory (a
 If we have enough free memory for parsing the entire file we could [set the -Xmx parameter](http://alvinalexander.com/blog/post/java/java-xmx-xms-memory-heap-size-control) 
 in order to accept as much memory as we want (and as long as we have it, of course).
 
-But if we still don't have enough free memory then the big json file shall be split into multiple files
-in order to insert the formatted information in our database and work with it easily.
+> But if we still don't have enough free memory then the big json file shall be split into multiple files
+> in order to insert the formatted information in our database and work with it easily.
 
 # CONCLUSION?
 Parsing 195 lines with the GSON library took 1/4 the time parsing 1 line 
-straight in PL/SQL with regular expressions (see demo.PNG) and we don't have
+straight in PL/SQL with regular expressions and we don't have
 to "clone" the raw information before parsing it.
 
-![demo.PNG](/_java-json-parser/demo.PNG?raw=true "demo.PNG")
 
 
 ## INSERTING DATA IN THE DATABASE
 For this we will use the [JDBC library](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html).
 
-Screenshots:
 
-![insert.PNG](/_java-json-parser/insert.PNG?raw=true "insert.PNG")
+### ~~Bugs to fix:~~
 
-![query.PNG](/_java-json-parser/query.PNG?raw=true "query.PNG")
-
-
-### Bugs to fix:
-
+[solved with variable binding preventing SQL injection]
 ![problem1.PNG](/_java-json-parser/problem1.PNG?raw=true "problem1.PNG")
+
+[solved by closing cursors when we don't need them anymore]
 ![problem2.PNG](/_java-json-parser/problem2.PNG?raw=true "problem2.PNG")
+
+## Update
+
+### workflow:
+
+> Setting the connection to the database
+![1_connection_driver.PNG](/_java-json-parser/1_connection_driver.PNG?raw=true "1_connection_driver.PNG")
+
+> For each task inserted we will check in the main class if the person is inserted or not
+![2_insert_person.PNG](/_java-json-parser/2_insert_person.PNG?raw=true "2_insert_person.PNG")
+
+> For each task name we will check with a PL/SQL function if it exists. If not then we will insert it in the database
+![3_insert_task_name.PNG](/_java-json-parser/3_insert_task_name.PNG?raw=true "3_insert_task_name.PNG")
+
+> With the task_id variable we check if the statement actually returns a row
+![4_insert_task_id.PNG](/_java-json-parser/4_insert_task_id.PNG?raw=true "4_insert_task_id.PNG")
+
+
+> Main class
+
+![5_main.PNG](/_java-json-parser/5_main.PNG?raw=true "5_main.PNG")
+
+> Details variable represents a list of lists of tasks
+![5_object.PNG](/_java-json-parser/5_object.PNG?raw=true "5_object.PNG")
+
+
+##Notes
+The tables are created without the primary key and foreign key constraints before inserting the data.
+Why? Because primary key constraints create implicit indexes.
+Indexing columns after the inserts will take less time than inserting big data in an indexed table.
+Foreign keys need to point to primary keys, but we don't have any yet.
+
+All these constraints and the indexing will be made after inserting the data from the JSON.
+
+
+
+
+
 

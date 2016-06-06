@@ -5,6 +5,8 @@ DROP TABLE Tasks CASCADE CONSTRAINTS
 /
 DROP TABLE SolvedTasks CASCADE CONSTRAINTS
 /
+DROP TABLE personView CASCADE CONSTRAINTS
+/
  
  
  
@@ -79,6 +81,13 @@ CREATE VIEW solvedTasksView as
   FROM SolvedTasks s
     JOIN Tasks t ON s.task_id = t.task_ID
   WHERE hasSolution IS NOT NULL
+;
+/
+
+CREATE VIEW personView AS
+SELECT p.P_ID,p.TASKS_ATTEMPTED_COUNTER,p.TASKS_COMPLETED_COUNTER,s.st_id,s.completedDate, s.hasSolution, s.solution
+ FROM persons p
+   JOIN solvedtasks s ON s.P_ID = p.P_ID
 ;
 /
 

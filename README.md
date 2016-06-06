@@ -33,7 +33,21 @@
 
 ##Calendar
 
-:thought_balloon:  __Saptamana 9__ - [descriere laborator](http://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html#calendar)
+:thought_balloon:  __Week 15__ - [lab details](http://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html#calendar-finals)
+... `deadline: 07.06.2016, ora 14`
++ [ ] video with usecases (max. 5 minutes, HD)
++ [ ] updated scholarly documentation: [scholarly documentation of architecture](https://xr86.github.io/tw-project/)
+  + status report, task assignment, intermediary steps in developing the application
+  + should explain how the code was managed with Github
+  + user guide - separate page in documentation and route (`\help`)
++ [ ] Node.js server
+  + [ ] all routes
+  + [ ] user usecase
+  + [ ] admin usecase
++ [ ] APEX bridge (node_plsql module)
++ [ ] swagger route (`help\rest` - in progress)
+
+:thought_balloon:  __Week 9__ - [lab details](http://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html#calendar)
 ... `deadline: 12.04.2016, ora 16 (S9)`
 + [X] wireframes: [wireframe folder](https://goo.gl/JXXELa)
 + [X] frotend protototype

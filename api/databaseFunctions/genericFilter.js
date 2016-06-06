@@ -5,9 +5,9 @@
 var oracledb = require('oracledb');
 var connAttrs = require('./../auth/utils/config');
 
-function filterBy(req,res,select,params,max_rows)
+function filterBy(req,res,select,params)
 {
-    oracledb.maxRows=max_rows;
+    //oracledb.maxRows=max_rows;
     oracledb.getConnection(connAttrs.database, function (err, connection) {
         if (err) {
             // Error connecting to DB

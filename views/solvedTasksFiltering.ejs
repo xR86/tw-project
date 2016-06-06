@@ -35,8 +35,11 @@
                     <input type = "text" class = "form-control inlined-element" name="date2" placeholder = "DD/MM/YY">
 
 
-                    <label>Rows returned</label>
-                    <input type = "number" class = "form-control inlined-element" name="max" placeholder = "Enter rows" required>
+                    <label>Jump To Page:</label>
+                    <input type = "number" max="1000" class = "form-control inlined-element" name="page" placeholder = "100" required>
+
+                    <label>Rows Per Page:</label>
+                    <input type = "number" max="1000" class = "form-control inlined-element" name="rowsToFetch" placeholder = "100" required>
 
                     <label>Display type</label>
                     <label class="radio-inline"><input type="radio" id="list-radio" name="display" value="list" checked> List</label>

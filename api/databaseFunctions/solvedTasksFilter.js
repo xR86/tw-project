@@ -12,16 +12,22 @@ function filterSolvedTasks(req,res)
             hassolution: req.body.hasSolution,
             task_name: req.body.task_name,
             date1: req.body.date1,
-            date2: req.body.date2
+            date2: req.body.date2,
+            page: parseInt(req.body.page),
+            rowsToFetch:parseInt(req.body.rowsToFetch)
         },
         case2: {
             hassolution: req.body.hasSolution,
-            task_name: req.body.task_name
+            task_name: req.body.task_name,
+            page: parseInt(req.body.page),
+            rowsToFetch:parseInt(req.body.rowsToFetch)
         },
         case3: {
             hassolution: req.body.hasSolution,
             date1: req.body.date1,
-            date2: req.body.date2
+            date2: req.body.date2,
+            page: parseInt(req.body.page),
+            rowsToFetch:parseInt(req.body.rowsToFetch)
         },
         case4: {
             hassolution: req.body.hasSolution
@@ -29,14 +35,20 @@ function filterSolvedTasks(req,res)
         case5: {
             task_name: req.body.task_name,
             date1: req.body.date1,
-            date2: req.body.date2
+            date2: req.body.date2,
+            page: parseInt(req.body.page),
+            rowsToFetch:parseInt(req.body.rowsToFetch)
         },
         case6: {
-            task_name: req.body.task_name
+            task_name: req.body.task_name,
+            page: parseInt(req.body.page),
+            rowsToFetch:parseInt(req.body.rowsToFetch)
         },
         case7: {
             date1: req.body.date1,
-            date2: req.body.date2
+            date2: req.body.date2,
+            page: parseInt(req.body.page),
+            rowsToFetch:parseInt(req.body.rowsToFetch)
         }
     };
 
@@ -51,7 +63,7 @@ function filterSolvedTasks(req,res)
             "TO_DATE(:date2,'DD/MM/YY') ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],bindvariables.case1,parseInt(req.body.max));
+        filter.filterBy(req,res,select[0],bindvariables.case1);
     }
     else if(req.body.hasSolution!='' && req.body.task_name!='' && req.body.date1=='' && req.body.date2=='')
     {
@@ -61,7 +73,7 @@ function filterSolvedTasks(req,res)
             "where task_name= :task_name and hasSolution= :hasSolution ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],bindvariables.case2,parseInt(req.body.max));
+        filter.filterBy(req,res,select[0],bindvariables.case2);
     }
     else if(req.body.hasSolution!='' && req.body.task_name=='' && req.body.date1!='' && req.body.date2!='')
     {
@@ -72,7 +84,7 @@ function filterSolvedTasks(req,res)
             "TO_DATE(:date2,'DD/MM/YY') ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],bindvariables.case3,parseInt(req.body.max));
+        filter.filterBy(req,res,select[0],bindvariables.case3);
     }
     else if(req.body.hasSolution!=''  && req.body.task_name=='' && req.body.date1=='' && req.body.date2=='')
     {
@@ -82,7 +94,7 @@ function filterSolvedTasks(req,res)
             "where hasSolution= :hasSolution ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],bindvariables.case4,parseInt(req.body.max));
+        filter.filterBy(req,res,select[0],bindvariables.case4);
     }
     else if(req.body.hasSolution=='' && req.body.task_name!='' && req.body.date1!='' && req.body.date2!='')
     {
@@ -93,7 +105,7 @@ function filterSolvedTasks(req,res)
             "TO_DATE(:date2,'DD/MM/YY') ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],bindvariables.case5,parseInt(req.body.max));
+        filter.filterBy(req,res,select[0],bindvariables.case5);
     }
     else if(req.body.hasSolution==''  && req.body.task_name!=''  && req.body.date1=='' && req.body.date2=='')
     {
@@ -124,7 +136,7 @@ function filterSolvedTasks(req,res)
         filter.filterBy(req,res,select[0],{},parseInt(req.body.max));
     }
     else{
-        res.redirect('/datafiltering/solvedTasksFilter');
+        res.send("Error");
         console.log("try inputting again");
     }
 }

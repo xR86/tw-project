@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>CoDr</title>
+    <link rel="stylesheet" href="../scholarly.css">
+    <link rel="stylesheet" href="../node_modules/prismjs/themes/prism-coy.css">
+    <script src="../node_modules/prismjs/prism.js" defer></script>
+  </head>
+  <body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+    <header>
+      <p class="title">CoDr</p>
+      <p class="subtitle">by TW-DALi team</p>
+    </header>
+    <article id="what" typeof="schema:ScholarlyArticle" resource="#">
+      <h1>What is CoDr?</h1>
+      <section>
+        <ol>
+          <li property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/xR86" typeof="schema:Person">
+              <span property="schema:givenName">Dan</span>
+              <span property="schema:familyName">Alexandru</span>
+            </a>
+            <a href="#tw-dali" property="sa:roleAffiliation" resource="http://science.ai/">a</a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru@info.uaic.ro" title="corresponding author">&#9993;</a>
+            </sup>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru.dev@gmail.com" title="corresponding author">&#9993;</a>
+            </sup>
+          </li>
+          <li property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/dev-alberto" typeof="schema:Person">
+              <span property="schema:givenName">Alberto</span>
+              <span property="schema:familyName">Cieri</span>
+            </a>
+            <a href="#tw-dali" property="sa:roleAffiliation" resource="http://science.ai/">a</a>
+          </li>
+          <li property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/shully899509" typeof="schema:Person">
+              <span property="schema:givenName">Iulian</span>
+              <span property="schema:familyName">Luca</span>
+            </a>
+            <a href="#tw-dali" property="sa:roleAffiliation" resource="http://science.ai/">a</a>
+          </li>
+        </ol>
+        <ol>
+          <li id="tw-dali">
+            <a href="https://github.com/TW-DALi" typeof="schema:Corporation">
+              <span property="schema:name">TW-DALi team</span>
+            </a>
+          </li>
+        </ol>
+      </section>
+
+      <section typeof="sa:Abstract" id="abstract">
+        <h2>Abstract</h2>
+        <p>
+          We live in a world surrounded by vast amounts of information. Impressive technological advances have allowed for the volume of information we produce to grow exponentially, to the point where we now produce in two days as much information as we produced up to 2003 (that is, from the dawn of mankind to 2003)(<a href="#ref-sch" property="schema:citation">SCH, 2010</a>). With this in mind, we need better tools to help us comprehend vast amounts of data. One way we can do this is by visualizing the data, hence filtering it, extracting what we need and putting it into a format our visual minds are equipped to handle. Effective data visualization helps users analyze data, makes complex data more accessible, understandable and usable.
+        </p>
+      </section>
+      <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2>Motivation</h2>
+        <aside typeof="schema:WPSideBar">
+          <p>
+            <strong>New</strong>: you can now join the
+            <a href="https://www.w3.org/community/scholarlyhtml/">Scholarly HTML Community Group</a>
+            to help make this a standard.
+          </p>
+          <p>
+            This document is an early-stage release. While the underlying format is relatively
+            mature and actually implemented, details are still in flux and the format can still be
+            changed. The quality of this document is also being gradually improved. If you’re
+            interested in this project, come join
+            <a href="https://github.com/tw-dali/scholarly.vernacular.io/">the party on GitHub</a>
+            or talk to either <a href="https://twitter.com/sciencedotai">@sciencedotai</a> or
+            <a href="https://twitter.com/robinberjon">@robinberjon</a> in Twitter.
+          </p>
+        </aside>
+        <p>CODR represents a data visualization web application that will help users explore, visualize and filter data pertaining to Free Code Camp.  Our goal is creating a user friendly way to interact with data so that an accurate analysis can be performed using our product. By providing  different methods of visualization, our users  will be able to look at a data set from different perspectives and make the most informed decisions. In order to provide a better user experience and enhance the functionality of our application, data vizualizations can be exported in PNG/SVG formats.  
+        </p>
+        
+      </section>
+      <section typeof="sa:GitArchitecture" id="gitarchitecture">
+        <h2>Github Architecture</h2>
+        <p>
+          We will use the following architecture for working on github.
+        </p>
+        <figure typeof="sa:Image">
+            <img src="../assets/arhitectura-git-explanations.png" width="880" height="655">
+            <figcaption>
+              Each branch for different purposes: master for Continuous Integration, feature branches if needed, gh-pages for this report, docker for deployment and Dockerfiles.
+            </figcaption>
+        </figure>
+        <p>If we will cluster the application and/or use Winston, we will probably need an extra <code>experimental</code> branch (or nightly ?).</p>
+
+      </section>
+
+      <section typeof="sa:Architecture" id="architecture">
+        <h2>Architecture</h2>
+        <p>
+          CoDr will minimally implement the following architecture:
+        </p>
+        <figure typeof="sa:Image">
+            <img src="../assets/app-architecture-simplified.png" width="880" height="655">
+            <figcaption>
+              Made with <a href="https://www.yworks.com/products/yed">YED graph editor</a>.
+            </figcaption>
+        </figure>
+        <p>
+          Our server will be made using the open source Node.js runtime environment plus Express framework. We made this choice because of
+          scalability and the relatively easy learning curve involved. Because of our architectural design choice, our app will run on a single thread and
+          will allow thousands of concurrent connections. In matter of view engine, we chose <a href="http://www.embeddedjs.com/">ejs</a> (also called embedded js) for simplicity.
+        </p>
+        <p>
+          The data will be stored two fold, using both a classic relational database (Oracle 11g) and a NoSQL database (MongoDB). The data that will be visualized by our app
+          will most probably be stored using Oracle. The connection between the database and our server will be provided by oracledb node module (<a href="https://www.npmjs.com/package/oracledb">link on npm</a>). To help us design this database side of our app, we will make use of SQL Developer.
+          So basically after a user connects to our server and makes a request for
+          some data, our server will make a query to the database and then receive a response. This will form a transaction (we would prefer not keeping the database connection open all the time).
+          Login details for our registered users will be stored  using MongoDB, connected to our server by Mongoose.
+        </p>
+
+        <p>
+          We will aim though for this kind of architecture (even if we implement just a part of it):
+        </p>
+        <figure typeof="sa:Image">
+            <img src="../assets/app-architecture.png" width="880" height="655">
+            <figcaption>
+              Made with <a href="https://www.yworks.com/products/yed">YED graph editor</a>.
+            </figcaption>
+        </figure>
+        <p>
+          For our more advanced approach we want use Docker to wrap around our app in order to automate deployment and provide containers for the different types of applications used. Hence,
+          we wish to use a container for the Node.js server (which may use PM2 or cluster for making several workers of the master Node server, to take advantage of the multicore nature of the hardware) and containers for the two types of databases used by our app.
+          For optimizing resource utilization, reducing latency and for ensuring a fault-tolerant configuration we will use nginx as a HTTP load balancer &amp; proxy and Redis as a Web cache (<a href="https://en.wikipedia.org/wiki/Web_cache">in theory</a>, or <a href="https://www.nginx.com/resources/wiki/modules/redis/">practical</a>).
+        </p>
+        <h4>Modelling the database(s)</h4>
+        <p>
+          <h5>SQL</h5>
+          <figure typeof="sa:Image">
+              <img src="../assets/CoDr-DatabaseSQL.png" width="880" height="655">
+              <figcaption>
+                Made with <a href="https://www.yworks.com/products/yed">YED graph editor</a>.
+              </figcaption>
+          </figure>
+          <p>This will be the database for storing the json, after parsing it with java (you can find notes on this process <a href="https://github.com/xR86/tw-project/tree/master/_java-json-parser">here</a>)
+          </p>
+          <p>
+            We will take advantage of the SQL joining, so we will break the json processed data into 2 tables: Persons and Tasks.
+          </p>
+
+          <h5>NoSQL</h5>
+          <figure typeof="sa:Image">
+              <img src="../assets/CoDr-DatabaseNoSQL.png" width="880" height="655">
+              <figcaption>
+                This ERD is less agnostic, so it offers a glimpse into Mongoose validation.
+                Made with <a href="https://www.yworks.com/products/yed">YED graph editor</a>. 
+              </figcaption>
+          </figure>
+          <p>
+            On the other side, we will use NoSQL for login, through Mongoose (for schema validation) and Passport (for the login specifically).
+          </p>
+          <p>
+            We start from the presumption that login through NoSQL will be faster than login through Oracle. We will check this soon.
+          </p>
+          
+
+        </p>
+        <h4>REST API</h4>
+        <p>
+          Momentarily, our API will expose a route like <code>/users</code>, where users data from the json (the FreeCodeCamp json, that is) will be returned and offer the possibility of specifying the format in which the data is returned when <b>GET</b> is called with the querystring (eg: <code>/users?format=xml</code> or <code>/users?format=json</code> ; json will be default). 
+        </p>
+        <p>
+          Filtering options will also include: filtering by task name (eg: <code>/users?taskName="Waypoint: Learn how Free Code Camp Works"</code>), completion date (full date, or combinations of year, month, day; eg: <code>/users?completionMonth=08</code>) or by existing solution (eg: <code>/users?solutionExists=true</code>).
+        </p>
+        <p>
+          We will probably impose a limit on the data returned for IO/network/security reasons.
+        </p>
+      </section>
+
+      <section typeof="sa:PageArchitecture" id="pagearchitecture">
+        <h2>Page Architecture</h2>
+        <p>
+          We will use the following architecture for structuring our ejs templates.
+        </p>
+        <figure typeof="sa:Image">
+            <img src="../assets/CoDr-arhitecturaPagini.png" width="880" height="655">
+            <figcaption>
+              Each node represents a page (or view or template). All pages inherit from the main template. 2<sup>nd</sup> degree inheritance is relevant only for the <code>Contact</code> page.
+            </figcaption>
+        </figure>
+        <p><code>Template</code> will store the navigation bar and the footer. Every page will have this. The next level of inheritance is neccessary for <code>Contact</code>, since we want it to extend the <code>About</code> page, so it isn't only a form (and we don't want to concatenate, because from an UX perspective they need to be separated). </p>
+        <p>We also have some doubts on the architecture when it comes to the <b>activity log</b> and <b>template logic</b>. We don't know yet how we would record and save user actions, or how we will display them, so this is a <b>pending feature</b> (we may, or may not implement it). The other issue we are thinking about is that of logging in: should we check, each time we render a view, if the user is logged in, and display some elements (the template logic approach), or should we have a separate base template for logged in users from the not logged in users ?
+        </p>
+        <h2>Additional notes on wireframes and prototype will be found on the repo's <a href="https://github.com/xR86/tw-project">README</a></h2>
+      </section>
+
+      <section typeof="sa:Acknowledgements" id="acknowledgements">
+        <h2>Acknowledgements</h2>
+        <p>
+          CoDr would like to thank the DevOps team @<a href="http://tss-yonder.com">Yonder Iasi</a> for the support on the Docker implementation (mainly through Vlad Baesu &amp; Florin Asavoaie).
+        </p>
+        <p>
+          CoDr would like to thank <a href="http://scholarlyhtml.org/">Scholarly HTML</a> for offering a template for making this academic report.
+        </p>
+        <p>
+          CoDr would also extend its thanks to all the people that have made <a href="http://scholarlyhtml.org/">Scholarly HTML</a> possible.
+        </p>
+        <p>
+          We also received very useful feedback and pointers from: <a href="https://github.com/alexandrucoman">Alexandru Coman</a>.
+        </p>
+        <p>
+          If we somehow forgot you in this list and you are too gracious to complain, we thank you
+          all the same.
+        </p>
+      </section>
+      <section typeof="sa:Conclusion" id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          CoDr is currently a work in progress and is open to change. If you have
+          feedback, simply
+          <a href="https://github.com/xR86/tw-project/issues">open an issue</a> on
+          GitHub, or <a href="https://github.com/xR86/tw-project">make a pull
+          request</a>.
+        </p>
+        <p>
+          CoDr currently has minimal documentation, wireframes and prototype made (almost complete). We aim to develop the full architecture, if our time allows it.
+        </p>
+      </section>
+      <section typeof="sa:ReferenceList" id="references">
+        <h2>References</h2>
+        <dl>
+          <dt>SCH, 2010</dt>
+          <dd id="ref-sch" typeof="schema:ScholarlyArticle"
+              resource="http://techcrunch.com/2010/08/04/schmidt-data/">
+            <cite property="schema:name"><a
+              href="http://techcrunch.com/2010/08/04/schmidt-data/">Eric Schmidt: Every 2 Days We Create As Much Information As We Did Up To 2003</a></cite>,
+            by
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">TechCrunch</span>
+            </span>;
+            <time property="schema:datePublished" datetime="2010-08" datatype="xsd:gYearMonth">2010 Aug</time>.
+          </dd>
+          
+        </dl>
+      </section>
+    </article>
+    <footer>
+      <p>
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>
+        <a href="https://github.com/xR86">@Dan Alexandru</a>
+        •
+        <a href="https://github.com/xR86/tw-project">Contribute</a>
+        <!--•
+        Brought to you by the
+        <a href="http://science.ai/"><img src="sciencedotai.svg" alt="science.ai logo" height="20"></a>
+        League of JStice-->
+      </p>
+    </footer>
+  </body>
+</html>

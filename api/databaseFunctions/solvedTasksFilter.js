@@ -49,6 +49,10 @@ function filterSolvedTasks(req,res)
             date2: req.body.date2,
             page: parseInt(req.body.page),
             rowsToFetch:parseInt(req.body.rowsToFetch)
+        },
+        case8: {
+            page: parseInt(req.body.page),
+            rowsToFetch:parseInt(req.body.rowsToFetch)
         }
     };
 
@@ -59,8 +63,8 @@ function filterSolvedTasks(req,res)
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW  " +
             "where task_name= :task_name and hasSolution= :hasSolution and " +
-            "TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and " +
-            "TO_DATE(:date2,'DD/MM/YY') ORDER BY TASK_ID ASC) " +
+            "TRUNC(completeddate) between :date1 and " +
+            ":date2 ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
         filter.filterBy(req,res,select[0],bindvariables.case1);
@@ -80,8 +84,8 @@ function filterSolvedTasks(req,res)
         select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW  " +
-            "where hasSolution= :hasSolution and TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and " +
-            "TO_DATE(:date2,'DD/MM/YY') ORDER BY TASK_ID ASC) " +
+            "where hasSolution= :hasSolution and TRUNC(completeddate) between :date1 and " +
+            ":date2 ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
         filter.filterBy(req,res,select[0],bindvariables.case3);
@@ -101,8 +105,8 @@ function filterSolvedTasks(req,res)
         select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW " +
-            "where task_name= :task_name and TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and " +
-            "TO_DATE(:date2,'DD/MM/YY') ORDER BY TASK_ID ASC) " +
+            "where task_name= :task_name and TRUNC(completeddate) between :date1 and " +
+            ":date2 ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
         filter.filterBy(req,res,select[0],bindvariables.case5);
@@ -115,26 +119,26 @@ function filterSolvedTasks(req,res)
             "where task_name= :task_name ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],bindvariables.case6,parseInt(req.body.max));
+        filter.filterBy(req,res,select[0],bindvariables.case6);
     }
     else if(req.body.hasSolution==''  && req.body.task_name=='' && req.body.date1!='' && req.body.date2!='')
     {
         select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW " +
-            "where TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and " +
-            "TO_DATE(:date2,'DD/MM/YY') ORDER BY TASK_ID ASC) " +
+            "where TRUNC(completeddate) between :date1 and " +
+            ":date2 ORDER BY TASK_ID ASC) " +
             "where ROWNUM<=:page*:rowsToFetch) " +
             "WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],bindvariables.case7,parseInt(req.body.max));
+        filter.filterBy(req,res,select[0],bindvariables.case7);
     }
-    else if(req.body.hasSolution=='' && req.body.task_name=='' && req.body.date1=='' && req.body.date2=='') {
-        select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
-            "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
-            "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW ORDER BY TASK_ID ASC) " +
-            "where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
-        filter.filterBy(req,res,select[0],{},parseInt(req.body.max));
-    }
+  //  else if(req.body.hasSolution=='' && req.body.task_name=='' && req.body.date1=='' && req.body.date2=='') {
+   //     select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
+  //          "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
+  //          "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW ORDER BY TASK_ID ASC) " +
+   //         "where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+ //       filter.filterBy(req,res,select[0],bindvariables.case8);
+ //   }
     else{
         res.send("Error");
         console.log("try inputting again");

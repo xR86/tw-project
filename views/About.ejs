@@ -5,9 +5,40 @@
     <title><%= title %> - About</title>
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
+
+    <style>
+    	body{
+    		background-color: #ecf0f5;
+    	}
+    </style>
 <body>
 <% include templates/header.ejs %>
 
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+
+		<div class="panel panel-default translate10">
+  			<div class="panel-body">
+  				<h2>CoDr<small> Our Team</small></h2>
+  				<p>Our team is composed of: Dan Alexandru (<a href="https://github.com/xR86">github</a>), Alberto Cieri (<a href="https://github.com/dev-alberto">github</a>) and Iulian Luca (<a href="https://github.com/shully899509">github</a>).</p>
+  				<p>This project is meant to visualize and aggregate FreeCodeCamp data and extrapolate based on its visualizations.
+  				<p>&nbsp;</p>
+
+  				<p>The repo is maintained at <a href="https://github.com/xR86/tw-project">github.com/xR86/tw-project</a></p>
+  				<!-- Place this tag where you want the button to render. -->
+				<a class="github-button" href="https://github.com/xR86/tw-project" data-icon="octicon-eye" data-count-href="/xR86/tw-project/watchers" data-count-api="/repos/xR86/tw-project#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch xR86/tw-project on GitHub">Watch</a>
+				<!-- Place this tag where you want the button to render. -->
+				<a class="github-button" href="https://github.com/xR86/tw-project" data-icon="octicon-star" data-count-href="/xR86/tw-project/stargazers" data-count-api="/repos/xR86/tw-project#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star xR86/tw-project on GitHub">Star</a>
+				<!-- Place this tag where you want the button to render. -->
+				<a class="github-button" href="https://github.com/xR86/tw-project/fork" data-icon="octicon-repo-forked" data-count-href="/xR86/tw-project/network" data-count-api="/repos/xR86/tw-project#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork xR86/tw-project on GitHub">Fork</a>
+
+  			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 </body>
 </html>

@@ -26,7 +26,11 @@ BEGIN
   RETURN result;
 END;
 /*
+set serveroutput on;
+DECLARE
+  ret NUMBER;
 BEGIN
-  SELECT FreeCodeCamp.taskCompletionRate_task(139) FROM DUAL;
+  ret := FreeCodeCamp.taskCompletionRate_task(139);-- FROM DUAL;
+  DBMS_OUTPUT.PUT_LINE(ret);
 END;
 /*/

@@ -61,6 +61,10 @@
         stroke: #fff;
       }
 
+      .slice path:hover{
+        fill: #FFA500;
+      }
+
 	  </style>
 
 
@@ -117,7 +121,7 @@
             <div class="col-md-8">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Monthly Recap Report</h3>
+                  <h3 class="box-title">Solved tasks on month</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <div class="btn-group">
@@ -136,88 +140,29 @@
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-8">
-                      <p class="text-center">
-                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                      </p>
                       <div id="d3Barchart" class="chart">
                         <!-- 
                         <canvas id="salesChart" style="height: 180px;"></canvas> -->
                       </div><!-- /.chart-responsive -->
                     </div><!-- /.col -->
-                    <div class="col-md-4">
+                    <div class="col-md-4" id="append-months">
                       <p class="text-center">
-                        <strong>Goal Completion</strong>
+                        <strong>Month / #solvedTasks</strong>
                       </p>
                       <div class="progress-group">
-                        <span class="progress-text">Add Products to Cart</span>
-                        <span class="progress-number"><b>160</b>/200</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                        </div>
+                        <span class="progress-text">Jan</span>
+                        <span class="progress-number"><b>160</b></span>
                       </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Complete Purchase</span>
-                        <span class="progress-number"><b>310</b>/400</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Visit Premium Page</span>
-                        <span class="progress-number"><b>480</b>/800</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Send Inquiries</span>
-                        <span class="progress-number"><b>250</b>/500</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                    </div><!-- /.col -->
-                  </div><!-- /.row -->
-                </div><!-- ./box-body -->
-                <div class="box-footer">
-                  <div class="row">
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                        <h5 class="description-header">$35,210.43</h5>
-                        <span class="description-text">TOTAL REVENUE</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                        <h5 class="description-header">$10,390.90</h5>
-                        <span class="description-text">TOTAL COST</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                        <h5 class="description-header">$24,813.53</h5>
-                        <span class="description-text">TOTAL PROFIT</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block">
-                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                        <h5 class="description-header">1200</h5>
-                        <span class="description-text">GOAL COMPLETIONS</span>
-                      </div><!-- /.description-block -->
                     </div>
                   </div><!-- /.row -->
-                </div><!-- /.box-footer -->
+                </div><!-- ./box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
 
             <div class="col-md-4">
               <div class="box box-default">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Browser Usage</h3>
+                  <h3 class="box-title">Task completion for given task</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -225,33 +170,67 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12" style="margin-left: 20%;">
                       <div class="chart-responsive">
                         <div id="d3Piechart" class="chart"></div>
                         <!-- <canvas id="pieChart" height="150"></canvas> -->
                       </div><!-- ./chart-responsive -->
                     </div><!-- /.col -->
-                    <div class="col-md-4">
-                      <ul class="chart-legend clearfix">
-                        <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                        <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                        <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                        <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                        <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                        <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                      </ul>
-                    </div><!-- /.col -->
                   </div><!-- /.row -->
                 </div><!-- /.box-body -->
                 <div class="box-footer no-padding">
                   <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">A <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
+                    <li><a href="#">Task Completed<span class="pull-right text-green"></i> <%= resultTaskCompletionRate %>%</span></a></li> 
+                    <li><a href="#">Task Completed<span class="pull-right text-red"></i> <%= Math.round((100-resultTaskCompletionRate)*100)/100 %>%</span></a></li> 
                   </ul>
                 </div><!-- /.footer -->
               </div><!-- /.box -->
             </div>
             
           </div><!-- /.row -->
+
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-olive"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Settings</span>
+                  <a href="/settings"><span class="info-box-number">Change your settings</span></a>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-orange"><i class="ion ion-search"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Datafiltering</span>
+                  <a href="/datafiltering"><span class="info-box-number">Search the DB</span></a>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-purple"><i class="fa fa-code"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Check REST API</span>
+                  <a href="/help/rest"><span class="info-box-number">Check documentation</span></a>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-maroon"><i class="ion ion-email"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Contact</span>
+                  <a href="/#contact"><span class="info-box-number">Send it here</span></a>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col -->
+          </div>
       </section>
 
 
@@ -261,7 +240,7 @@
   <!-- Bar chart -->
 	<script>
 		var margin = {top: 20, right: 20, bottom: 30, left: 40},
-		    width = 400 - margin.left - margin.right,
+		    width = 500 - margin.left - margin.right,
 		    height = .7 * width;
 
 		var x = d3.scale.ordinal()
@@ -276,8 +255,7 @@
 
 		var yAxis = d3.svg.axis()
 		    .scale(y)
-		    .orient("left")
-		    .ticks(10, "%");
+  		    .orient("right");
 
 		var svg = d3.select("#d3Barchart").append("svg")
 		    .attr("width", width + margin.left + margin.right)
@@ -288,8 +266,13 @@
 		d3.tsv("/public/data-barchart.tsv", type, function(error, data) {
 		  if (error) throw error;
 
-		  x.domain(data.map(function(d) { return d.letter; }));
-		  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+      console.log("each tick", data[0]["taskCount"], data[0]["taskCount"]);
+      for(var i=0; i<data.length; i++){
+        $("#append-months").append('<div class="progress-group"><span class="progress-text">' + data[i]["month"] + '</span><span class="progress-number"><b>' + data[i]["taskCount"] + '</b></span></div>');
+      }
+
+		  x.domain(data.map(function(d) { return d.month; }));
+		  y.domain([0, d3.max(data, function(d) { return d.taskCount; })]);
 
 		  svg.append("g")
 		      .attr("class", "x axis")
@@ -304,75 +287,67 @@
 		      .attr("y", 6)
 		      .attr("dy", ".71em")
 		      .style("text-anchor", "end")
-		      .text("Frequency");
+		      .text("Count");
 
 		  svg.selectAll(".bar")
 		      .data(data)
 		    .enter().append("rect")
 		      .attr("class", "bar")
-		      .attr("x", function(d) { return x(d.letter); })
+		      .attr("x", function(d) { return x(d.month); })
 		      .attr("width", x.rangeBand())
-		      .attr("y", function(d) { return y(d.frequency); })
-		      .attr("height", function(d) { return height - y(d.frequency); });
+		      .attr("y", function(d) { return y(d.taskCount); })
+		      .attr("height", function(d) { return height - y(d.taskCount); });
 		});
 
 		function type(d) {
-		  d.frequency = +d.frequency;
+		  d.taskCount = +d.taskCount;
 		  return d;
 		}
+
 	</script>
 
-  <!-- Pie chart --><!--
+  <!-- Pie chart -->
   <script>
-    var width = 960,
-        height = 500,
-        radius = Math.min(width, height) / 2;
 
-    var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    var w = 200;
+    var h = 200;
+    var r = h/2;
+    var color = d3.scale.category20c();
 
-    var arc = d3.svg.arc()
-        .outerRadius(radius - 10)
-        .innerRadius(0);
 
-    var labelArc = d3.svg.arc()
-        .outerRadius(radius - 40)
-        .innerRadius(radius - 40);
+    var taskCompletionPercent = <%= resultTaskCompletionRate %>;
+    var taskInvert = 100 - taskCompletionPercent;
 
-    var pie = d3.layout.pie()
-        .sort(null)
-        .value(function(d) { return d.population; });
+    var data = [{"label":"%Completed", "value":taskCompletionPercent}, 
+                  {"label":"%Not completed", "value":taskInvert}];
 
-    var svg = d3.select("#d3Piechart").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-      .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-    d3.csv("/public/data-piechart.csv", type, function(error, data) {
-      if (error) throw error;
+    var vis = d3.select('#d3Piechart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+    var pie = d3.layout.pie().value(function(d){return d.value;});
 
-      var g = svg.selectAll(".arc")
-          .data(pie(data))
-        .enter().append("g")
-          .attr("class", "arc");
+    // declare an arc generator function
+    var arc = d3.svg.arc().outerRadius(r);
 
-      g.append("path")
-          .attr("d", arc)
-          .style("fill", function(d) { return color(d.data.age); });
+    // select paths, use arc generator to draw
+    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+    arcs.append("svg:path")
+        .attr("fill", function(d, i){
+            return color(i);
+        })
+        .attr("d", function (d) {
+            // log the result of the arc generator to show how cool it is :)
+            //console.log(arc(d));
+            return arc(d);
+        });
 
-      g.append("text")
-          .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-          .attr("dy", ".35em")
-          .text(function(d) { return d.data.age; });
-    });
-
-    function type(d) {
-      d.population = +d.population;
-      return d;
-    }
-
-    </script>-->
+    // add the text
+    arcs.append("svg:text").attr("transform", function(d){
+        d.innerRadius = 0;
+        d.outerRadius = r;
+      return "translate(" + arc.centroid(d) + ")";}).attr("text-anchor", "middle").text( function(d, i) {
+      return data[i].label;}
+      );
+    </script>
 
 <script>
   ((window.gitter = {}).chat = {}).options = {

@@ -6,10 +6,49 @@
     <title><%= title %> - About</title>
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
-<body>
+
+    <style>
+        body { background-image: url("/public/assets/404image.png");}
+        .error-template {padding: 40px 15px;text-align: center;}
+        .error-actions {margin-top:15px;margin-bottom:15px;}
+        .error-actions .btn { margin-right:10px; }
+        .error-actions a{
+            transition: all 1s ease;
+        }
+        .error-actions a:hover{
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            transform: translate(0px, -5px);
+            transition: all 0.5s ease;
+        }
+    </style>
+<body id="page-top" class="index">
 <% include templates/header.ejs %>
 
-<h1>Cannot find <%= url %></h1>
+	<div class="container translate10">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    404 Not Found</h2>
+                <div class="error-details">
+                    Sorry, the page does not exist !  <%#= url #%> 
+                </div>
+                <div class="error-actions">
+	                <% if(user){ %>
+						<a href="/dashboard" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a>
+					<% } else{ %>
+						<a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a>
+					<% } %>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
 </body>
 </html>

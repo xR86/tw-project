@@ -7,17 +7,149 @@
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
     <style>
-        form{
-            margin-top: 6rem;
+        body{
+            background-color: #ecf0f5;
+        }
+
+        /*  vertical tab */
+        div.vertical-tab-container{
+          z-index: 10;
+          background-color: #ffffff;
+          padding: 0 !important;
+          border-radius: 4px;
+          -moz-border-radius: 4px;
+          border:1px solid #ddd;
+          margin-top: 20px;
+          margin-left: 50px;
+          -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+          box-shadow: 0 6px 12px rgba(0,0,0,.175);
+          -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+          background-clip: padding-box;
+          opacity: 0.97;
+          filter: alpha(opacity=97);
+        }
+        div.vertical-tab-menu{
+          padding-right: 0;
+          padding-left: 0;
+          padding-bottom: 0;
+        }
+        div.vertical-tab-menu div.list-group{
+          margin-bottom: 0;
+        }
+        div.vertical-tab-menu div.list-group>a{
+          margin-bottom: 0;
+        }
+        div.vertical-tab-menu div.list-group>a .glyphicon,
+        div.vertical-tab-menu div.list-group>a .fa {
+          color: #337AB7;
+        }
+        div.vertical-tab-menu div.list-group>a:first-child{
+          border-top-right-radius: 0;
+          -moz-border-top-right-radius: 0;
+        }
+        div.vertical-tab-menu div.list-group>a:last-child{
+          border-bottom-right-radius: 0;
+          -moz-border-bottom-right-radius: 0;
+        }
+        div.vertical-tab-menu div.list-group>a.active,
+        div.vertical-tab-menu div.list-group>a.active .glyphicon,
+        div.vertical-tab-menu div.list-group>a.active .fa{
+          background-color: #337AB7;
+          background-image: #337AB7;
+          color: #ffffff;
+        }
+        div.vertical-tab-menu div.list-group>a.active:after{
+          content: '';
+          position: absolute;
+          left: 100%;
+          top: 50%;
+          margin-top: -13px;
+          border-left: 0;
+          border-bottom: 13px solid transparent;
+          border-top: 13px solid transparent;
+          border-left: 10px solid #337AB7;
+        }
+
+        div.vertical-tab-content{
+          background-color: #ffffff;
+          /* border: 1px solid #eeeeee; */
+          padding-left: 20px;
+          padding-top: 10px;
+        }
+
+        div.vertical-tab div.vertical-tab-content:not(.active){
+          display: none;
+        }
+
+        .list-group-item .fa{
+            font-size: 4rem;
         }
     </style>
 </head>
 <body>
 <% include templates/header.ejs %>
-<form method="post" action="/settings">
-    <p>
-        <input type="submit" value="delete">
-    </p>
-</form>
+
+<div class="container translate5">
+    <div class="row">
+        <div class="col-md-11 vertical-tab-container">
+            <div class="col-md-2 vertical-tab-menu">
+              <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                  <h4 class="fa fa-cogs"></h4><br/>General settings
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4 class="fa fa-user"></h4><br/>Profile settings
+                </a>
+                
+              </div>
+            </div>
+            <div class="col-md-9 vertical-tab">
+                <!-- flight section -->
+                <div class="vertical-tab-content active">
+                      <h1 class="fa fa-cogs" style="font-size:5rem;color:#337AB7;display:inline-block;"></h1><h1 style="color:#337AB7;display:inline-block;">&nbsp;General settings</h1>
+                      <h3 style="color:#97C0E4">Delete account</h3>
+
+                      <form method="post" action="/settings">
+                            <p>
+                                <input class="btn btn-default" type="submit" value="delete">
+                            </p>
+                      </form>
+                    
+                </div>
+                <!-- train section -->
+                <div class="vertical-tab-content">
+                    <h1 class="fa fa-user" style="font-size:5rem;color:#337AB7;display:inline-block;"></h1><h1 style="color:#337AB7;display:inline-block;">&nbsp;Profile settings</h1>
+                    <p>&nbsp;</p>
+                    <div>
+                        <h3 style="color:#97C0E4" class="inlined-element">Change first name: </h3>
+                        <input class="inlined-element" placeholder="Write your first name">
+                    </div>
+                    <div>
+                        <h3 style="color:#97C0E4" class="inlined-element" placeholder="Write your last name">Change last name: </h3>
+                        <input class="inlined-element">
+                    </div>
+                    <input disabled class="btn btn-default" type="submit">
+                </div>
+                <p>&nbsp;</p>
+
+            </div>
+        </div>
+  </div>
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+    $("div.vertical-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.vertical-tab>div.vertical-tab-content").removeClass("active");
+        $("div.vertical-tab>div.vertical-tab-content").eq(index).addClass("active");
+    });
+});
+</script>
 </body>
 </html>

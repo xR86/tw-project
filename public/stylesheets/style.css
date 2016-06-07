@@ -26,6 +26,10 @@ nav{
 	margin-top: 10rem;
 }
 
+.translate5{
+  margin-top: 5rem;
+}
+
 /*custom scrollbar*/
 ::-webkit-scrollbar {
   width: 0.5em;

@@ -68,7 +68,23 @@
 
       </section>
 
-      
+      <section typeof="sa:implemDocum" id="implemDocum">
+        <h2>Implementation Details</h2>
+        
+        <p>The application utilizes a log in system for two types of users, a normal Base user and an Admin type user.
+			Using special a specialy tailored node libraries, once a user logs in, a token is generated. This token is saved in a session,
+				which expires after 15 minutes of innactivity, and is used to validate if one has access the routes the users is trying to 
+				access.
+		</p>
+		<p> The normal user has access to the app's special features, like a dashboard filled with rich statistics about the Free Code Camp data.
+			Also, one may explore the database by using our custom made filters. 
+		</p>
+		<p>
+			The REST api is open to all users, including the ones without an account. The Api gives the option to retrieve different parts of our 
+			database. Using the API documentation included, you can start developing your custom apps today.
+		</p>
+		
+      </section>
 
       
       <section typeof="sa:Conclusion" id="conclusion">

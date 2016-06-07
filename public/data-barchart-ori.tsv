@@ -25,3 +25,7 @@ W	.02360
 X	.00150
 Y	.01974
 Z	.00074
+--or
+letter	frequency
+"Solved"	.8167
+"Not Solved"	.1492

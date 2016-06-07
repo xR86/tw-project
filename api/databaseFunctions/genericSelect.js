@@ -4,12 +4,18 @@
 var oracledb = require('oracledb');
 var connAttrs = require('./../auth/utils/config');
 var SimpleOracleDB = require('simple-oracledb');
+//var js2xmlparser = require('js2xmlparser');
+//var xml=require('xml');
 SimpleOracleDB.extend(oracledb);
+
+
+
 
 
 function genericDatabaseOperation(req,res,select,params)
 {
     oracledb.getConnection(connAttrs.database, function (err, connection) {
+        oracledb.maxRows=300;
         if (err) {
             // Error connecting to DB
             res.set('Content-Type', 'application/json');
@@ -47,4 +53,33 @@ function genericDatabaseOperation(req,res,select,params)
     });
 }
 
+
+
+/*
+function genericDatabaseOperation(req,res,select,params)
+{
+    oracledb.getConnection(
+        connAttrs.database,
+        function(err, connection) {
+            if (err) throw err;
+
+            connection.execute(
+                select,
+                params, //no binds
+                {
+                    maxRows: 100
+                },
+                function(err, results) {
+                    if (err) throw err;
+
+                    res.set('Content-Type', 'text/xml');
+                    res.send(xml(results));
+
+                    //do work on the rows here
+                }
+            );
+        }
+    );
+}
+*/
 module.exports=genericDatabaseOperation;

@@ -9,10 +9,37 @@
 </head>
 <body>
 <% include templates/header.ejs %>
-<p class="translate10">&nbsp;</p>
-<div class="container">
-	<h1>Help</h1>
-</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="panel panel-default translate5">
+  			<div class="panel-body">
+  				<h1>Help</h1>
+  				<blockquote>
+  					<a href="/help/rest" class="btn btn-info" role="button"><i class="fa fa-code" aria-hidden="true"></i> REST API</a>
+  					<a href="#user-guide" class="btn btn-info" role="button"><i class="fa fa-book" aria-hidden="true"></i> User Guide</a>
+  				</blockquote>
+  				<p class="translate5">&nbsp;</p>
+  				<h3 id="user-guide">User Guide</h3>
+  				<ol>
+  					<li>If you don't have an account, go ahead and <mark><a href="/signup">make</a></mark> one.</li>
+  					<li>After your account was confirmed, login <mark><a href="/login">here</a></mark>, if you aren't redirected automatically.</li>
+  					<li>Check different features our site offers:</li>
+  					<li>
+	  					<ul>
+		  					<li>Be sure to check the <mark><a href="/dashboard">dashboard</a></mark>, where you can see various visualizations and statistics.</li>
+		  					<li>Same applies to filtering: the main <mark><a href="/datafiltering">datafiltering route</a></mark>, and the secondary ones - for <mark><a href="/datafiltering/solvedtasksfilter">solved tasks</a></mark> and for <mark><a href="/datafiltering/personfilter">FCC users</a></mark> (named persons in this context).</li>
+		  					<li>If you want to develop an application that uses our services, be sure to check our <mark><a href="/help/rest">REST API documentation</a></mark> and <mark><a href="https://github.com/xR86/tw-project">repo page</a></mark>.</li>
+		  				</ul>
+		  			</li>
+	  				<li>You can manage your settings <mark><a href="/settings">here</a></mark></li>
+	  				<li>If any problem or question arises, please <mark><a href="/#contact">contact</a></mark> us.</li>
+
+
+  				</ol>
+  			</div>
+  		</div>
+  	</div>
+ </div>
 
 </body>
 </html>

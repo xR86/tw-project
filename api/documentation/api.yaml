@@ -5,7 +5,7 @@ swagger: '2.0'
 
 # This is your document metadata
 info:
-  version: "0.0.0"
+  version: "0.0.9"
   title: CODR REST API
 
 # Describe your paths here

@@ -27,29 +27,41 @@
 
     <!-- Custom Style for D3.js diagrams -->
     <style>
-		.bar {
-		  fill: steelblue;
-		}
+      /*Bar chart styles*/
+  		.bar {
+  		  fill: steelblue;
+  		}
 
-		.bar:hover {
-		  fill: #f39c12;
-		}
+  		.bar:hover {
+  		  fill: #f39c12;
+  		}
 
-		.axis {
-		  font: 10px sans-serif;
-		}
+  		.axis {
+  		  font: 10px sans-serif;
+  		}
 
-		.axis path,
-		.axis line {
-		  fill: none;
-		  stroke: #000;
-		  shape-rendering: crispEdges;
-		}
+  		.axis path,
+  		.axis line {
+  		  fill: none;
+  		  stroke: #000;
+  		  shape-rendering: crispEdges;
+  		}
 
-		.x.axis path {
-		  display: none;
-		}
-	</style>
+  		.x.axis path {
+  		  display: none;
+  		}
+
+      /*Pie chart styles*/
+      .arc text {
+        font: 10px sans-serif;
+        text-anchor: middle;
+      }
+
+      .arc path {
+        stroke: #fff;
+      }
+
+	  </style>
 
 
 </head>
@@ -61,19 +73,19 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="ion ion-filing"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">CPU Traffic</span>
-                  <span class="info-box-number">90<small>%</small></span>
+                  <span class="info-box-text">Tasks</span>
+                  <span class="info-box-number"><%= resultSetTasks%></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+                <span class="info-box-icon bg-red"><i class="ion ion-ios-people"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-text">CoDr Users</span>
+                  <span class="info-box-number"><%= resultSetSiteUsers%></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -83,10 +95,10 @@
 
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                <span class="info-box-icon bg-green"><i class="ion ion-bookmark"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Sales</span>
-                  <span class="info-box-number">760</span>
+                  <span class="info-box-text">Tasks solved</span>
+                  <span class="info-box-number"><%= resultSetSolvedTasks %></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -94,8 +106,8 @@
               <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
-                  <span class="info-box-number"><%= resultSet %></span>
+                  <span class="info-box-text">FreeCodeCamp Users</span>
+                  <span class="info-box-number"><%= resultSetUsers %></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -201,6 +213,43 @@
                 </div><!-- /.box-footer -->
               </div><!-- /.box -->
             </div><!-- /.col -->
+
+            <div class="col-md-4">
+              <div class="box box-default">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Browser Usage</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="chart-responsive">
+                        <div id="d3Piechart" class="chart"></div>
+                        <!-- <canvas id="pieChart" height="150"></canvas> -->
+                      </div><!-- ./chart-responsive -->
+                    </div><!-- /.col -->
+                    <div class="col-md-4">
+                      <ul class="chart-legend clearfix">
+                        <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
+                        <li><i class="fa fa-circle-o text-green"></i> IE</li>
+                        <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
+                        <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
+                        <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
+                        <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
+                      </ul>
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->
+                </div><!-- /.box-body -->
+                <div class="box-footer no-padding">
+                  <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#">A <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
+                  </ul>
+                </div><!-- /.footer -->
+              </div><!-- /.box -->
+            </div>
             
           </div><!-- /.row -->
       </section>
@@ -208,6 +257,8 @@
 
     <!-- D3.js -->
 	<script src="/public/javascripts/d3.v3.min.js"></script>
+
+  <!-- Bar chart -->
 	<script>
 		var margin = {top: 20, right: 20, bottom: 30, left: 40},
 		    width = 400 - margin.left - margin.right,
@@ -234,7 +285,7 @@
 		  .append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		d3.tsv("/public/data.tsv", type, function(error, data) {
+		d3.tsv("/public/data-barchart.tsv", type, function(error, data) {
 		  if (error) throw error;
 
 		  x.domain(data.map(function(d) { return d.letter; }));
@@ -270,6 +321,58 @@
 		  return d;
 		}
 	</script>
+
+  <!-- Pie chart --><!--
+  <script>
+    var width = 960,
+        height = 500,
+        radius = Math.min(width, height) / 2;
+
+    var color = d3.scale.ordinal()
+        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+    var arc = d3.svg.arc()
+        .outerRadius(radius - 10)
+        .innerRadius(0);
+
+    var labelArc = d3.svg.arc()
+        .outerRadius(radius - 40)
+        .innerRadius(radius - 40);
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) { return d.population; });
+
+    var svg = d3.select("#d3Piechart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    d3.csv("/public/data-piechart.csv", type, function(error, data) {
+      if (error) throw error;
+
+      var g = svg.selectAll(".arc")
+          .data(pie(data))
+        .enter().append("g")
+          .attr("class", "arc");
+
+      g.append("path")
+          .attr("d", arc)
+          .style("fill", function(d) { return color(d.data.age); });
+
+      g.append("text")
+          .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+          .attr("dy", ".35em")
+          .text(function(d) { return d.data.age; });
+    });
+
+    function type(d) {
+      d.population = +d.population;
+      return d;
+    }
+
+    </script>-->
 
 <script>
   ((window.gitter = {}).chat = {}).options = {

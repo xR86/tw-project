@@ -35,15 +35,15 @@
 
 :thought_balloon:  __Week 15__ - [lab details](http://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html#calendar-finals)
 ... `deadline: 07.06.2016, ora 14`
-+ [ ] video with usecases (max. 5 minutes, HD)
-+ [ ] updated scholarly documentation: [scholarly documentation of architecture](https://xr86.github.io/tw-project/)
++ [x] video with usecases (max. 5 minutes, HD): [vimeo.com/169730397](https://vimeo.com/169730397)
++ [ ] updated scholarly documentation: [scholarly documentation](https://xr86.github.io/tw-project/) (split into architecture and implementation)
   + status report, task assignment, intermediary steps in developing the application
   + should explain how the code was managed with Github
   + user guide - separate page in documentation and route (`\help`)
-+ [ ] Node.js server
-  + [ ] all routes
-  + [ ] user usecase
-  + [ ] admin usecase
++ [x] Node.js server
+  + [x] all routes
+  + [x] user usecase
+  + [x] admin usecase
 + [ ] APEX bridge (node_plsql module)
 + [ ] swagger route (`help\rest` - in progress)
 

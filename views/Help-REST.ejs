@@ -1,18 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><%= title %> - Help</title>
 
-    <% include templates/styletemplate.ejs %>
+<head>
+  <meta charset="UTF-8">
+  <title>
+    <%= title %> - Help</title>
+
+  <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
+
+      <style type="text/css">
+        body { 
+  			font-family: Trebuchet MS, sans-serif;
+  			font-size: 15px;
+  			color: #444;
+  			margin-right: 24px;
+  		}
+  
+  		h1	{
+  			font-size: 25px;
+  		}
+  		h2	{
+  			font-size: 20px;
+  		}
+  		h3	{
+  			font-size: 16px;
+  			font-weight: bold;
+  		}
+  		hr	{
+  			height: 1px;
+  			border: 0;
+  			color: #ddd;
+  			background-color: #ddd;
+  			display: none;
+  		}
+  
+  		.app-desc {
+  		  clear: both;
+  		  margin-left: 20px;
+  		}
+  		.param-name {
+  		  width: 100%;
+  		}
+  		.license-info {
+  		  margin-left: 20px;
+  		}
+  
+  		.license-url {
+  		  margin-left: 20px;
+  		}
+  
+  		.model {
+  		  margin: 0 0 0px 20px;
+  		}
+  
+  		.method {
+  		  margin-left: 20px;
+  		}
+  
+  		.method-notes	{
+  			margin: 10px 0 20px 0;
+  			font-size: 90%;
+  			color: #555;
+  		}
+  
+  		pre {
+  		  padding: 10px;
+  		  margin-bottom: 2px;
+  		}
+  
+  		.http-method {
+  		 text-transform: uppercase;
+  		}
+  
+  		pre.get {
+  		  background-color: #0f6ab4;
+  		}
+  
+  		pre.post {
+  		  background-color: #10a54a;
+  		}
+  
+  		pre.put {
+  		  background-color: #c5862b;
+  		}
+  
+  		pre.delete {
+  		  background-color: #a41e22;
+  		}
+  
+  		.huge	{
+  			color: #fff;
+  		}
+  
+  		pre.example {
+  		  background-color: #f3f3f3;
+  		  padding: 10px;
+  		  border: 1px solid #ddd;
+  		}
+  
+  		code {
+  		  white-space: pre;
+  		}
+  
+  		.nickname {
+  		  font-weight: bold;
+  		}
+  
+  		.method-path {
+  		  font-size: 1.5em;
+  		  background-color: #0f6ab4;
+  		}
+  
+  		.up {
+  		  float:right;
+  		}
+  
+  		.parameter {
+  		  width: 500px;
+  		}
+  
+  		.param {
+  		  width: 500px;
+  		  padding: 10px 0 0 20px;
+  		  font-weight: bold;
+  		}
+  
+  		.param-desc {
+  		  width: 700px;
+  		  padding: 0 0 0 20px;
+  		  color: #777;
+  		}
+  
+  		.param-type {
+  		  font-style: italic;
+  		}
+  
+  		.param-enum-header {
+  		width: 700px;
+  		padding: 0 0 0 60px;
+  		color: #777;
+  		font-weight: bold;
+  		}
+  
+  		.param-enum {
+  		width: 700px;
+  		padding: 0 0 0 80px;
+  		color: #777;
+  		font-style: italic;
+  		}
+  
+  		.field-label {
+  		  padding: 0;
+  		  margin: 0;
+  		  clear: both;
+  		}
+  
+  		.field-items	{
+  			padding: 0 0 15px 0;
+  			margin-bottom: 15px;
+  		}
+  
+  		.return-type {
+  		  clear: both;
+  		  padding-bottom: 10px;
+  		}
+  
+  		.param-header {
+  		  font-weight: bold;
+  		}
+  
+  		.method-tags {
+  		  text-align: right;
+  		}
+  
+  		.method-tag {
+  		  background: none repeat scroll 0% 0% #24A600;
+  		  border-radius: 3px;
+  		  padding: 2px 10px;
+  		  margin: 2px;
+  		  color: #FFF;
+  		  display: inline-block;
+  		  text-decoration: none;
+  		}
+      </style>
 </head>
+
 <body>
-<% include templates/header.ejs %>
-<p class="translate10">&nbsp;</p>
-<div class="container">
-	<h1>Help - REST</h1>
-</div>
+  <% include templates/header.ejs %>
+  <div class="row">
+	<div class="col-md-10 col-md-offset-1">
+	<div class="panel panel-default translate5">
+  	<div class="panel-body">
+  		<a href="/help" class="btn btn-info" role="button"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go back</a>
+      <h1>Help - REST</h1>
+      <div class="app-desc">CoDr</div>
+      <div class="app-desc">More information: <a href="https://github.com/xR86/tw-project/">https://github.com/xR86/tw-project/</a></div>
+      <div class="app-desc">Version: 0.0.9</div>
+      <div class="app-desc">Generated based on swagger yaml: <a href="https://github.com/xR86/tw-project/blob/eda3699365ca978967c7e0b2045937b5b177e50b/api/documentation/api.yaml">github link</a></div>
+      <h2>Access</h2>
+
+      <h2><a name="__Methods">Methods</a></h2> [ Jump to <a href="#__Models">Models</a> ]
+
+      <h2>Table of Contents </h2>
+      <div class="method-summary"></div>
+      <ol>
+        <li><a href="#apiPersonsGet"><code><span class="http-method">get</span> /api/persons</code></a></li>
+        <li><a href="#apiSolvedTasksCompleteddateGet"><code><span class="http-method">get</span> /api/solvedTasks/completeddate</code></a></li>
+        <li><a href="#apiSolvedTasksGet"><code><span class="http-method">get</span> /api/solvedTasks</code></a></li>
+        <li><a href="#apiSolvedTasksHasSolutionGet"><code><span class="http-method">get</span> /api/solvedTasks/hasSolution</code></a></li>
+        <li><a href="#apiSolvedTasksTaskNameDateGet"><code><span class="http-method">get</span> /api/solvedTasks/task_name/date</code></a></li>
+        <li><a href="#apiSolvedTasksTaskNameGet"><code><span class="http-method">get</span> /api/solvedTasks/task_name</code></a></li>
+        <li><a href="#apiSolvedTasksTaskNameHasSolutionGet"><code><span class="http-method">get</span> /api/solvedTasks/task_name/hasSolution</code></a></li>
+        <li><a href="#apiSolvedTasksTaskNamePIdGet"><code><span class="http-method">get</span> /api/solvedTasks/task_name/p_id</code></a></li>
+        <li><a href="#apiSolvedTasksTaskNamePIdHasSolutionGet"><code><span class="http-method">get</span> /api/solvedTasks/task_name/p_id/hasSolution</code></a></li>
+        <li><a href="#apiTasksGet"><code><span class="http-method">get</span> /api/tasks</code></a></li>
+        <li><a href="#apiTasksNameGet"><code><span class="http-method">get</span> /api/tasks/name</code></a></li>
+      </ol>
+
+      <div class="method"><a name="apiPersonsGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/persons</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiPersonsGet</span>)</div>
+        <div class="method-notes">Gets &#x60;Person&#x60; objects. Optional query param of **p_id** determines the Person object returned </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">p_id (optional)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Person id in the database </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200">inline_response_200</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksCompleteddateGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks/completeddate</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksCompleteddateGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects. Filters tasks only by date </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">completeddate (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Date of completion </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects. Optional query param of **st_id** determines the solvedTask object returned </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">st_id (optional)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Name of the task </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksHasSolutionGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks/hasSolution</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksHasSolutionGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects. Filters tasks by existence of solution only </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">hasSolution (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Y or N response </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksTaskNameDateGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks/task_name/date</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksTaskNameDateGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects.Used to filter a SolvedTasks by name and date of completion </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">task_name (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Name of the task </div>
+          <div class="param">completeddate (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Date of completion </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksTaskNameGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks/task_name</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksTaskNameGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects. You must either use neither optional parameters or both at the same time. </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">task_name (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Name of the task </div>
+          <div class="param">completeddate (optional)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Date of completion </div>
+          <div class="param">hasSolution (optional)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Y or N response </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksTaskNameHasSolutionGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks/task_name/hasSolution</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksTaskNameHasSolutionGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects.Used to filter a SolvedTasks by name and existence of the solution field. </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">task_name (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Name of the task </div>
+          <div class="param">hasSolution (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Y or N response </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksTaskNamePIdGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks/task_name/p_id</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksTaskNamePIdGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects. Filters tasks by the persons who completed them, optional query parameter **completeddate** also filters by date of completion </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">p_id (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Person id in the database </div>
+          <div class="param">completeddate (optional)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Date of completion </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiSolvedTasksTaskNamePIdHasSolutionGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/solvedTasks/task_name/p_id/hasSolution</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiSolvedTasksTaskNamePIdHasSolutionGet</span>)</div>
+        <div class="method-notes">Gets &#x60;SolvedTasks&#x60; objects. Filters by mandatory fields p_id, completeddate and hasSolution. Used to inspect what tasks a user completed at a specific date </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">p_id (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Person id in the database </div>
+          <div class="param">completeddate (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Date of completion </div>
+          <div class="param">hasSolution (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Y or N response </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_1">inline_response_200_1</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiTasksGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/tasks</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiTasksGet</span>)</div>
+        <div class="method-notes">Gets &#x60;Task&#x60; objects. Query param of **task_id** determines the Task object returned </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">task_id (optional)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The task id </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_2">inline_response_200_2</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+      <div class="method"><a name="apiTasksNameGet" />
+        <div class="method-path">
+          <a class="up" href="#__Methods">Up</a>
+          <pre class="get"><code class="huge"><span class="http-method">get</span> /api/tasks/name</code></pre></div>
+        <div class="method-summary"> (<span class="nickname">apiTasksNameGet</span>)</div>
+        <div class="method-notes">Gets &#x60;Task&#x60; objects. Query param of **task_name** determines the Task object returned </div>
+
+
+        <h3 class="field-label">Query parameters</h3>
+        <div class="field-items">
+          <div class="param">task_name (required)</div>
+
+          <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Name of the task </div>
+        </div>
+        <!-- field-items -->
+
+
+        <h3 class="field-label">Return type</h3>
+        <div class="return-type">
+          array[<a href="#inline_response_200_2">inline_response_200_2</a>]
+
+        </div>
+
+        <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+        <h3 class="field-label">Responses</h3>
+        <h4 class="field-label">200</h4> Successful response
+
+      </div>
+      <!-- method -->
+      <hr/>
+
+      <div class="up"><a href="#__Models">Up</a></div>
+      <h2><a name="__Models">Models</a></h2> [ Jump to <a href="#__Methods">Methods</a> ]
+
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#Inline_response_200"><code>Inline_response_200</code></a></li>
+        <li><a href="#Inline_response_200_1"><code>Inline_response_200_1</code></a></li>
+        <li><a href="#Inline_response_200_2"><code>Inline_response_200_2</code></a></li>
+      </ol>
+
+      <div class="model">
+        <h3 class="field-label"><a name="Inline_response_200">Inline_response_200</a> <a class="up" href="#__Models">Up</a></h3>
+        <div class="field-items">
+          <div class="param">p_id (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> </div>
+          <div class="param">tasks_completed_counter (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> </div>
+          <div class="param">tasks_atttempted_counter (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> </div>
+        </div>
+        <!-- field-items -->
+      </div>
+      <div class="model">
+        <h3 class="field-label"><a name="Inline_response_200_1">Inline_response_200_1</a> <a class="up" href="#__Models">Up</a></h3>
+        <div class="field-items">
+          <div class="param">st_id (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> </div>
+          <div class="param">p_id (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> </div>
+          <div class="param">task_id (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> </div>
+          <div class="param">completeddate (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#date">date</a></span> </div>
+          <div class="param">hasSolution (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> </div>
+          <div class="param">solution (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> </div>
+        </div>
+        <!-- field-items -->
+      </div>
+      <div class="model">
+        <h3 class="field-label"><a name="Inline_response_200_2">Inline_response_200_2</a> <a class="up" href="#__Models">Up</a></h3>
+        <div class="field-items">
+          <div class="param">task_id (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> </div>
+          <div class="param">task_name (optional)</div>
+          <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> </div>
+        </div>
+        <!-- field-items -->
+      </div>
+    </div>
+    </div><!--./panel-body-->
+    </div>
+    </div>
+   </div><!--./row-->
 
 </body>
+
 </html>

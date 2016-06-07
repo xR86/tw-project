@@ -10,124 +10,127 @@ function personFilter(req,res)
         {
             p_id:req.body.p_id,
             tasks_completed_counter:req.body.tasks_completed_counter,
-            date1:req.body.date1,
-            date2:req.body.date2,
-            page: parseInt(req.body.page),
-            rowsToFetch:parseInt(req.body.rowsToFetch)
+            date11:req.body.date11,
+            date22:req.body.date22,
+            page1: parseInt(req.body.page1),
+            rowsToFetch1:parseInt(req.body.rowsToFetch1)
         },
         case2:
         {
             p_id:req.body.p_id,
-            date1:req.body.date1,
-            date2:req.body.date2,
-            page:parseInt(req.body.page),
-            rowsToFetch:parseInt(req.body.rowsToFetch)
+            date11:req.body.date11,
+            date22:req.body.date22,
+            page1:parseInt(req.body.page1),
+            rowsToFetch1:parseInt(req.body.rowsToFetch1)
         },
         case3:
         {
             tasks_completed_counter:req.body.tasks_completed_counter,
-            page:parseInt(req.body.page),
-            rowsToFetch:parseInt(req.body.rowsToFetch)
+            page1:parseInt(req.body.page1),
+            rowsToFetch1:parseInt(req.body.rowsToFetch1)
         },
         case4:
         {
-            date1:req.body.date1,
-            date2:req.body.date2,
-            page:parseInt(req.body.page),
-            rowsToFetch:parseInt(req.body.rowsToFetch)
+            date11:req.body.date11,
+            date22:req.body.date22,
+            page1:parseInt(req.body.page1),
+            rowsToFetch1:parseInt(req.body.rowsToFetch1)
         },
         case5:
         {
             p_id:req.body.p_id,
-            page:parseInt(req.body.page),
-            rowsToFetch:parseInt(req.body.rowsToFetch)
+            page1:parseInt(req.body.page1),
+            rowsToFetch1:parseInt(req.body.rowsToFetch1)
         },
         case6:
         {
             tasks_completed_counter:req.body.tasks_completed_counter,
-            date1:req.body.date1,
-            date2:req.body.date2,
-            page:parseInt(req.body.page),
-            rowsToFetch:parseInt(req.body.rowsToFetch)
+            date11:req.body.date11,
+            date22:req.body.date22,
+            page1:parseInt(req.body.page1),
+            rowsToFetch1:parseInt(req.body.rowsToFetch1)
         },
         case7:
         {
-            page:parseInt(req.body.page),
-            rowsToFetch:parseInt(req.body.rowsToFetch)
+            page1:parseInt(req.body.page1),
+            rowsToFetch1:parseInt(req.body.rowsToFetch1)
         }
     };
 
 
 
     //console.log(typeof bindvariables.case7.page);
-  //  console.log(bindvariables.case7.page);
+    console.log(bindvariables.case7.page1);
   //  console.log(req.body.page);
-  //  console.log(req.body.rowsToFetch);
+    console.log(req.body.rowsToFetch1);
  //   console.log(bindvariables.case7.rowsToFetch);
  //   console.log(typeof bindvariables.case7.rowsToFetch);
 
+    console.log(req.body.p_id);
+    console.log(req.body.date11);
 
     var select=[];
-    if(req.body.p_id!='' && req.body.tasks_completed_counter!='' && req.body.date1!='' && req.body.date2!='')
+    if(req.body.p_id!='' && req.body.tasks_completed_counter!='' && req.body.date11!='' && req.body.date22!='')
     {
         select.push("SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution FROM " +
             "(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution,ROWNUM RN " +
             "FROM (SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution" +
             " FROM personView where p_id= :p_id and tasks_completed_counter> :tasks_completed_counter and " +
-            "TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and TO_DATE(:date2,'DD/MM/YY') ORDER BY P_ID ASC)" +
-            " where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+            "TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date11,'DD/MM/YY') and TO_DATE(:date22,'DD/MM/YY') ORDER BY P_ID ASC)" +
+            " where ROWNUM<=:page1*:rowsToFetch1) WHERE RN>(:page1-1)*:rowsToFetch1");
         filter.filterBy(req,res,select[0],bindvariables.case1);
     }
-    else if(req.body.p_id!='' && req.body.tasks_completed_counter=='' && req.body.date1!='' && req.body.date2!='')
+    else if(req.body.p_id!='' && req.body.tasks_completed_counter=='' && req.body.date11!='' && req.body.date22!='')
     {
         select.push("SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution FROM" +
             "(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution," +
             "ROWNUM RN FROM(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution" +
             " FROM personView where p_id= :p_id and " +
-            "TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and TO_DATE(:date2,'DD/MM/YY') ORDER BY P_ID ASC)" +
-            " where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+            "TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date11,'DD/MM/YY') and TO_DATE(:date22,'DD/MM/YY') ORDER BY P_ID ASC)" +
+            " where ROWNUM<=:page1*:rowsToFetch1) WHERE RN>(:page1-1)*:rowsToFetch1");
         filter.filterBy(req,res,select[0],bindvariables.case2);
     }
-    else if(req.body.p_id=='' && req.body.tasks_completed_counter!='' && req.body.date1=='' && req.body.date2=='')
+    else if(req.body.p_id=='' && req.body.tasks_completed_counter!='' && req.body.date11=='' && req.body.date22=='')
     {
         select.push("SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution FROM" +
-            "(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution,ROWNUM RN FROM(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution" +
-            " FROM personView where tasks_completed_counter> :tasks_completed_counter ORDER BY P_ID ASC) where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+            "(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution,ROWNUM RN FROM(SELECT p_id, tasks_completed_counter, " +
+            "tasks_attempted_counter, completeddate, hassolution,solution" +
+            " FROM personView where tasks_completed_counter> :tasks_completed_counter ORDER BY P_ID ASC) where ROWNUM<=:page1*:rowsToFetch1) WHERE RN>(:page1-1)*:rowsToFetch1");
         filter.filterBy(req,res,select[0],bindvariables.case3);
     }
-    else if(req.body.p_id=='' && req.body.tasks_completed_counter=='' && req.body.date1=='' && req.body.date2=='')
+    else if(req.body.p_id=='' && req.body.tasks_completed_counter=='' && req.body.date11=='' && req.body.date22=='')
     {
         select.push("SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution " +
             "FROM(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution,ROWNUM RN " +
             "FROM(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution FROM personView " +
-            "ORDER BY P_ID ASC) WHERE ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+            "ORDER BY P_ID ASC) WHERE ROWNUM<=:page1*:rowsToFetch1) WHERE RN>(:page1-1)*:rowsToFetch1");
         filter.filterBy(req, res, select[0], bindvariables.case7);
     }
-    else if(req.body.p_id=='' && req.body.tasks_completed_counter=='' && req.body.date1!='' && req.body.date2!='')
+    else if(req.body.p_id=='' && req.body.tasks_completed_counter=='' && req.body.date11!='' && req.body.date22!='')
     {
         select.push("SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution FROM" +
             "(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution,ROWNUM RN " +
             "FROM(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution" +
-            " FROM personView where TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and TO_DATE(:date2,'DD/MM/YY') ORDER BY P_ID ASC) " +
-            " where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+            " FROM personView where TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date11,'DD/MM/YY') and TO_DATE(:date22,'DD/MM/YY') ORDER BY P_ID ASC) " +
+            " where ROWNUM<=:page1*:rowsToFetch1) WHERE RN>(:page1-1)*:rowsToFetch1");
         filter.filterBy(req,res,select[0],bindvariables.case4);
     }
-    else if(req.body.p_id!='' && req.body.tasks_completed_counter=='' && req.body.date1=='' && req.body.date2=='')
+    else if(req.body.p_id!='' && req.body.tasks_completed_counter=='' && req.body.date11=='' && req.body.date22=='')
     {
         select.push("SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution FROM (SELECT p_id, tasks_completed_counter, " +
             "tasks_attempted_counter, completeddate, hassolution,solution,ROWNUM RN FROM(select p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, " +
             "hassolution,solution from personView where p_id= :p_id ORDER BY P_ID ASC) " +
-            "where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+            "where ROWNUM<=:page1*:rowsToFetch1) WHERE RN>(:page1-1)*:rowsToFetch1");
         filter.filterBy(req,res,select[0],bindvariables.case5);
     }
-    else if(req.body.p_id=='' && req.body.tasks_completed_counter!='' && req.body.date1!='' && req.body.date2!='')
+    else if(req.body.p_id=='' && req.body.tasks_completed_counter!='' && req.body.date11!='' && req.body.date22!='')
     {
         select.push("SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution FROM " +
             "(SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution,ROWNUM RN " +
             "FROM (SELECT p_id, tasks_completed_counter, tasks_attempted_counter, completeddate, hassolution,solution" +
             " FROM personView where tasks_completed_counter> :tasks_completed_counter and " +
-            "TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date1,'DD/MM/YY') and TO_DATE(:date2,'DD/MM/YY') ORDER BY P_ID ASC)" +
-            " where ROWNUM<=:page*:rowsToFetch) WHERE RN>(:page-1)*:rowsToFetch");
+            "TO_DATE(TRUNC(completeddate),'DD/MM/YY') between TO_DATE(:date11,'DD/MM/YY') and TO_DATE(:date22,'DD/MM/YY') ORDER BY P_ID ASC)" +
+            " where ROWNUM<=:page1*:rowsToFetch1) WHERE RN>(:page1-1)*:rowsToFetch1");
         filter.filterBy(req,res,select[0],bindvariables.case6);
     }
     else

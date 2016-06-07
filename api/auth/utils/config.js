@@ -4,7 +4,7 @@
 
 module.exports = {
     database: {
-         user : 'TW',
+         user : 'TW_final',
          password: 'parola' ,
          connectString: 'localhost/XE'
     },

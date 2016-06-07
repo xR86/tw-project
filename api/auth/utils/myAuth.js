@@ -15,7 +15,7 @@ function myAuth(role){
          //   next()
        // }
         var token= req.session.persistentSessionToken;
-        console.log(token);
+      //  console.log(token);
 
         try {
             payload = jwt.verify(token, config.jwtSecretKey);

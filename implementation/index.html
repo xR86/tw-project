@@ -53,10 +53,45 @@
           </li>
         </ol>
       </section>
-      <section typeof="sa:GitArchitecture" id="gitarchitecture">
-        <h2>Github Architecture</h2>
+      <section typeof="sa:Features" id="features">
+        <h2>Features</h2>
+        <p>An almost complete list of features can be found on the <a href="https://github.com/xR86/tw-project/blob/3c5764f0834dc6e48a077f124338255d8884e4cf/views/Devstats.ejs"><code>devstats</code></a> route within the application (available only to admin users).
+        <ul>
+          <li><p>Frontend</p>
+            <ul>
+              <li>AdminLTE Dashboard - used for user dashboard - badges, boxes for easier management of the interface</li>
+              <li>Visualization - mainly D3 stats on the user dashboard (barchart and piechart), badges on user dashboard, the <code>/datafiltering</code> related routes showing json with solvedTasks or persons, and offering the possibility of visualizing in a Codepen</li>
+              <li>Codepen API Integration - as mentioned, solutions from FCC users can be visualized, making use of the Codepen API prefill through POST</li>
+              <li>Grunt integration - for now, we use grunt for minification of the main .css file, and setup a grunt watch to do it on-the-fly (when changes are made to the .css, the file is minified by Grunt)</li>
+            </ul>
+          </li>
+          <li><p>Backend</p>
+            <ul>
+              <li>Java json parser - used to parse the FCC json and insert into the relational database (to be faster, insertions require that no index is made before or during the process - indexations are made after a batch of insertions are done)</li>
+              <li>Oracle DB - we make use of relational DB advantages and also of PL/SQL (for procedures needed for visualizations)</li>
+              <li>REST API - any user can query the database (with a limit on the rows returned), and have access to data</li>
+              <li>Authentication (RBAC) - we defined 2 roles - BASE and ADMIN - BASE users have access to the dashboard, settings, datafiltering routes, while ADMIN users have access to all BASE routes and additional routes like <code>/admindash</code> or <code>/devstats</code></li>
+              <li>Integrated Gitter chat - we used Sidecar to integrate a chat (FreeCodeCamp/FreeCodeCamp room), in case our users have any questions regarding FCC (provided they have a Gitter/Github account to login to Gitter)</li>
+              <li>Contact form - used to contact our site administrators in case of a question, proposal or issue</li>
+            </ul>
+          </li>
+          <li><p>Devops</p>
+            <ul>
+              <li>Logging - made with basic Node.js console.log, and with <a href="https://www.npmjs.com/package/winston">Winston</a></li>
+              <li>Intermediate Github use - milestones, issues, labels, commits that link to issues, branches, READMEs </li>
+              <li>Academic documentation - this documentation (implementation-side), the architecture documentation, and the <a href="../">main page</a> that links to those 2</li>
+              <li>Scripting - workspace script (.bat), deployment scripts (Vagrantfile, Dockerfile, utility.sh script)</li>
+            </ul>
+          </l
+
+
+        </ul>
+
+      </section>
+      <section typeof="sa:GitWork" id="gitwork">
+        <h2>How we used Github</h2>
         <p>
-          We will use the following architecture for working on github.
+          We kept roughly the same branch structure as in the architecture phase, except for a new branch, <code>frontend</code>, when we worked simultaneously, and rebasing with each other would have lead to merge conflicts (this led to making a <a href="https://github.com/xR86/tw-project/pull/5">pull request</a> when synchronizing the frontend branch with the master branch).
         </p>
         <figure typeof="sa:Image">
             <img src="../assets/arhitectura-git-explanations.png" width="880" height="655">
@@ -64,26 +99,142 @@
               Each branch for different purposes: master for Continuous Integration, feature branches if needed, gh-pages for this report, docker for deployment and Dockerfiles.
             </figcaption>
         </figure>
-        <p>If we will cluster the application and/or use Winston, we will probably need an extra <code>experimental</code> branch (or nightly ?).</p>
+        <p>We used milestones to structure our work for beta (see <a href="https://github.com/xR86/tw-project/milestones">Sprint for beta version</a>. As such, we used issues to track our TODOs, bugs and enhanecements (see closed <a href="https://github.com/xR86/tw-project/issues?q=is%3Aissue+is%3Aclosed">issue list</a>).</p>
+        <p>To further describe the issues, we made a few custom labels (list <a href="https://github.com/xR86/tw-project/labels">here</a>): <code>backend</code>, <code>frontend</code>, <code>documentation</code>.</p>
+        <p>In order to further version our application, we made use of the tagging/release system to make a release for the presentation (you can see it <a href="https://github.com/xR86/tw-project/releases/tag/v0.9">here</a>). When the application will reach version ~1.x.x, the release will also contain scripts to easily deploy the application (dockerized Node.js and Oracle11g database, with a small subset of the FCC database to be imported with the json parser).</p>
 
       </section>
 
-      <section typeof="sa:implemDocum" id="implemDocum">
+      <section typeof="sa:Database" id="database">
+        <h2>Relational Database</h2>
+
+        <p>We store in the database the FCC user data obtained from the json, our users data (that have an account in our web application), and various statistics tables, used for aggregating and processing data. We also cover PL/SQL functions and procedures for easier querying of the database (defined <a href="https://github.com/xR86/tw-project/tree/master/_sgbd">here</a> in files like <code>pachete.sql</code>, <code>additional-functions.sql</code>).</p>
+
+        <p>The database schema has been updated. The main changes that will be made to the database will only impact statistic tables (to store certain statistic values, and optimize the querying and transactions with the database) and PL/SQL functions and procedures.</p>
+        <figure typeof="sa:Image">
+            <img src="../assets/CoDr-DatabaseSQL-new.png" width="880" height="655">
+            <figcaption>
+              The ERD covers the main tables (Persons, SolvedTasks, SiteUsers, Tasks) and some of the secondary tables (PersonStats). PL/SQL procedures not covered.
+            </figcaption>
+        </figure>
+
+      </section>
+
+      <section typeof="sa:implemDetails" id="implemDetails">
         <h2>Implementation Details</h2>
         
-        <p>The application utilizes a log in system for two types of users, a normal Base user and an Admin type user.
-			Using special a specialy tailored node libraries, once a user logs in, a token is generated. This token is saved in a session,
-				which expires after 15 minutes of innactivity, and is used to validate if one has access the routes the users is trying to 
+        <p>The application is built with a RBAC (role-based access control) system for login,  for two types of users, a normal Base user and an Admin type user. Using specially tailored node libraries (to name a few: <a href="https://www.npmjs.com/package/bcrypt">bcrypt</a>, <a href="https://www.npmjs.com/package/express-session">express-session</a>, <a href="https://www.npmjs.com/package/jsonwebtoken">jsonwebtoken</a>), once a user logs in, a token is generated. This token is saved in a session, which expires after 15 minutes of inactivity, and is used to validate if one has access to the routes the users are allowed to 
 				access.
-		</p>
-		<p> The normal user has access to the app's special features, like a dashboard filled with rich statistics about the Free Code Camp data.
-			Also, one may explore the database by using our custom made filters. 
-		</p>
-		<p>
-			The REST api is open to all users, including the ones without an account. The Api gives the option to retrieve different parts of our 
-			database. Using the API documentation included, you can start developing your custom apps today.
-		</p>
+		    </p>
+		    <p> The normal user has access to the app's special features, like a dashboard filled with rich statistics about the Free Code Camp data. Also, one may explore the database by using our custom made filters. 
+		    </p>
+		    <p>The REST API is open to all users, including the ones without an account. The API gives the option to retrieve different parts of our database. Using the API documentation included (based on swagger.yaml, you can either get the .yaml <a href="https://github.com/xR86/tw-project/blob/3c5764f0834dc6e48a077f124338255d8884e4cf/api/documentation/api.yaml">here</a>, or access within the application the <code>/help/rest</code> route to see a .yaml static export), and you can start developing your custom apps today.
+		    </p>
+        <h4>Scripting</h4>
+        <p>To make developing easier, we wrote a <a href="https://github.com/xR86/tw-project/blob/3c5764f0834dc6e48a077f124338255d8884e4cf/dev-script-win.bat">.bat script</a> to open the application and setup the workspace. It opens 3 terminals: grunt watch (opening the grunt watch to minify the main css file on change; synchronous/blocking call), npm start (running the server; synchronous/blocking call), git status (an extra window to use for git work or for other purposes - eg: npm install, networking).</p>
+        <p>We also have minimal deployment scripts (Vagrantfile, Dockerfile, and utility.sh on the <a href="https://github.com/xR86/tw-project/tree/docker"><code>docker</code></a> branch), that have to be updated for the database dependencies.</p>
 		
+      </section>
+
+      <section typeof="sa:Responsibilities" id="responsibilities">
+        <h2>Responsibilities / Task assignments</h2>
+
+        <p>Frontend - <span property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/xR86" typeof="schema:Person">
+              <span property="schema:givenName">Dan</span>
+              <span property="schema:familyName">Alexandru</span>
+            </a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru@info.uaic.ro" title="corresponding author">&#9993;</a>
+            </sup>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru.dev@gmail.com" title="corresponding author">&#9993;</a>
+            </sup>
+          </span>
+        </p>
+        <p>Backend - Java (FCC json parsing and insert into the database) - <span property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/dev-alberto" typeof="schema:Person">
+              <span property="schema:givenName">Alberto</span>
+              <span property="schema:familyName">Cieri</span>
+            </a>
+          </span> ,
+          <span property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/shully899509" typeof="schema:Person">
+              <span property="schema:givenName">Iulian</span>
+              <span property="schema:familyName">Luca</span>
+            </a>
+          </span>
+        </p>
+        <p>Backend - PHP (prototype for database querying, features, pagination) - 
+          <span property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/shully899509" typeof="schema:Person">
+              <span property="schema:givenName">Iulian</span>
+              <span property="schema:familyName">Luca</span>
+            </a>
+          </span>
+        </p>
+        <p>Backend - Node.js (the main part of the application, REST API) - 
+          <span property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/xR86" typeof="schema:Person">
+              <span property="schema:givenName">Dan</span>
+              <span property="schema:familyName">Alexandru</span>
+            </a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru@info.uaic.ro" title="corresponding author">&#9993;</a>
+            </sup>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru.dev@gmail.com" title="corresponding author">&#9993;</a>
+            </sup>
+          </span>, 
+          <span property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/dev-alberto" typeof="schema:Person">
+              <span property="schema:givenName">Alberto</span>
+              <span property="schema:familyName">Cieri</span>
+            </a>
+          </span>
+        </p>
+        <p>Database - Oracle 11g tables and procedures - mainly 
+          <span property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/shully899509" typeof="schema:Person">
+              <span property="schema:givenName">Iulian</span>
+              <span property="schema:familyName">Luca</span>
+            </a>
+          </span>
+          with help from 
+          <span property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/xR86" typeof="schema:Person">
+              <span property="schema:givenName">Dan</span>
+              <span property="schema:familyName">Alexandru</span>
+            </a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru@info.uaic.ro" title="corresponding author">&#9993;</a>
+            </sup>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru.dev@gmail.com" title="corresponding author">&#9993;</a>
+            </sup>
+          </span>, 
+          <span property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/dev-alberto" typeof="schema:Person">
+              <span property="schema:givenName">Alberto</span>
+              <span property="schema:familyName">Cieri</span>
+            </a>
+          </span>
+        </p>
+        <p>Scripting, github coordination, documentation - 
+        <span property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/xR86" typeof="schema:Person">
+              <span property="schema:givenName">Dan</span>
+              <span property="schema:familyName">Alexandru</span>
+            </a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru@info.uaic.ro" title="corresponding author">&#9993;</a>
+            </sup>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:dan.alexandru.dev@gmail.com" title="corresponding author">&#9993;</a>
+            </sup>
+          </span>
+        </p>
+
       </section>
 
       

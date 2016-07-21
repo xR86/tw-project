@@ -1,0 +1,16 @@
+{
+	"critics": {
+		"lint": {"engine": "jshint"}
+	},
+	"ignore": [
+		"public/stylesheets/bootstrap.min.css",
+		"public/stylesheets/AdminLTE/**",
+		"public/javascripts/jquery.min.js",
+		"public/javascripts/d3.v3.min.js",
+		"public/javascripts/bootstrap.min.js",
+		"public/javascripts/AdminLTE/**"
+	],
+	"test": [
+		"**/test/**"
+	]
+}

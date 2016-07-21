@@ -3,7 +3,7 @@
 [![slack shield mock](https://img.shields.io/badge/slack-available-ff69b4.svg?style=flat)](https://tw-dali.slack.com)
 [![GitHub license](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/xR86/tw-project/)
   
-[![Build Status](https://travis-ci.org/xR86/tw-project.svg?branch=master)](https://travis-ci.org/xR86/tw-project)
+<!-- [![Build Status](https://travis-ci.org/xR86/tw-project.svg?branch=master)](https://travis-ci.org/xR86/tw-project) -->
   
 
 ###CoDr (Free Code Camp Data Visualizer)

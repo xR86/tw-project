@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <title><%= title %> - Dashboard</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/public/stylesheets/AdminLTE/AdminLTE.min.css">
+    <link rel="stylesheet" href="public/vendor/AdminLTE/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="/public/stylesheets/AdminLTE/skins/_all-skins.min.css">
+    <!-- <link rel="stylesheet" href="public/vendor/AdminLTE/skins/_all-skins.min.css"> -->
 
     <% include templates/styletemplate.ejs %>
     <% include templates/scripttemplate.ejs %>
@@ -235,7 +233,8 @@
 
 
     <!-- D3.js -->
-	<script src="/public/javascripts/d3.v3.min.js"></script>
+	<script src="public/javascripts/d3.v3.min.js"></script>
+  <!-- <script src="/public/vendor/d3/d3.min.js"></script> -->
 
   <!-- Bar chart -->
 	<script>
@@ -367,18 +366,12 @@
 </script>
 
 
-<!-- jQuery 2.1.4 -->
-   <!--  <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script> -->
-    <!-- Bootstrap 3.3.5 -->
-<!--     <script src="bootstrap/js/bootstrap.min.js"></script> -->
-    <!-- FastClick -->
-<!--     <script src="plugins/fastclick/fastclick.min.js"></script> -->
-    <!-- AdminLTE App -->
-<!--     <script src="javascripts/AdminLTE/app.min.js"></script> -->
+<!-- AdminLTE App -->
+  <script src="/public/vendor/AdminLTE/app.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!--     <script src="dist/js/pages/dashboard2.js"></script> -->
+  <script src="/public/vendor/AdminLTE/pages/dashboard2.js"></script>
     <!-- AdminLTE for demo purposes -->
-<!--     <script src="dist/js/demo.js"></script> -->
+  <script src="/public/vendor/AdminLTE/demo.js"></script>
 
 </body>
 </html>	

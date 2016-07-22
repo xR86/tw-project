@@ -5,8 +5,12 @@ _java-json-parser/.idea/*
 #Compiled java files
 _java-json-parser/out/*
 
-#Dependency directory
+#Dependency directory - backend
 node_modules/*
+
+#Dependency directory - frontend
+bower_components/*
+public/vendor/*
 
 #database configuration
 api/auth/utils/config.js

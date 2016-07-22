@@ -1,0 +1,24 @@
+{
+  "name": "codr",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Dan Alexandru <dan.alexandru@info.uaic.ro>"
+  ],
+  "license": "GPLv3",
+  "homepage": "https://github.com/xR86/tw-project",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "d3": "^4.1.1",
+    "AdminLTE": "admin-lte#^2.3.5",
+    "font-awesome": "^4.6.3"
+  }
+}

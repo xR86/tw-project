@@ -23,7 +23,7 @@ function post(req, res, next) {
                 'select user_firstname as "user_firstname", ' +
                 '   user_email as "user_email", ' +
                 '   user_password as "user_password", ' +
-                '   role as "role" ' +
+                '   user_role as "user_role" ' +
                 'from SITEUSERS ' +
                 'where user_email = :user_email',
                 {

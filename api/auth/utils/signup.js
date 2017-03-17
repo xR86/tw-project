@@ -74,7 +74,7 @@ function insertUser(user, cb) {
                 'insert into SITEUSERS ( ' +
                 '   user_email, ' +
                 '   user_password, ' +
-                '   role, ' +
+                '   user_role, ' +
                 '   user_firstname, '+
                 '   user_lastname '+
                 ') ' +
@@ -88,7 +88,7 @@ function insertUser(user, cb) {
                 'returning ' +
                 '   user_id, ' +
                 '   user_email, ' +
-                '   role, ' +
+                '   user_role, ' +
                 '   user_firstname, '+
                 '   user_lastname '+
                 'into ' +

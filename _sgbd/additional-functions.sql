@@ -4,6 +4,7 @@ BEGIN
   SELECT COUNT(*) INTO result FROM PERSONS;
   RETURN result;
 END;
+/
 
 CREATE OR REPLACE FUNCTION solvedTasksCount RETURN VARCHAR2 AS
   result number;
@@ -11,6 +12,7 @@ BEGIN
   SELECT COUNT(*) INTO result FROM SOLVEDTASKS;
   RETURN result;
 END;
+/
 
 CREATE OR REPLACE FUNCTION tasksCount RETURN VARCHAR2 AS
   result number;
@@ -18,6 +20,7 @@ BEGIN
   SELECT COUNT(*) INTO result FROM TASKS;
   RETURN result;
 END;
+/
 
 CREATE OR REPLACE FUNCTION siteUsersCount RETURN VARCHAR2 AS
   result number;
@@ -25,6 +28,7 @@ BEGIN
   SELECT COUNT(*) INTO result FROM SITEUSERS;
   RETURN result;
 END;
+/
 /*
 set serveroutput on;
 DECLARE

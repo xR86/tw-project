@@ -4,9 +4,9 @@
 
 module.exports = {
     database: {
-         user : 'TW_final',
+         user : 'tw_admin',
          password: 'parola' ,
-         connectString: 'localhost/XE'
+         connectString: 'localhost/orcl'
     },
     jwtSecretKey: "jmvhDdDBMvqb=M@6h&QVA7x"
 };

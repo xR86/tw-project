@@ -1,18 +1,24 @@
-#IntelliJ metadata
+
+# Protected files
+safe_*
+**/safe_*/*
+
+# IntelliJ metadata
 _java-json-parser/.idea/*
 .idea/*
+*.iml
 
-#Compiled java files
+# Compiled java files
 _java-json-parser/out/*
 
-#Dependency directory - backend
+# Dependency directory - backend
 node_modules/*
 
-#Dependency directory - frontend
+# Dependency directory - frontend
 bower_components/*
 public/vendor/*
 
-#database configuration
+# Database configuration
 api/auth/utils/config.js
 
 # Logs

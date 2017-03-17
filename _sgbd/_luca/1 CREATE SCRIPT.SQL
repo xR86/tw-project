@@ -149,12 +149,12 @@ FOR EACH ROW
    COMMIT;
 /
 
-drop sequence task_id_seq;
-/
+-- drop sequence task_id_seq;
+-- /
 CREATE SEQUENCE TASK_ID_SEQ;
 /
-drop sequence st_id_seq;
-/
+-- drop sequence st_id_seq;
+-- /
 create sequence st_id_seq;
 /
 commit;

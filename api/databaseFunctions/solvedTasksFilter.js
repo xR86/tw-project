@@ -58,7 +58,7 @@ function filterSolvedTasks(req,res)
 
     var select=[];
     if(req.body.hasSolution!='' && req.body.task_name!='' && req.body.date1!='' && req.body.date2!='')
-    {
+    {   //task_id = 2
         select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW  " +
@@ -70,7 +70,7 @@ function filterSolvedTasks(req,res)
         filter.filterBy(req,res,select[0],bindvariables.case1);
     }
     else if(req.body.hasSolution!='' && req.body.task_name!='' && req.body.date1=='' && req.body.date2=='')
-    {
+    {   //task_id = 2
         select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW  " +
@@ -101,7 +101,7 @@ function filterSolvedTasks(req,res)
         filter.filterBy(req,res,select[0],bindvariables.case4);
     }
     else if(req.body.hasSolution=='' && req.body.task_name!='' && req.body.date1!='' && req.body.date2!='')
-    {
+    {   //task_id = 2
         select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW " +
@@ -112,7 +112,7 @@ function filterSolvedTasks(req,res)
         filter.filterBy(req,res,select[0],bindvariables.case5);
     }
     else if(req.body.hasSolution==''  && req.body.task_name!=''  && req.body.date1=='' && req.body.date2=='')
-    {
+    {   //task_id = 2
         select.push("SELECT task_name, completeddate,hassolution,solution FROM(" +
             "SELECT task_name, completeddate,hassolution,solution,ROWNUM RN FROM(" +
             "SELECT task_name, completeddate,hassolution,solution FROM SOLVEDTASKSVIEW " +

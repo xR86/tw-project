@@ -34,10 +34,13 @@ public class MainParser {
     public static void main(String[] args) {
         Boolean personIsInserted=false;
         //Date time;
+        //DBConnect connection = new DBConnect("tw_admin","pass");
         DBConnect connection = new DBConnect("TW_PROJ","TW_PROJ");
         try {
             BufferedReader br = new BufferedReader(
                     new FileReader("D:\\try\\test.json")); //destination to json here
+                    // "E:\\github\\tw-project\\_java-json-parser\\demo.json"
+                    //orig: "D:\\try\\test.json"
             Gson gson = new Gson();
             Type collectionType = new TypeToken<List<List<Tasks>>>() {
             }.getType();

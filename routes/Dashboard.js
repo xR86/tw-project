@@ -62,9 +62,9 @@ router.get('/', auth() ,function(req, res, next) {
              }));
              return;
          }
- 
+        //task id 139 not found ... (json too small ?)
 		  connection.execute(
-		  "BEGIN :ret := personsCount(); :ret2 := solvedTasksCount(); :ret3 := tasksCount(); :ret4 := siteUsersCount(); :ret5 := FreeCodeCamp.taskCompletionRate_task(139); END;",
+		  "BEGIN :ret := personsCount(); :ret2 := solvedTasksCount(); :ret3 := tasksCount(); :ret4 := siteUsersCount(); :ret5 := FreeCodeCamp.taskCompletionRate_task(91); END;",
 		  { ret: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 40 },
 		    ret2: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 40 },
 		    ret3: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 40 },
